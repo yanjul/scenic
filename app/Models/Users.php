@@ -16,7 +16,6 @@ class Users extends Authenticatable {
         'name',
         'password',
         'telephone',
-        'role_id',
         'status'
     ];
 
@@ -24,5 +23,4 @@ class Users extends Authenticatable {
         'password'
     ];
 
-    public $timestamps = false;
 }

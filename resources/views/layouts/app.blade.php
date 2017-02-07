@@ -70,6 +70,7 @@
                                     </li>
                                 </ul>
                             </li>
+                            <li><a href="{{ url('user') }}">个人中心</a></li>
                         @endif
                     </ul>
                 </div>
