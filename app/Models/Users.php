@@ -23,4 +23,8 @@ class Users extends Authenticatable {
         'password'
     ];
 
+    public function scenic(){
+        return $this->hasOne('App\Models\Scenic');
+    }
+
 }

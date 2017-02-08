@@ -8,9 +8,10 @@ class Scenic extends Model {
     protected $table = 'scenic';
 
     protected $fillable = [
-        'email',
+        'user_id',
         'name',
-        'telephone',
+        'image',
+        'info',
         'status'
     ];
 

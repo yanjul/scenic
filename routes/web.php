@@ -34,6 +34,9 @@ Route::group(['middleware'=> 'auth'], function (){
     Route::get('/home', 'HomeController@Index');
     Route::get('/user', 'Web\UserController@Index');
 
-    Route::get('/user/add-scenic', 'Web\ScenicController@add');
-    Route::post('/user/add-scenic', 'Web\ScenicController@add_data');
+    Route::get('/user/scenic', 'Web\ScenicController@getUserScenic');
+    Route::get('/user/add-scenic/{id?}', 'Web\ScenicController@add')->where('id', '[0-9]+');
+    Route::post('/user/add-scenic', 'Web\ScenicController@createScenic');
+    Route::post('/user/update-scenic', 'Web\ScenicController@updateScenic');
+    Route::get('/user/del-scenic/{id}', 'Web\ScenicController@deleteScenic')->where('id', '[0-9]+');
 });
