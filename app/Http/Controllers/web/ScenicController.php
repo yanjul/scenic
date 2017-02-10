@@ -46,12 +46,12 @@ class ScenicController extends Controller
     {
         $this->validate($request, [
             'name' => 'required|max:24',
-            'image' => 'required'
+            'image' => 'required|image'
         ]);
         $data = $request->input();
         $data['user_id'] = $request->user()->id;
         if ($request->hasFile('image')) {
-            $data['image'] = config('filesystems.disks.image.root') . '/' .
+            $data['image'] = '/' . config('filesystems.disks.image.root') . '/' .
                 $request->file('image')->store($request->user()->id . '/scenic', 'image');
         }
         Scenic::create($data);
@@ -69,9 +69,9 @@ class ScenicController extends Controller
             $scenic->name = $request->input('name');
             $scenic->info = $request->input('info');
             if ($request->hasFile('image')) {
-                echo $img = $request->user()->id . '/scenic/' . basename($scenic->image);
+                $img = $request->user()->id . '/scenic/' . basename($scenic->image);
                 Storage::disk('image')->delete($img);
-                echo $scenic->image = config('filesystems.disks.image.root') . '/' .
+                $scenic->image = '/' . config('filesystems.disks.image.root') . '/' .
                     $request->file('image')->store($request->user()->id . '/scenic', 'image');
             }
             $scenic->save();

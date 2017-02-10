@@ -18,7 +18,7 @@
             <div class="form-group">
                 <label for="scenic-image">景区图片</label>
                 @if($data)
-                    <img src="{{url($data['image'])}}" style="width: 100px">
+                    <img src="{{$data['image']}}" style="width: 100px">
                 @endif
                 <input class="form-control" type="file" id="scenic-image" name="image">
             </div>
