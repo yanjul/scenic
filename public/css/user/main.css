@@ -1,0 +1,62 @@
+/*样式重置*/
+*{
+    margin: 0;
+    padding: 0;
+}
+body, div, dl, dt, dd, ul, ol, li, h1, h2, h3, h4, h5, h6, pre, code, form, fieldset, legend, input, textarea, p, blockquote, th, td {
+    margin: 0;
+    padding: 0;
+}
+a{
+    text-decoration: none;
+}
+
+#myfoot {
+    border: 1px solid #efefef;
+    margin-bottom: 15px;
+}
+#myfoot h3 {
+    background-color: #fa5883;
+    height: 33px;
+    position: relative;
+    padding-left: 11px;
+    line-height: 30px;
+    font-family: "Microsoft YaHei";
+    font-size: 14px;
+    color: #fff;
+    font-weight: 700;
+    line-height: 33px;
+}
+#myfoot h3 a{
+    color: #fff;
+}
+#myfoot dt{
+    background-color: #fafafa;
+    border-top: 1px solid #efefef;
+    border-bottom: 1px solid #efefef;
+    height: 30px;
+    line-height: 30px;
+    padding-left: 20px;
+    font-family: "Microsoft YaHei";
+    color: #333;
+    font-weight: 700;
+}
+#myfoot dd a {
+    height: 32px;
+    line-height: 32px;
+    padding-left: 33px;
+    display: block;
+}
+#myfoot dd a.on, #myfoot dd a:hover {
+    border-left: 2px solid #f81c5a;
+    background: #fafafa ;
+    height: 32px;
+    margin-left: -1px;
+    position: relative;
+    padding-left: 32px;
+    text-decoration: none;
+}
+#myfoot dd a span {
+    padding-left: 10px;
+    color: #333;
+}

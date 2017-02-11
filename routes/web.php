@@ -42,3 +42,7 @@ Route::group(['middleware' => 'auth'], function () {
     Route::get('/user/add-ticket/{id}', 'Web\TicketController@add')->where('id', '^[0-9]+$');
     Route::post('/user/add-ticket', 'Web\TicketController@createTicket');
 });
+
+
+//测试
+Route::get('/test',function(){return view('user.person');});

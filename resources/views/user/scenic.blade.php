@@ -1,6 +1,7 @@
 @extends('layouts.app')
 
 @section('content')
+
     <h3>景区</h3><h5><a href="{{url('user/add-scenic')}}">添加</a></h5>
     <div class="container">
         @foreach($list as $item)

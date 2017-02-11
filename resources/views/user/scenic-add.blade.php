@@ -1,6 +1,8 @@
 @extends('layouts.app')
 
 @section('content')
+
+    @include('user.menu')
     <h3>添加景区</h3>
     <div class="container">
         <form class="form-horizontal" action="{{ url($data? 'user/update-scenic':'user/add-scenic') }}" method="post" enctype="multipart/form-data">

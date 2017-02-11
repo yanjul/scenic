@@ -12,7 +12,8 @@
 
     <!-- Styles -->
     <link href="/css/app.css" rel="stylesheet">
-
+    <link rel="stylesheet" href="/css/layout.css">
+    @yield('css')
     <!-- Scripts -->
     <script>
         window.Laravel = {!! json_encode([ 'csrfToken' => csrf_token() ]) !!};
@@ -34,7 +35,7 @@
 
                     <!-- Branding Image -->
                     <a class="navbar-brand" href="{{ url('/') }}">
-                        {{ config('app.name', 'Laravel') }}
+                        {{ config('app.name', 'scenic') }}
                     </a>
                 </div>
 
@@ -82,5 +83,6 @@
 
     <!-- Scripts -->
     <script src="/js/app.js"></script>
+    @yield('js')
 </body>
 </html>
