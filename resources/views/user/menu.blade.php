@@ -56,4 +56,3 @@
 
     </div>
 </div>
-<h3><a href="/user/scenic">景区</a></h3>

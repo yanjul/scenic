@@ -6,7 +6,9 @@
         @include('user.menu')
         <div class="col-md-9">
             <div class="breadcrumb">
-                <a href="">我的脚印>景区添加</a>
+                <a href="/user">我的脚印</a>
+                >
+                <span>景区添加</span>
             </div>
             <form class="form-horizontal" action="{{ url($data? 'user/update-scenic':'user/add-scenic') }}" method="post" enctype="multipart/form-data">
                 {{ csrf_field() }}

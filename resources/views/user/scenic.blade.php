@@ -10,6 +10,7 @@
                 <p>
                     <img src="{{$item['image']}}" width="220px">
                 </p>
+                <p>{{$item['info']}}</p>
                 <p>
                     <a href="{{url('user/add-scenic/'.$item['id'])}}">修改</a>
                     <a href="{{url('user/del-scenic/'.$item['id'])}}">删除</a>
