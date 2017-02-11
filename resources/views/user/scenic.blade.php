@@ -1,7 +1,5 @@
 @extends('layouts.app')
-
 @section('content')
-
     <h3>景区</h3><h5><a href="{{url('user/add-scenic')}}">添加</a></h5>
     <div class="container">
         @foreach($list as $item)
@@ -16,10 +14,10 @@
                     <a href="{{url('user/del-scenic/'.$item['id'])}}">删除</a>
                 </p>
                 <p>
+                    <a href="{{url('user/scenic/'.$item['id'])}}">查看门票</a>
                     <a href="{{url('user/add-ticket/'.$item['id'])}}">添加门票</a>
                 </p>
             </div>
         @endforeach
     </div>
-
 @endsection

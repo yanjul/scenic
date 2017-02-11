@@ -28,21 +28,27 @@ Route::group(['namespace' => 'Auth'], function () {
 });
 
 Route::get('/', 'HomeController@Index');
+Route::get('/home', 'HomeController@Index');
+Route::group(['prefix' => 'user', 'middleware' => 'auth', 'namespace' => 'web'], function () {
 
-Route::group(['middleware' => 'auth'], function () {
-    Route::get('/home', 'HomeController@Index');
-    Route::get('/user', 'Web\UserController@Index');
+    Route::get('/', 'UserController@Index');
 
-    Route::get('/user/scenic', 'Web\ScenicController@getUserScenic');
-    Route::get('/user/add-scenic/{id?}', 'Web\ScenicController@add')->where('id', '^[0-9]+$');
-    Route::post('/user/add-scenic', 'Web\ScenicController@createScenic');
-    Route::post('/user/update-scenic', 'Web\ScenicController@updateScenic');
-    Route::get('/user/del-scenic/{id}', 'Web\ScenicController@deleteScenic')->where('id', '^[0-9]+$');
+    Route::get('/scenic', 'ScenicController@getUserScenic');
+    Route::get('/add-scenic/{id?}', 'ScenicController@add')->where('id', '^[0-9]+$');
+    Route::post('/add-scenic', 'ScenicController@createScenic');
+    Route::post('/update-scenic', 'ScenicController@updateScenic');
+    Route::get('/del-scenic/{id}', 'ScenicController@deleteScenic')->where('id', '^[0-9]+$');
 
-    Route::get('/user/add-ticket/{id}', 'Web\TicketController@add')->where('id', '^[0-9]+$');
-    Route::post('/user/add-ticket', 'Web\TicketController@createTicket');
+    Route::get('/scenic/{id}', 'TicketController@index')->where('id', '^[0-9]+$');
+    Route::get('/add-ticket/{id}', 'TicketController@add')->where('id', '^[0-9]+$');
+    Route::get('/scenic/ticket/{id}', 'TicketController@update')->where('id', '^[0-9]+$');
+    Route::post('/scenic/ticket/{id}', 'TicketController@updateTicket')->where('id', '^[0-9]+$');
+    Route::post('/add-ticket', 'TicketController@createTicket');
+    Route::get('/del-ticket/{id}', 'TicketController@deleteTicket')->where('id', '^[0-9]+$');
 });
 
 
 //测试
-Route::get('/test',function(){return view('user.userInfo');});
+Route::get('/test', function () {
+    return view('user.userInfo');
+});

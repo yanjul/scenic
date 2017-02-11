@@ -16,7 +16,7 @@ class Scenic extends Model {
     ];
 
     public function ticket() {
-        return $this->hasOne('App\Models\Ticket');
+        return $this->hasMany('App\Models\Ticket');
     }
 
 }

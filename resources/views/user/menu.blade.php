@@ -1,6 +1,6 @@
 @section('css')
     <link rel="stylesheet" href="/css/user/main.css">
-@stop
+@endsection
 <div class="col-md-3 sidenav">
     <div class="sidenav_content" id="myfoot">
         <h3><a href="/user">我的脚印</a></h3>
