@@ -45,4 +45,4 @@ Route::group(['middleware' => 'auth'], function () {
 
 
 //测试
-Route::get('/test',function(){return view('user.person');});
+Route::get('/test',function(){return view('user.userInfo');});

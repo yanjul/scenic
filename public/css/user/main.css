@@ -60,3 +60,14 @@ a{
     padding-left: 10px;
     color: #333;
 }
+
+.breadcrumb {
+    border: 1px solid #efefef;
+    height: 38px;
+    overflow: hidden;
+    background-color: #fdfdfd;
+    padding: 0 15px;
+    line-height: 38px;
+    color: #999;
+    margin-bottom: 15px;
+}
