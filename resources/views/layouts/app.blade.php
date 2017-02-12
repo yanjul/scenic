@@ -26,8 +26,20 @@
         <div class="header_content clearfix">
             <span>Hi~</span>
             <span>
-                    <a href="#">[请登录]</a>
-                    <a href="#">[请注册]</a>
+                @if(Auth::guest())
+                    <a href="{{ route('login') }}">[请登录]</a>
+                    <a href="{{ route('register') }}">[请注册]</a>
+                @else
+                    <span>{{ Auth::user()->name }}</span>
+                    <a href="{{ route('logout') }}"
+                       onclick="event.preventDefault(); document.getElementById('logout-form').submit();">
+                        退出
+                    </a>
+
+                    <form id="logout-form" action="{{ route('logout') }}" method="POST" style="display: none;">
+                        {{ csrf_field() }}
+                    </form>
+                @endif
             </span>
 
             <ul>

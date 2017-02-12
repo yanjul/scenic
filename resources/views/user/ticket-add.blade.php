@@ -1,6 +1,6 @@
 @extends('layouts.app')
 
-@section('content')
+@('content')
     <h3>添加门票</h3>
     <div class="container">
         <div>
