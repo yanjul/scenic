@@ -50,7 +50,7 @@ return [
 
         'image' => [
             'driver' => 'local',
-            'root' => 'image',
+            'root' => 'images',
         ],
 
         'public' => [
