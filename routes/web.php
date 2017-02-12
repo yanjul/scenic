@@ -50,5 +50,5 @@ Route::group(['prefix' => 'user', 'middleware' => 'auth', 'namespace' => 'web'],
 
 //测试
 Route::get('/test', function () {
-    return view('user.userInfo');
+    return view('home');
 });
