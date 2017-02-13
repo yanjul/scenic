@@ -36,9 +36,8 @@ class ScenicController extends Controller
     {
         $scenic = Scenic::find($id);
         $img = Auth::user()->id . '/scenic/' . basename($scenic->image);
-        if (Storage::disk('image')->delete($img)) {
-            $scenic->delete();
-        }
+        $scenic->delete();
+        Storage::disk('image')->delete($img);
         return redirect('user/scenic');
     }
 
