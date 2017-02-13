@@ -13,7 +13,6 @@
     <!-- Styles -->
     <link href="/css/bootstrap.css" rel="stylesheet">
     <link rel="stylesheet" href="/css/layout.css">
-    <link rel="stylesheet" href="/css/nav.css">
 @yield('css')
 <!-- Scripts -->
     <script>
