@@ -13,6 +13,7 @@
     <!-- Styles -->
     <link href="/css/bootstrap.css" rel="stylesheet">
     <link rel="stylesheet" href="/css/layout.css">
+    <link rel="stylesheet" href="/css/nav.css">
 @yield('css')
 <!-- Scripts -->
     <script>
@@ -44,7 +45,7 @@
 
             <ul>
                 <li>|</li>
-                <li><a href="#">我的脚印</a></li>
+                <li><a href="/user">我的脚印</a></li>
                 <li>|</li>
                 <li><a href="#">我的订单</a></li>
 
