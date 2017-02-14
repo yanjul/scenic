@@ -29,9 +29,16 @@ Route::group(['namespace' => 'Auth'], function () {
 
 Route::get('/', 'HomeController@Index');
 Route::get('/home', 'HomeController@Index');
+
+
+Route::get('/get-code', 'web\MsgController@sendCode');
+
 Route::group(['prefix' => 'user', 'middleware' => 'auth', 'namespace' => 'web'], function () {
 
     Route::get('/', 'UserController@Index');
+
+    Route::match(['get', 'post'], '/reset-password', 'UserController@resetPassword');
+    Route::match(['get', 'post'], '/bind-mobile', 'UserController@bindMobile');
 
     Route::get('/scenic', 'ScenicController@getUserScenic');
     Route::get('/add-scenic/{id?}', 'ScenicController@add')->where('id', '^[0-9]+$');

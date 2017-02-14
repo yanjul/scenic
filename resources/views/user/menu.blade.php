@@ -38,12 +38,17 @@
         <dl>
             <dt>账户管理</dt>
             <dd>
-                <a href="/user/userInfo">
+                <a href="">
                     <span>个人信息</span>
                 </a>
             </dd>
             <dd>
-                <a href="">
+                <a href="/user/bind-mobile">
+                    <span>绑定手机</span>
+                </a>
+            </dd>
+            <dd>
+                <a href="/user/reset-password">
                     <span>修改密码</span>
                 </a>
             </dd>
