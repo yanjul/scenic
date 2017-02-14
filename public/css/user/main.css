@@ -10,6 +10,9 @@ body, div, dl, dt, dd, ul, ol, li, h1, h2, h3, h4, h5, h6, pre, code, form, fiel
 a{
     text-decoration: none;
 }
+a:hover {
+    color: #e51a45;
+}
 
 #myfoot {
     border: 1px solid #efefef;
@@ -77,4 +80,194 @@ a{
 }
 .breadcrumb span {
     padding-right: 5px;
+}
+
+/*默认显示*/
+
+/*用户栏*/
+.userInfo_box {
+    background: url(//dui.damai.cn/damai_v2/passport/images/userbg1.png) repeat-x #fff;
+    padding: 20px 20px 10px;
+    border: 1px solid #efefef;
+    margin-bottom: 15px;
+    position: relative;
+    height: 200px;
+}
+.userInfo_box .infos {
+    width: 415px;
+    float: left;
+}
+.userInfo_box .infos .infos-lf {
+    float: left;
+    width: 126px;
+    margin-right: 18px;
+    text-align: center;
+}
+.userInfo_box .infos .img {
+    width: 126px;
+    position: relative;
+}
+.userInfo_box .infos .img img {
+    width: 120px;
+    height: 120px;
+    padding: 2px;
+    border: 1px solid #efefef;
+}
+.userInfo_box .infos .img a {
+    position: absolute;
+    bottom: 3px;
+    left: 3px;
+    display: block;
+    width: 120px;
+    height: 28px;
+    line-height: 28px;
+    background: #fff;
+    filter: Alpha(opacity=50);
+    opacity: .5;
+    color: #000;
+}
+.userInfo_box .infos .infos-lf a {
+    line-height: 25px;
+}
+.c1, a.c1 {
+    color: #333;
+}
+.userInfo_box .infos .infos-ri {
+    line-height: 25px;
+    float: left;
+}
+.userInfo_box .infos .username {
+    color: #999;
+    font-weight: 700;
+}
+.c4, a.c4 {
+    color: #e51a45;
+}
+.userInfo_box .infos .infos-ri label {
+    font-family: '微软雅黑';
+    font-size: 12px;
+    font-weight: 500;
+}
+.mr10 {
+    margin-right: 10px;
+    font-size: 12px;
+}
+.userInfo_box .user-state {
+    width: 333px;
+    float: right;
+}
+.userInfo_box .last-time {
+    color: #999;
+    text-align: right;
+}
+.credit-card {
+    text-align: right;
+    line-height: 25px;
+    padding-top: 5px;
+}
+.credit-card .col1 {
+    color: #2f97b4;
+    background: url(//dui.damai.cn/damai_v2/passport/images/i4.png) no-repeat scroll 0 -617px;
+    padding-left: 20px;
+}
+.userInfo_box .user-msg {
+    border: 1px solid #f4e4b4;
+    background: #ffffe9;
+    line-height: 33px;
+    padding: 0 10px;
+    _padding: 9px 10px;
+    color: #666;
+    width: 585px;
+    position: absolute;
+    right: 18px;
+    bottom: 10px;
+}
+.userInfo_box .user-msg a.c2 {
+    color: #666;
+    font-size: 12px;
+}
+span.i1 {
+    background: url(//dui.damai.cn/damai_v2/passport/images/i.png) no-repeat scroll 0 -38px;
+    width: 1px;
+    height: 13px;
+    overflow: hidden;
+    display: inline-block;
+    margin: 0 5px;
+}
+
+/*近期订单栏*/
+.section, .section02 {
+    border: 1px solid #efefef;
+    margin-bottom: 15px;
+}
+.section .hd, .section02 .hd {
+    background: url(//dui.damai.cn/damai_v2/passport/images/hd.png) no-repeat scroll 0 bottom;
+    height: 30px;
+    padding: 8px 10px 0 15px;
+}
+.section .hd h2, .section02 .hd h2 {
+    float: left;
+    font-family: "Microsoft YaHei";
+    font-size: 16px;
+    color: #333;
+    padding-right: 10px;
+}
+.section .hd .subtit, .section02 .hd .subtit {
+    color: #999;
+    float: left;
+    padding-top: 5px;
+}
+.section .hd a, .section02 .hd a {
+    color: #2f97b4;
+}
+.c7, a.c7 {
+    color: #2f97b4;
+}
+.fr {
+    float: right;
+}
+.index-table01 .table03 {
+    margin-top: 0;
+}
+.table03 {
+    border: 1px solid #eef1f3;
+    text-align: center;
+    color: #666;
+    margin-top: 15px;
+    width: 100%;
+}
+thead {
+    display: table-header-group;
+    vertical-align: middle;
+    border-color: inherit;
+}
+.index-table01 .table03 .w6 {
+    width: 110px;
+    border-right: none;
+}
+.index-table01 .table03 .w13 {
+    width: 65px;
+    border-right: none;
+}
+.index-table01 .table03 .w7 {
+    width: 85px;
+    border-right: none;
+}
+.index-table01 .table03 .w4 {
+    width: 100px;
+    border-right: none;
+}
+.index-table01 .table03 th {
+    border: none;
+    text-align: center;
+}
+.table03 th {
+    padding: 0 16px;
+}
+.table01 th, .table03 th {
+    height: 31px;
+    line-height: 30px;
+    font-weight: 400;
+    background: url(//dui.damai.cn/damai_v2/passport/images/th.png) repeat-x;
+    padding: 0 8px;
 }

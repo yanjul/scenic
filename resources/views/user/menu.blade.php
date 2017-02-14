@@ -38,18 +38,13 @@
         <dl>
             <dt>账户管理</dt>
             <dd>
-                <a href="">
+                <a href="/user/userInfo">
                     <span>个人信息</span>
                 </a>
             </dd>
             <dd>
                 <a href="">
                     <span>修改密码</span>
-                </a>
-            </dd>
-            <dd>
-                <a href="">
-                    <span>忘记密码</span>
                 </a>
             </dd>
         </dl>
