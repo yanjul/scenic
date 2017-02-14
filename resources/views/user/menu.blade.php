@@ -43,13 +43,13 @@
                 </a>
             </dd>
             <dd>
-                <a href="">
-                    <span>修改密码</span>
+                <a href="/user/bind-mobile">
+                    <span>绑定手机</span>
                 </a>
             </dd>
             <dd>
-                <a href="">
-                    <span>忘记密码</span>
+                <a href="/user/reset-password">
+                    <span>修改密码</span>
                 </a>
             </dd>
         </dl>
