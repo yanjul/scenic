@@ -34,7 +34,9 @@ body{
     float: right;
     margin-right: 10%;
 }
-
+.header_logo a{
+    color: black;
+}
 .header_content span:nth-of-type(2) a, .header_content ul li a {
     color: gray;
 }

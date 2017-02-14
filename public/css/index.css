@@ -1,37 +1,88 @@
-.top_left {
-    float: left;
+/*搜索*/
+.index_search {
+    display: flex;
+    width: 100%;
+    align-items: center;
+}
+
+.logo {
     width: 20%;
-    height: 500px;
-
+    height: 130px;
     text-align: center;
+    margin-left: 40%;
 }
 
-.top_left_title {
-    color: #b2dba1;
+.logo p {
+    color: burlywood;
 }
 
-.top_content {
+.logo, .search_box {
     float: left;
-    margin-left: 1%;
-    width: 78%;
-    height: 500px;
+}
 
+.search_box input {
+    width: 300px;
+    border: 1px solid lightblue;
+
+}
+
+/*分类*/
+.classify {
+    margin-top: -50px;
+}
+
+.classify .tab-content ul {
+    width: 100%;
+    height: 45px;
+    background: #F4F4F4;
+}
+
+.classify .tab-content ul li {
+    float: left;
+    list-style: none;
+    width: 100px;
+    height: 40px;
+    text-align: center;
+    line-height: 40px;
+}
+
+.classify .tab-content ul li:hover {
+    background: palegoldenrod;
+}
+
+.classify .tab-content ul li a {
+    color: black;
+}
+
+/*滚动图*/
+.top_content {
+    margin-left: 5%;
+    width: 90%;
+    height: 500px;
 }
 
 .top_content .carousel-inner img {
     width: 100%;
     height: 500px
 }
+
 /*内容*/
-.nav-tabs > li.active > a, .nav-tabs > li.active > a:hover, .nav-tabs > li.active > a:focus{
+.nav-tabs > li.active > a, .nav-tabs > li.active > a:hover, .nav-tabs > li.active > a:focus {
     border-top: 1px solid #4cae4c;
-    border-left:1px solid #4cae4c;
+    border-left: 1px solid #4cae4c;
     border-right: 1px solid #4cae4c;
+    background: #F4F4F4
 }
-.nav-tabs{
+
+.nav-tabs {
     border-bottom: 1px solid #4cae4c;
+
 }
-.hot_box{
+
+.nav-tabs li {
+}
+
+.hot_box {
     width: 20%;
     height: 300px;
     border: 1px solid transparent;
@@ -39,29 +90,35 @@
     margin-left: 4%;
     float: left;
 }
-.hot_box img{
+
+.hot_box img {
     width: 100%;
     height: 230px;
 }
-.hot_box_introduce{
+
+.hot_box_introduce {
     height: 68px;
     background: #F8F8F8;
 
 }
-.hot_box_introduce span{
+
+.hot_box_introduce span {
     color: red;
 }
-.hot_box_introduce p:nth-of-type(1){
+
+.hot_box_introduce p:nth-of-type(1) {
     font-size: 14px;
     font-weight: bold;
     margin-left: 5px;
 }
-.hot_box_introduce p:nth-of-type(2){
+
+.hot_box_introduce p:nth-of-type(2) {
     font-size: 12px;
     color: gray;
 }
+
 /*底部*/
-.index_footer{
+.index_footer {
     width: 100%;
     margin-top: 30px;
     height: 50px;
