@@ -10,7 +10,9 @@ use Illuminate\Support\Facades\Storage;
 
 class ScenicController extends Controller
 {
-
+    /**获取用户景区
+     * @return $this
+     */
     public function getUserScenic()
     {
         $user_id = Auth::user()->id;
@@ -18,6 +20,10 @@ class ScenicController extends Controller
         return view('user.scenic')->with('list', $list);
     }
 
+    /**景区添加
+     * @param null $id
+     * @return $this|\Illuminate\Http\RedirectResponse|\Illuminate\Routing\Redirector
+     */
     public function add($id = null)
     {
         $data = null;
@@ -32,6 +38,10 @@ class ScenicController extends Controller
         return view('user.scenic-add')->with('data', $data);
     }
 
+    /**删除景区
+     * @param $id
+     * @return \Illuminate\Http\RedirectResponse|\Illuminate\Routing\Redirector
+     */
     public function deleteScenic($id)
     {
         $scenic = Scenic::find($id);
@@ -41,6 +51,10 @@ class ScenicController extends Controller
         return redirect('user/scenic');
     }
 
+    /**创建景区
+     * @param Request $request
+     * @return \Illuminate\Http\RedirectResponse|\Illuminate\Routing\Redirector
+     */
     public function createScenic(Request $request)
     {
         $this->validate($request, [
@@ -57,6 +71,10 @@ class ScenicController extends Controller
         return redirect('user/scenic');
     }
 
+    /**添加景区
+     * @param Request $request
+     * @return \Illuminate\Http\RedirectResponse|\Illuminate\Routing\Redirector
+     */
     public function updateScenic(Request $request)
     {
         $this->validate($request, [

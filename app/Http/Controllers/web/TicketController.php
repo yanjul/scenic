@@ -10,6 +10,10 @@ use App\Models\Ticket;
 
 class TicketController extends Controller
 {
+    /**获取景区门票
+     * @param $id
+     * @return $this|\Illuminate\Http\RedirectResponse|\Illuminate\Routing\Redirector
+     */
     function index($id)
     {
         $scenic = Scenic::with('ticket')->find($id);
@@ -19,6 +23,10 @@ class TicketController extends Controller
         return view('user.ticket')->with('scenic', $scenic->toArray());
     }
 
+    /**创建门票
+     * @param $id
+     * @return $this|\Illuminate\Http\RedirectResponse|\Illuminate\Routing\Redirector
+     */
     function add($id)
     {
         $scenic = Scenic::find($id);
@@ -28,6 +36,10 @@ class TicketController extends Controller
         return view('user.ticket-add')->with('scenic', $scenic->toArray());
     }
 
+    /**获取修改门票
+     * @param $id
+     * @return $this|\Illuminate\Http\RedirectResponse|\Illuminate\Routing\Redirector
+     */
     function update($id)
     {
         $ticket = Ticket::find($id);
@@ -42,6 +54,11 @@ class TicketController extends Controller
         return redirect('/user/scenic');
     }
 
+    /**修改门票
+     * @param $id
+     * @param Request $request
+     * @return \Illuminate\Http\RedirectResponse|\Illuminate\Routing\Redirector
+     */
     function updateTicket($id, Request $request)
     {
         $this->validate($request, [
@@ -79,6 +96,10 @@ class TicketController extends Controller
         return redirect('user/scenic/' . $input['scenic_id']);
     }
 
+    /**创建门票
+     * @param Request $request
+     * @return \Illuminate\Http\RedirectResponse|\Illuminate\Routing\Redirector
+     */
     function createTicket(Request $request)
     {
         $this->validate($request, [
@@ -107,6 +128,10 @@ class TicketController extends Controller
         return redirect('user/scenic');
     }
 
+    /**删除门票
+     * @param $id
+     * @return \Illuminate\Http\RedirectResponse
+     */
     function deleteTicket($id){
         Ticket::with(['scenic'=> function($query){
             $query->where('user_id', Auth::id());

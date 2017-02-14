@@ -22,33 +22,32 @@
 <body>
 <div id="app">
     <div class="header_index clearfix">
-        <div class="header_logo">FootPrint脚印👣</div>
+        <div class="header_logo"><a href="/">FootPrint脚印👣</a></div>
         <div class="header_content clearfix">
             <span>Hi~</span>
-            <span>
-                @if(Auth::guest())
+            @if(Auth::guest())
+                <span>
                     <a href="{{ route('login') }}">[请登录]</a>
                     <a href="{{ route('register') }}">[请注册]</a>
-                @else
+                </span>
+            @else
+                <span>
                     <span>{{ Auth::user()->name }}</span>
                     <a href="{{ route('logout') }}"
                        onclick="event.preventDefault(); document.getElementById('logout-form').submit();">
                         退出
                     </a>
-
                     <form id="logout-form" action="{{ route('logout') }}" method="POST" style="display: none;">
                         {{ csrf_field() }}
                     </form>
-                @endif
-            </span>
-
-            <ul>
-                <li>|</li>
-                <li><a href="/user">我的脚印</a></li>
-                <li>|</li>
-                <li><a href="#">我的订单</a></li>
-
-            </ul>
+                </span>
+                <ul>
+                    <li>|</li>
+                    <li><a href="/user">我的脚印</a></li>
+                    <li>|</li>
+                    <li><a href="#">我的订单</a></li>
+                </ul>
+            @endif
         </div>
     </div>
     @yield('content')
