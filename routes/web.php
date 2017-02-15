@@ -37,6 +37,8 @@ Route::group(['prefix' => 'user', 'middleware' => 'auth', 'namespace' => 'web'],
 
     Route::get('/', 'UserController@Index');
 
+
+    Route::get('/info', 'UserController@getUserInfo');
     Route::match(['get', 'post'], '/reset-password', 'UserController@resetPassword');
     Route::match(['get', 'post'], '/bind-mobile', 'UserController@bindMobile');
 

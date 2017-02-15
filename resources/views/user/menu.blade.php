@@ -38,7 +38,7 @@
         <dl>
             <dt>账户管理</dt>
             <dd>
-                <a href="">
+                <a href="/user/info">
                     <span>个人信息</span>
                 </a>
             </dd>
