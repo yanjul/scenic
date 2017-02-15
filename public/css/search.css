@@ -1,0 +1,109 @@
+/*主要搜索*/
+.search_content {
+    margin-top: 3%;
+    margin-left: 10%;
+    width: 80%;
+    height: 360px;
+    border: 1px solid lightgrey;
+
+}
+
+.search_guess {
+    font-size: 18px;
+    width: 100%;
+    border-bottom: 1px solid lightgrey;
+}
+
+.search_guess p {
+    margin-left: 1%
+}
+
+.search_c {
+    width: 100%;
+    height: 330px;
+
+}
+
+.search_c img {
+    width: 400px;
+    height: 300px;
+    margin-top: 5px;
+    margin-left: 10px;
+}
+
+.search_word {
+    margin-left: 5%;
+    margin-top: 2%;
+    width: 50%;
+}
+
+.search_word p:nth-of-type(2) span {
+    color: coral
+}
+
+.search_c img, .search_word {
+    float: left;
+}
+
+/*景观分类*/
+.search_classify {
+    margin-top: 3%;
+    margin-left: 10%;
+    width: 80%;
+    height: 200px;
+    border: 1px solid lightgrey;
+}
+
+.search_classify_box {
+    margin-top: 1%;
+    width: 100%;
+    height: 50px;
+    line-height: 50px;
+}
+
+.search_classify_box ul li {
+    float: left;
+    list-style: none;
+    margin-left: 5%;
+}
+
+.search_classify_box ul li a {
+    color: black;
+    text-decoration: none;
+}
+
+.search_classify_box ul li a:hover {
+    color: cornflowerblue;
+}
+
+.search_classify_box ul li:nth-of-type(2) a {
+    color: cornflowerblue;
+}
+
+/*其他搜索*/
+.search_else_box {
+    margin-top: 3%;
+    margin-left: 10%;
+    width: 80%;
+}
+
+.search_else {
+    width: 100%;
+    height: 300px;
+    border-bottom: 1px solid lightgrey;
+    margin-top: 3%;
+}
+.search_else img{
+    width: 360px;
+    height: 280px;
+    margin-left: 3%;
+}
+.search_else_word{
+    width: 50%;
+}
+.search_else_word,.search_else img{
+    float: left;
+}
+.search_else_word p:nth-of-type(2) span {
+    color: coral
+}

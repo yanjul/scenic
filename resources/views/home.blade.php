@@ -16,7 +16,7 @@
                 <div class="form-group">
                     <label for="search"></label>
                     <input type="text" id="search" placeholder="请输入景区名称">
-                    <a href="#"><span class="glyphicon glyphicon-search"></span></a>
+                    <a href="search.blade.php"><span class="glyphicon glyphicon-search"></span></a>
                 </div>
 
             </form>
