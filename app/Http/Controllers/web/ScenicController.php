@@ -7,6 +7,8 @@ use Illuminate\Support\Facades\Auth;
 use Illuminate\Http\Request;
 use App\Models\Scenic;
 use Illuminate\Support\Facades\Storage;
+use App\Models\SysPlace;
+use App\Models\SysCountries;
 
 class ScenicController extends Controller
 {
@@ -26,11 +28,12 @@ class ScenicController extends Controller
      */
     public function add($id = null)
     {
-        $data = null;
+        $data['place'] = SysPlace::where('type', 1)->get()->toArray();
+        $data['countries'] = SysCountries::all()->toArray();
         if ($id) {
-            $data = Scenic::find($id);
-            if ($data) {
-                $data = $data->toArray();
+            $data['scenic'] = Scenic::find($id);
+            if ($data['scenic']) {
+                $data['scenic'] = $data['scenic']->toArray();
             } else {
                 return redirect('user/scenic');
             }
@@ -85,6 +88,8 @@ class ScenicController extends Controller
         if ($scenic) {
             $scenic->name = $request->input('name');
             $scenic->info = $request->input('info');
+            $scenic->place_id = $request->input('place_id');
+            $scenic->country_id = $request->input('country_id');
             if ($request->hasFile('image')) {
                 $img = $request->user()->id . '/scenic/' . basename($scenic->image);
                 Storage::disk('image')->delete($img);

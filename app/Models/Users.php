@@ -24,7 +24,11 @@ class Users extends Authenticatable {
     ];
 
     public function scenic(){
-        return $this->hasOne('App\Models\Scenic');
+        return $this->hasMany('App\Models\Scenic');
+    }
+
+    public function info(){
+        return $this->hasOne('App\Models\UserInfo', 'user_id', 'id');
     }
 
 }

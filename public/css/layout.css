@@ -29,9 +29,7 @@ body {
     float: left;
     margin-left: 10%;
 }
-.header_logo a{
-    color: black;
-}
+
 .header_content {
     float: right;
     margin-right: 10%;
@@ -49,4 +47,14 @@ body {
 
 .header_content span, .header_content ul {
     float: left;
+}
+
+/*底部*/
+.index_footer {
+    width: 100%;
+    margin-top: 30px;
+    height: 50px;
+    text-align: center;
+    line-height: 50px;
+    background: #bce8f1;
 }
