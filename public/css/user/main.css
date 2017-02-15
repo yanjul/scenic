@@ -12,6 +12,10 @@ a{
 }
 a:hover {
     color: #e51a45;
+    text-decoration: none;
+}
+ul{
+    list-style: none;
 }
 
 #myfoot {
@@ -271,3 +275,94 @@ thead {
     background: url(//dui.damai.cn/damai_v2/passport/images/th.png) repeat-x;
     padding: 0 8px;
 }
+
+
+/*个人信息info页面*/
+.tab-myfoot {
+    margin-top: 23px;
+}
+.tab-myfoot .title {
+    border-bottom: 2px solid #f81c5a;
+    height: 31px;
+}
+.tab-myfoot .title li {
+    float: left;
+    width: 104px;
+    height: 29px;
+    overflow: hidden;
+    margin-left: 5px;
+    _display: inline;
+}
+.tab-myfoot .title li a.on, .tab-mydamai .title li a.on:hover {
+    background-position: -139px -93px;
+    color: #fff;
+    font-weight: 700;
+}
+.tab-myfoot .title li a {
+    background: url(//dui.damai.cn/damai_v2/passport/images/b.png) no-repeat scroll -139px -122px;
+    display: block;
+    line-height: 29px;
+    text-align: center;
+    color: #333;
+    font-size: 12px;
+    padding: 0 2px;
+}
+.box01 {
+    border: 1px solid #eef1f3;
+}
+.per-edit-list {
+    padding: 25px 40px;
+    color: #666;
+}
+.per-edit-list .per-edit-msg {
+    background: #fffdee;
+    border: 1px solid #edd28b;
+    padding: 10px 20px;
+    color: #999;
+    margin-bottom: 15px;
+}
+.per-edit-list dl {
+    margin: 0 0 20px;
+    clear: both;
+    height: 22px;
+}
+.per-edit-list dt {
+    width: 71px;
+    float: left;
+    padding-right: 5px;
+    text-align: right;
+    font-size: 12px;
+}
+.per-edit-list dt span.c4 {
+    padding-right: 5px;
+}
+.per-edit-list dd {
+    float: left;
+}
+.per-edit-list dd .input-text-2 {
+    width: 120px;
+    height: 22px;
+    line-height: 14px;
+    border: 1px solid #efefef;
+    border-top: 1px solid #d5d5d5;
+}
+.per-edit-list dd .input-text-3 {
+    width: 300px;
+    height: 22px;
+    line-height: 14px;
+    border: 1px solid #efefef;
+    border-top: 1px solid #d5d5d5;
+}
+.per-edit-list button {
+    border: none;
+    margin: 0 0 0 150px;
+}
+.btn05 {
+    background: url(//dui.damai.cn/damai_v2/passport/images/b.png) no-repeat;
+    background-position: -243px -93px;
+    width: 94px;
+    height: 32px;
+    cursor: pointer;
+    color: #fff;
+}
+
