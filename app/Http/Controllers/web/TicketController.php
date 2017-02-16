@@ -7,6 +7,7 @@ use Illuminate\Support\Facades\Auth;
 use Illuminate\Http\Request;
 use App\Models\Scenic;
 use App\Models\Ticket;
+use App\Services\TicketService;
 
 class TicketController extends Controller
 {
@@ -64,7 +65,7 @@ class TicketController extends Controller
         $this->validate($request, [
             'scenic_id' => 'required',
             'name' => 'required|max:18',
-            'price' => 'required',
+            'price' => 'required|between:0,999999999',
             'start_time' => 'array',
             'end_time' => 'array',
             'custom_price' => 'array',
@@ -79,7 +80,7 @@ class TicketController extends Controller
                 if ($value && ($input['start_time'][$key] || $input['end_time'][$key])) {
                     $data['custom_price'][] = [
                         'start_time' => $input['start_time'][$key] ? strtotime($input['start_time'][$key]) : strtotime($input['end_time'][$key]),
-                        'end_time' => $input['end_time'][$key] ? strtotime($input['end_time'][$key] . '+1 day') : strtotime($input['start_time'][$key] . '+1 day'),
+                        'end_time' => $input['end_time'][$key] ? strtotime($input['end_time'][$key] . '+1 day') : strtotime($input['start_time'][$key] . '+1 days'),
                         'price' => $value
                     ];
                 }
@@ -118,7 +119,7 @@ class TicketController extends Controller
             if ($value && ($input['start_time'][$key] || $input['end_time'][$key])) {
                 $data['custom_price'][] = [
                     'start_time' => $input['start_time'][$key] ? strtotime($input['start_time'][$key]) : strtotime($input['end_time'][$key]),
-                    'end_time' => $input['end_time'][$key] ? strtotime($input['end_time'][$key] . '+1 day') : strtotime($input['start_time'][$key] . '+1 day'),
+                    'end_time' => $input['end_time'][$key] ? strtotime($input['end_time'][$key] . '+1 day') : strtotime($input['start_time'][$key] . '+1 days'),
                     'price' => $value
                 ];
             }

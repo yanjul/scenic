@@ -1,6 +1,6 @@
 @extends('layouts.app')
 
-@('content')
+@section('content')
     <h3>添加门票</h3>
     <div class="container">
         <div>
@@ -24,7 +24,7 @@
                 <label class="control-label" for="ticket-price">门票价格</label>
                 <input class="form-control" type="number" id="ticket-price" name="price"
                        value="{{isset($scenic['ticket'])? $scenic['ticket']['price']: ''}}">
-                @if ($errors->has('name'))
+                @if ($errors->has('price'))
                     error
                 @endif
             </div>
@@ -68,13 +68,16 @@
                         }
                     }
                 </script>
+                @if ($errors->has('custom_price'))
+                    error
+                @endif
             </div>
 
             <div class="form-group">
                 <label class="control-label" for="ticket-valid-time">门票有效时间</label>
                 <input class="form-control" type="tel" pattern="^[0-9]+$" id="ticket-valid-time" name="valid_time"
                        value="{{isset($scenic['ticket'])? $scenic['ticket']['valid_time']: ''}}">
-                @if ($errors->has('name'))
+                @if ($errors->has('valid_time'))
                     error
                 @endif
             </div>
@@ -82,7 +85,7 @@
                 <label class="control-label" for="ticket-lead-time">门票提前时间</label>
                 <input class="form-control" type="tel" pattern="^[0-9]+$" id="ticket-lead-time" name="lead_time"
                        value="{{isset($scenic['ticket'])? $scenic['ticket']['lead_time']: ''}}">
-                @if ($errors->has('name'))
+                @if ($errors->has('lead_time'))
                     error
                 @endif
             </div>
@@ -91,7 +94,14 @@
                 <input class="form-control" type="tel" pattern="^[0-9]+$" id="ticket-last-time" name="last_time"
                        value="{{isset($scenic['ticket'])? $scenic['ticket']['last_time']: ''}}"
                        placeholder="0-24">
-                @if ($errors->has('name'))
+                @if ($errors->has('last_time'))
+                    error
+                @endif
+            </div>
+            <div class="form-group">
+                <label class="control-label" for="remark">备注</label>
+                <textarea class="form-control" id="remark" name="remark">{{isset($scenic['ticket'])? $scenic['ticket']['remark']: ''}}</textarea>
+                @if ($errors->has('remark'))
                     error
                 @endif
             </div>

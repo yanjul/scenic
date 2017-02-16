@@ -58,6 +58,6 @@ Route::group(['prefix' => 'user', 'middleware' => 'auth', 'namespace' => 'web'],
 
 
 //测试
-Route::get('/test', function () {
-    return view('home');
+Route::get('/search', function () {
+    return view('search');
 });

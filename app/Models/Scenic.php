@@ -12,6 +12,7 @@ class Scenic extends Model {
         'name',
         'image',
         'info',
+        'remark',
         'place_id',
         'country_id',
         'status'

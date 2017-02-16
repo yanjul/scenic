@@ -15,6 +15,7 @@ class Ticket extends Model {
         'valid_time',
         'lead_time',
         'last_time',
+        'remark',
         'state'
     ];
 

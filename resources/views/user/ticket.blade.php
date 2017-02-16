@@ -24,6 +24,7 @@
                     <p>有效时间{{$ticket['valid_time']}}天</p>
                     <p>提前时间{{$ticket['lead_time']}}天</p>
                     <p>最迟入园时间{{$ticket['last_time']}}点</p>
+                    <p>备注{{$ticket['remark']}}点</p>
                     <p>
                         <a href="{{url('user/scenic/ticket/'.$ticket['id'])}}">修改</a>
                         <a href="{{url('user/del-ticket/'.$ticket['id'])}}">删除</a>
