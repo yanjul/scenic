@@ -29,7 +29,9 @@ body {
     float: left;
     margin-left: 10%;
 }
-
+.header_logo a{
+    color: black;
+}
 .header_content {
     float: right;
     margin-right: 10%;

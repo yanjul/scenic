@@ -39,7 +39,6 @@
                 <li><a href="#">城市</a></li>
                 <li><a href="#">海岛</a></li>
                 <li><a href="#">自然景观</a></li>
-                <li><a href="#">其他</a></li>
             </ul>
         </div>
         <div class="search_classify_box">
