@@ -358,11 +358,100 @@ thead {
     margin: 0 0 0 150px;
 }
 .btn05 {
-    background: url(//dui.damai.cn/damai_v2/passport/images/b.png) no-repeat;
+    background: url(//localhost:8000/images/system/b.png) no-repeat;
     background-position: -243px -93px;
     width: 94px;
     height: 32px;
     cursor: pointer;
     color: #fff;
 }
+
+/*景区展示页面*/
+.media{
+    border: 1px solid #efefef;
+    padding: 10px;
+}
+.media:hover{
+    background-color: #F8F8F8;
+}
+.media:hover .imgTitle{
+    color: #fff;
+    opacity: .8;
+    filter: alpha(opacity=80);
+    font-weight: bolder;
+    font-size: 26px;
+}
+.scenic-title:hover{
+    color: #000000;
+}
+.media:hover .media-heading .scenic-title{
+    color: #ff9d00;
+}
+.media:hover .scenic-content{
+    color: #ff9d00;
+    text-decoration: underline;
+    cursor: pointer;
+}
+.imgBox{
+    position: relative;
+}
+.imgTitle{
+    position: absolute;
+    width: 440px;
+    height: 35px;
+    bottom: 10px;
+    background-color: #000000;
+    opacity: .2;
+    filter: alpha(opacity=20);
+    font-size: 24px;
+    color: #ccc;
+    text-align: center;
+    line-height: 35px;
+}
+.media-heading{
+    font-size: 22px;
+    text-align: center;
+}
+.scenic-title{
+    color: #000000;
+}
+.scenic-content{
+    font-size: 16px;
+    text-indent:20px;
+    width: 100%;
+    height: 160px;
+}
+.handle{
+    margin-top:25px;
+}
+.edit-btn{
+    text-align: right;
+}
+.btn-3{
+    margin-left: 20px;
+}
+
+
+/*绑定手机*/
+.popup-address {
+    padding: 30px 0 0 85px;
+}
+.popup-address li {
+    padding-bottom: 20px;
+    line-height: 20px;
+    color: #666;
+    overflow: hidden;
+    zoom: 1;
+}
+.popup-address li .caption01 {
+    width: 100px;
+    float: left;
+    text-align: right;
+}
+.popup-address li .info {
+    float: left;
+    position: relative;
+}
+
+
 
