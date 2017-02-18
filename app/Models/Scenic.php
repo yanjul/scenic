@@ -14,8 +14,13 @@ class Scenic extends Model {
         'info',
         'remark',
         'place_id',
+        'category',
         'country_id',
         'status'
+    ];
+
+    protected $casts = [
+        'category'=> 'json'
     ];
 
     public function ticket() {

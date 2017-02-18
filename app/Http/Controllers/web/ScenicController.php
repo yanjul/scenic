@@ -9,6 +9,7 @@ use App\Models\Scenic;
 use Illuminate\Support\Facades\Storage;
 use App\Models\SysPlace;
 use App\Models\SysCountries;
+use App\Models\Category;
 
 class ScenicController extends Controller
 {
@@ -29,6 +30,7 @@ class ScenicController extends Controller
     public function add($id = null)
     {
         $data['place'] = SysPlace::where('type', 1)->get()->toArray();
+        $data['category'] = Category::with('child')->where('parent_id', 0)->get()->toArray();
         $data['countries'] = SysCountries::all()->toArray();
         if ($id) {
             $data['scenic'] = Scenic::find($id);
@@ -62,7 +64,8 @@ class ScenicController extends Controller
     {
         $this->validate($request, [
             'name' => 'required|max:24',
-            'image' => 'required|image'
+            'image' => 'required|image',
+            'category' => 'array',
         ]);
         $data = $request->input();
         $data['user_id'] = $request->user()->id;
@@ -70,6 +73,11 @@ class ScenicController extends Controller
             $data['image'] = '/' . config('filesystems.disks.image.root') . '/' .
                 $request->file('image')->store($request->user()->id . '/scenic', 'image');
         }
+        $data['category'] = [
+            'type' => $data['category'][0],
+            'time' => $data['category'][1],
+            'season' => $data['category'][2]
+        ];
         Scenic::create($data);
         return redirect('user/scenic');
     }
@@ -84,18 +92,24 @@ class ScenicController extends Controller
             'id' => 'required',
             'name' => 'max:24',
         ]);
-        $scenic = Scenic::find($request->input('id'));
+        $data = $request->input();
+        $scenic = Scenic::find($data['id']);
         if ($scenic) {
-            $scenic->name = $request->input('name');
-            $scenic->info = $request->input('info');
-            $scenic->place_id = $request->input('place_id');
-            $scenic->country_id = $request->input('country_id');
+            $scenic->name = $data['name'];
+            $scenic->info = $data['info'];
+            $scenic->place_id = $data['place_id'];
+            $scenic->country_id = $data['country_id'];
             if ($request->hasFile('image')) {
                 $img = $request->user()->id . '/scenic/' . basename($scenic->image);
                 Storage::disk('image')->delete($img);
                 $scenic->image = '/' . config('filesystems.disks.image.root') . '/' .
                     $request->file('image')->store($request->user()->id . '/scenic', 'image');
             }
+            $scenic->category = [
+                'type' => $data['category'][0],
+                'time' => $data['category'][1],
+                'season' => $data['category'][2]
+            ];
             $scenic->save();
         }
         return redirect('user/scenic');

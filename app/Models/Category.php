@@ -15,4 +15,8 @@ class Category extends Model
 
     public $timestamps = false;
 
+    public function child(){
+        return $this->hasMany('App\Models\Category', 'parent_id', 'id');
+    }
+
 }

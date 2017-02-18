@@ -10,7 +10,8 @@
 
                     <span>景区添加</span>
                 </div>
-                <form class="form-horizontal" action="{{ url(isset($data['scenic'])? 'user/update-scenic':'user/add-scenic') }}"
+                <form class="form-horizontal"
+                      action="{{ url(isset($data['scenic'])? 'user/update-scenic':'user/add-scenic') }}"
                       method="post" enctype="multipart/form-data">
                     {{ csrf_field() }}
                     @if(isset($data['scenic']))
@@ -40,7 +41,6 @@
                             @endforeach
                         </select>
                     </div>
-
                     <div id="place" class="form-group">
                         <label for="scenic-place">位置</label>
                         <select class="form-control" id="scenic-place" name="place_id">
@@ -50,9 +50,30 @@
                             @endforeach
                         </select>
                     </div>
+                    @foreach($data['category'] as $key=>$value)
+                        <div class="form-group">
+                            <label class="control-label" for="scenic-name">{{$value['name']}}</label>
+                            <select class="form-control" name="category[]">
+                                @foreach($value['child'] as $item)
+                                    <option value="{{$item['id']}}"
+                                    @if(isset($data['scenic']))
+                                        @if($key == 0)
+                                            {{$data['scenic']['category']['type'] == $item['id']? 'selected': ''}}
+                                        @elseif($key == 1)
+                                            {{$data['scenic']['category']['time'] == $item['id']? 'selected': ''}}
+                                        @else
+                                            {{$data['scenic']['category']['season'] == $item['id']? 'selected': ''}}
+                                        @endif
+                                    @endif
+                                    >{{$item['name']}}</option>
+                                @endforeach
+                            </select>
+                        </div>
+                    @endforeach
                     <div class="form-group">
                         <label for="scenic-image">景区描述</label>
-                        <textarea class="form-control" name="info">{{isset($data['scenic'])? $data['scenic']['info']: ''}}</textarea>
+                        <textarea class="form-control"
+                                  name="info">{{isset($data['scenic'])? $data['scenic']['info']: ''}}</textarea>
                     </div>
                     <button class="btn" type="submit">{{isset($data['scenic'])? '修改': '添加'}}</button>
                 </form>

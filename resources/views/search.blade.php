@@ -1,9 +1,3 @@
-/**
-* Created by PhpStorm.
-* User: moxuan
-* Date: 2017/2/15
-* Time: 下午4:46
-*/
 @extends('layouts.app')
 
 @section('css')
