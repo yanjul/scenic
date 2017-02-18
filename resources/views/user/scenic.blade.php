@@ -23,6 +23,20 @@
                                 <div class="media-body">
                                     <h4 class="media-heading"><a href="" class="scenic-title">{{$item['name']}}</a></h4>
                                     <p class="scenic-content">{{$item['info']}}</p>
+                                    @foreach($category as $key=>$value)
+
+                                        @foreach($value['child'] as $v)
+                                            @if($key == 0 && $v['id'] == $item['category']['type'])
+                                                <p>{{$value['name']}}:{{$v['name']}}</p>
+                                            @elseif($key == 1 && $v['id'] == $item['category']['time'])
+                                                <p>{{$value['name']}}:{{$v['name']}}</p>
+                                            @elseif($key == 2 && $v['id'] == $item['category']['season'])
+                                                <p>{{$value['name']}}:{{$v['name']}}</p>
+                                            @endif
+
+                                        @endforeach
+                                    @endforeach
+                                    {{--<p>{{$category[$item['category']['type']]}}</p>--}}
                                     <div class="handle">
                                         <p class="edit-btn">
                                             <a href="{{url('user/scenic/'.$item['id'])}}" class="btn btn-primary">查看门票</a>
@@ -41,24 +55,6 @@
                     </div>
 
                 @endif
-
-                {{--@foreach($list as $item)--}}
-                    {{--<div style="border: 2px solid #f0ad4e; display: inline-block; vertical-align: top; width: 240px; height: 240px">--}}
-                        {{--<p>{{$item['name']}}</p>--}}
-                        {{--<p>--}}
-                            {{--<img src="{{$item['image']}}" width="220px">--}}
-                        {{--</p>--}}
-                        {{--<p>{{$item['info']}}</p>--}}
-                        {{--<p>--}}
-                            {{--<a href="{{url('user/add-scenic/'.$item['id'])}}">修改</a>--}}
-                            {{--<a href="{{url('user/del-scenic/'.$item['id'])}}">删除</a>--}}
-                        {{--</p>--}}
-                        {{--<p>--}}
-                            {{--<a href="{{url('user/scenic/'.$item['id'])}}">查看门票</a>--}}
-                            {{--<a href="{{url('user/add-ticket/'.$item['id'])}}">添加门票</a>--}}
-                        {{--</p>--}}
-                    {{--</div>--}}
-                {{--@endforeach--}}
             </div>
         </div>
     </div>

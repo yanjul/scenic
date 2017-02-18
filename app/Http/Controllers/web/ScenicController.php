@@ -20,7 +20,8 @@ class ScenicController extends Controller
     {
         $user_id = Auth::user()->id;
         $list = Scenic::where('user_id', $user_id)->get()->toArray();
-        return view('user.scenic')->with('list', $list);
+        $category = Category::with('child')->where('parent_id', 0)->get()->toArray();
+        return view('user.scenic')->with('list', $list)->with('category', $category);
     }
 
     /**景区添加
