@@ -16,7 +16,7 @@
                     <span>您已绑定手机</span>
                 @else
                     <form id="code-form" class="form-horizontal" action="/user/bind-mobile" method="post">
-                        <input id="msg-id" type="hidden" name="msg_id">
+                        <input id="msg-id" type="hidden" name="msg_id" value="{{old('msg_id')}}">
                         <div class="section">
                             <ul class="popup-address">
                                 <li>
@@ -40,6 +40,9 @@
                                         <input type="tel" class="t" id="verification-code" name="code"
                                                value="{{old('code')}}">
                                         <button id="btn-code" type="button">获取验证码</button>
+                                        @if($errors->has('code'))
+                                            error
+                                        @endif
                                     </div>
                                 </li>
                                 <li>
