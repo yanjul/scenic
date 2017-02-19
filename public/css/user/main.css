@@ -390,6 +390,29 @@ thead {
     position: relative;
 }
 
+
+/* 门票添加页面 */
+
+.ticket-add{
+    padding: 30px 0 0 85px;
+}
+.ticket-add li{
+    padding-bottom: 20px;
+    line-height: 20px;
+    color: #666;
+    overflow: hidden;
+    zoom: 1;
+}
+.ticket-add li .caption01 {
+    width: 100px;
+    float: left;
+    text-align: right;
+}
+.ticket-add li .info {
+    float: left;
+    position: relative;
+}
+
 /*个人信息info页面*/
 .tab-myfoot {
     margin-top: 23px;

@@ -1,6 +1,52 @@
 @extends('layouts.app')
 
 @section('content')
+    <div class="container">
+        <div class="row">
+            @include('user.menu')
+            <div class="col-md-9">
+                <div class="breadcrumb">
+                    <a href="/user">我的脚印</a>
+                    >
+                    <span>门票添加</span>
+                </div>
+                <div class="section">
+                    <div class="scenic-name">
+                        <h4>景区名字</h4>
+                        <img src="{{$scenic['image']}}" height="200">
+                    </div>
+                    <form class="form-horizontal"
+                          action="{{isset($scenic['ticket'])? '/user/scenic/ticket/'.$scenic['ticket']['id'] : '/user/add-ticket' }}"
+                          method="post">
+                        {{ csrf_field() }}
+                        <input type="hidden" name="scenic_id" value="{{$scenic['id']}}">
+                        <ul class="ticket-add">
+                            <li>
+                                <p class="caption01">门票名称：</p>
+                                <div class="info">
+                                    <input type="text" class="t" id="ticket-name" name="name"
+                                           value="{{isset($scenic['ticket'])? $scenic['ticket']['name']: ''}}">
+                                    @if ($errors->has('name'))
+                                        error
+                                    @endif
+                                </div>
+                            </li>
+                            <li>
+                                <p class="caption01">门票价格：</p>
+                                <div class="info">
+                                    <input class="t" type="number" id="ticket-price" name="price"
+                                           value="{{isset($scenic['ticket'])? $scenic['ticket']['price']: ''}}">
+                                    @if ($errors->has('price'))
+                                        error
+                                    @endif
+                                </div>
+                            </li>
+                        </ul>
+                    </form>
+                </div>
+            </div>
+        </div>
+    </div>
     <h3>添加门票</h3>
     <div class="container">
         <div>
@@ -100,7 +146,8 @@
             </div>
             <div class="form-group">
                 <label class="control-label" for="remark">备注</label>
-                <textarea class="form-control" id="remark" name="remark">{{isset($scenic['ticket'])? $scenic['ticket']['remark']: ''}}</textarea>
+                <textarea class="form-control" id="remark"
+                          name="remark">{{isset($scenic['ticket'])? $scenic['ticket']['remark']: ''}}</textarea>
                 @if ($errors->has('remark'))
                     error
                 @endif
