@@ -23,20 +23,19 @@
                                 <div class="media-body">
                                     <h4 class="media-heading"><a href="" class="scenic-title">{{$item['name']}}</a></h4>
                                     <p class="scenic-content">{{$item['info']}}</p>
-                                    @foreach($category as $key=>$value)
-
-                                        @foreach($value['child'] as $v)
-                                            @if($key == 0 && $v['id'] == $item['category']['type'])
-                                                <p>{{$value['name']}}:{{$v['name']}}</p>
-                                            @elseif($key == 1 && $v['id'] == $item['category']['time'])
-                                                <p>{{$value['name']}}:{{$v['name']}}</p>
-                                            @elseif($key == 2 && $v['id'] == $item['category']['season'])
-                                                <p>{{$value['name']}}:{{$v['name']}}</p>
-                                            @endif
-
+                                    <div class="des_div">
+                                        @foreach($category as $key=>$value)
+                                            @foreach($value['child'] as $v)
+                                                @if($key == 0 && $v['id'] == $item['category']['type'])
+                                                    <span class="des_span des_span01">{{$value['name']}}:{{$v['name']}}</span>
+                                                @elseif($key == 1 && $v['id'] == $item['category']['time'])
+                                                    <span class="des_span des_span02">{{$value['name']}}:{{$v['name']}}</span>
+                                                @elseif($key == 2 && $v['id'] == $item['category']['season'])
+                                                    <span class="des_span des_span03">{{$value['name']}}:{{$v['name']}}</span>
+                                                @endif
+                                            @endforeach
                                         @endforeach
-                                    @endforeach
-                                    {{--<p>{{$category[$item['category']['type']]}}</p>--}}
+                                    </div>
                                     <div class="handle">
                                         <p class="edit-btn">
                                             <a href="{{url('user/scenic/'.$item['id'])}}" class="btn btn-primary">查看门票</a>

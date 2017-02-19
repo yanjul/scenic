@@ -23,7 +23,7 @@
                                     <input type="password" class="t" id="old-password" name="old_password"
                                            value="{{old('old_password')}}">
                                     @if($errors->has('old_password'))
-                                        <span>密码错误</span>
+                                        <span>原始密码错误</span>
                                     @endif
                                 </div>
                             </li>
@@ -36,20 +36,20 @@
                                     <input type="password" class="t" id="password" name="password"
                                            value="{{old('old_password')}}">
                                     @if($errors->has('password'))
-                                        <span>密码错误</span>
+                                        <span>新密码不能与原始密码一致</span>
                                     @endif
                                 </div>
                             </li>
                             <li>
                                 <p class="caption01">
                                     <span class="c4">*&nbsp;</span>
-                                    新密码：
+                                    确认密码：
                                 </p>
                                 <div class="info">
                                     <input type="password" class="t" id="password-confirmation"
                                            name="password_confirmation" value="{{old('password_confirmation')}}">
                                     @if($errors->has('password_confirmation'))
-                                        <span>密码错误</span>
+                                        <span>与新密码不一致</span>
                                     @endif
                                 </div>
                             </li>
