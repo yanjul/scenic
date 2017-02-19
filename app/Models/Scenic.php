@@ -16,6 +16,7 @@ class Scenic extends Model {
         'place_id',
         'category',
         'country_id',
+        'hot',
         'status'
     ];
 

@@ -13,7 +13,8 @@
                 <div class="section">
                     <div class="scenic-name">
                         <h4>景区名字</h4>
-                        <img src="{{$scenic['image']}}" height="200">
+                        <span>{{$scenic['name']}}</span>
+                        <img src="{{$scenic['image']}}" height="120">
                     </div>
                     <form class="form-horizontal"
                           action="{{isset($scenic['ticket'])? '/user/scenic/ticket/'.$scenic['ticket']['id'] : '/user/add-ticket' }}"

@@ -31,9 +31,9 @@ Route::get('/', 'HomeController@Index');
 Route::get('/home', 'HomeController@Index');
 
 
-Route::get('/get-code', 'web\MsgController@sendCode');
+Route::get('/get-code', 'User\MsgController@sendCode');
 
-Route::group(['prefix' => 'user', 'middleware' => 'auth', 'namespace' => 'web'], function () {
+Route::group(['prefix' => 'user', 'middleware' => 'auth', 'namespace' => 'user'], function () {
 
     Route::get('/', 'UserController@Index');
 

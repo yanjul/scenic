@@ -1,22 +1,22 @@
 <?php
 
-namespace App\Http\Controllers\Web;
+namespace App\Http\Controllers\User;
 
 use App\Http\Controllers\Controller;
 use App\Models\UserInfo;
 use App\Models\Users;
-use App\Models\SysMsg;
 use Illuminate\Support\Facades\Auth;
-use Illuminate\Support\Facades\Mail;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Hash;
+
 class UserController extends Controller {
 
     public function index() {
-//        Mail::send('user.main', [], function ($message){
-//            $message->to('1737143630@qq.com')->subject('欢迎注册我们的网站，请激活您的账号！');
-//        });
-        return view('user.main');
+
+        $user = Users::with('info')->find(Auth::id())->toArray();
+
+        return view('user.main')->with('user', $user);
+
     }
 
     public function getUserInfo(){
@@ -39,7 +39,7 @@ class UserController extends Controller {
             'msg_id'=> 'required'
         ]);
         $data = $request->all();
-        $msg = new \App\Http\Controllers\Web\MsgController();
+        $msg = new \App\Http\Controllers\User\MsgController();
         if ($msg->validateCode($data['code'], $data['mobile'], $data['msg_id'])) {
             $user = Auth::user();
             $user->telephone = $data['mobile'];

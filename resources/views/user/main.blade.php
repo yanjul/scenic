@@ -13,11 +13,11 @@
                                     <img src="https://perico.damai.cn/userheadphotos/294450/58890122_150_150.jpg" alt="" id="userPhoto">
                                     <a href="" class="c1">修改头像</a>
                                 </div>
-                                <a href="#">编辑个人信息</a>
+                                <a href="/user/info">编辑个人信息</a>
                             </div>
                             <div class="infos-ri">
                                 <p class="username">
-                                    <span>您好，</span><span class="c4" id="myindexnickname">hgq!</span>
+                                    <span>您好，</span><span class="c4" id="myindexnickname">{{$user['name']}}!</span>
                                 </p>
                                 <p id="growInfo">
                                     <label>成 长 值：0</label>
