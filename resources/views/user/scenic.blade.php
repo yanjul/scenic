@@ -49,8 +49,8 @@
                         </div>
                     @endforeach
                 @else
-                    <div class="scenic-list">
-
+                    <div class="section no-scenic">
+                        亲！当前没有任何景区，赶紧去 <a href="/user/add-scenic" class="c4">添加景区</a> 吧。
                     </div>
 
                 @endif

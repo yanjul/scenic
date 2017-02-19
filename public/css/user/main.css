@@ -367,6 +367,11 @@ thead {
 }
 
 /*景区展示页面*/
+.no-scenic{
+    padding: 20px;
+    text-align: center;
+    font-size: 18px;
+}
 .media{
     border: 1px solid #efefef;
     padding: 10px;
