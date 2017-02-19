@@ -18,6 +18,7 @@ ul{
     list-style: none;
 }
 
+/*左侧导航栏*/
 #myfoot {
     border: 1px solid #efefef;
     margin-bottom: 15px;
@@ -86,7 +87,6 @@ ul{
     padding-right: 5px;
 }
 
-/*默认显示*/
 
 /*用户栏*/
 .userInfo_box {
@@ -199,7 +199,6 @@ span.i1 {
     margin: 0 5px;
 }
 
-/*近期订单栏*/
 .section, .section02 {
     border: 1px solid #efefef;
     margin-bottom: 15px;
@@ -276,6 +275,120 @@ thead {
     padding: 0 8px;
 }
 
+
+/*景区展示页面*/
+.no-scenic{
+    padding: 20px;
+    text-align: center;
+    font-size: 18px;
+}
+.media{
+    border: 1px solid #efefef;
+    padding: 10px;
+}
+.media:hover{
+    background-color: #F8F8F8;
+}
+.media:hover .imgTitle{
+    color: #fff;
+    opacity: .8;
+    filter: alpha(opacity=80);
+    font-weight: bolder;
+    font-size: 26px;
+}
+.media:hover .des_span{
+    border-color: #ff9d00;
+    background-color: #fff;
+    color: #ff9d00;
+}
+.scenic-title:hover{
+    color: #000000;
+}
+.media:hover .media-heading .scenic-title{
+    color: #ff9d00;
+}
+.media:hover .scenic-content{
+    color: #ff9d00;
+    text-decoration: underline;
+    cursor: pointer;
+}
+.imgBox{
+    position: relative;
+}
+.imgTitle{
+    position: absolute;
+    width: 440px;
+    height: 35px;
+    bottom: 10px;
+    background-color: #000000;
+    opacity: .2;
+    filter: alpha(opacity=20);
+    font-size: 24px;
+    color: #ccc;
+    text-align: center;
+    line-height: 35px;
+}
+.media-body{
+    position: relative;
+}
+.media-heading{
+    font-size: 22px;
+    text-align: center;
+}
+.scenic-title{
+    color: #000000;
+}
+.scenic-content{
+    font-size: 15px;
+    text-indent:20px;
+    width: 100%;
+    height: 130px;
+}
+.des_div{
+    margin-top: 5px;
+}
+.des_span{
+    display: inline-block;
+    padding: 0 14px;
+    margin-right: 5px;
+    line-height: 20px;
+    background-color: #f6f6f6;
+    border: 1px solid #e5e5e5;
+    border-radius: 11px;
+    font-size: 12px;
+    margin-top: 5px;
+}
+.handle{
+    position: absolute;
+    bottom: 0;
+}
+.edit-btn{
+    text-align: right;
+}
+.btn-3{
+    margin-left: 20px;
+}
+
+/*景区添加页面*/
+.scenic-add{
+    padding: 30px 0 0 85px;
+}
+.scenic-add li{
+    padding-bottom: 20px;
+    line-height: 20px;
+    color: #666;
+    overflow: hidden;
+    zoom: 1;
+}
+.scenic-add li .caption01 {
+    width: 100px;
+    float: left;
+    text-align: right;
+}
+.scenic-add li .info {
+    float: left;
+    position: relative;
+}
 
 /*个人信息info页面*/
 .tab-myfoot {
@@ -366,101 +479,8 @@ thead {
     color: #fff;
 }
 
-/*景区展示页面*/
-.no-scenic{
-    padding: 20px;
-    text-align: center;
-    font-size: 18px;
-}
-.media{
-    border: 1px solid #efefef;
-    padding: 10px;
-}
-.media:hover{
-    background-color: #F8F8F8;
-}
-.media:hover .imgTitle{
-    color: #fff;
-    opacity: .8;
-    filter: alpha(opacity=80);
-    font-weight: bolder;
-    font-size: 26px;
-}
-.media:hover .des_span{
-    border-color: #ff9d00;
-    background-color: #fff;
-    color: #ff9d00;
-}
-.scenic-title:hover{
-    color: #000000;
-}
-.media:hover .media-heading .scenic-title{
-    color: #ff9d00;
-}
-.media:hover .scenic-content{
-    color: #ff9d00;
-    text-decoration: underline;
-    cursor: pointer;
-}
-.imgBox{
-    position: relative;
-}
-.imgTitle{
-    position: absolute;
-    width: 440px;
-    height: 35px;
-    bottom: 10px;
-    background-color: #000000;
-    opacity: .2;
-    filter: alpha(opacity=20);
-    font-size: 24px;
-    color: #ccc;
-    text-align: center;
-    line-height: 35px;
-}
-.media-body{
-    position: relative;
-}
-.media-heading{
-    font-size: 22px;
-    text-align: center;
-}
-.scenic-title{
-    color: #000000;
-}
-.scenic-content{
-    font-size: 15px;
-    text-indent:20px;
-    width: 100%;
-    height: 130px;
-}
-.des_div{
-    margin-top: 15px;
-}
-.des_span{
-    display: inline-block;
-    padding: 0 14px;
-    margin-right: 5px;
-    line-height: 20px;
-    background-color: #f6f6f6;
-    border: 1px solid #e5e5e5;
-    border-radius: 11px;
-    font-size: 12px;
-}
 
-.handle{
-    position: absolute;
-    bottom: 0;
-}
-.edit-btn{
-    text-align: right;
-}
-.btn-3{
-    margin-left: 20px;
-}
-
-
-/*绑定手机*/
+/* 绑定手机  修改密码 页面*/
 .popup-address {
     padding: 30px 0 0 85px;
 }
