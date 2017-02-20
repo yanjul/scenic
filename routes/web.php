@@ -60,6 +60,6 @@ Route::group(['prefix' => 'user', 'middleware' => 'auth', 'namespace' => 'user']
 
 
 //测试
-Route::get('/search', function () {
-    return view('search');
+Route::get('/detail', function () {
+    return view('detail');
 });
