@@ -2,21 +2,14 @@
 
 namespace App\Http\Controllers;
 
+use App\Models\Scenic;
 use Illuminate\Http\Request;
 use App\Services\ScenicService;
+use App\Services\TicketService;
+use Illuminate\Support\Facades\Auth;
 
 class HomeController extends Controller
 {
-    /**
-     * Create a new controller instance.
-     *
-     * @return void
-     */
-    public function __construct()
-    {
-        $this->middleware('auth');
-    }
-
     /**
      * Show the application dashboard.
      *
@@ -41,5 +34,22 @@ class HomeController extends Controller
             return $scenic->getHasCustomPrice($params['length']);
         }
         return [];
+    }
+
+    public function ScenicDetail($id){
+        $scenic = Scenic::query();
+        if(Auth::check()){
+            $scenic->where('user_id', '!=', Auth::id());
+        }
+        $scenic = $scenic->with('ticket')->where('id', $id)->first();
+        if ($scenic) {
+            $ticket = new TicketService();
+            foreach ($scenic->ticket as $key=>$value){
+                $scenic->ticket[$key]->now_price = $ticket->getPrice($value);
+            }
+            return view('detail')->with('scenic', $scenic);
+        }
+
+        return redirect()->back();
     }
 }

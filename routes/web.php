@@ -31,10 +31,12 @@ Route::get('/', 'HomeController@Index');
 Route::get('/home', 'HomeController@Index');
 
 
+Route::get('/scenic/{id}', 'HomeController@ScenicDetail')->where('id', '^[0-9]+$');
+
+//ajax
 Route::get('/get-scenic', 'HomeController@getScenic');
-
 Route::get('/get-code', 'User\MsgController@sendCode');
-
+//用户组
 Route::group(['prefix' => 'user', 'middleware' => 'auth', 'namespace' => 'user'], function () {
 
     Route::get('/', 'UserController@Index');

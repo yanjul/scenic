@@ -12,28 +12,42 @@
             <ul>
                 <li><a href="#">脚印</a></li>
                 <li><a href="#"> > </a></li>
-                <li><a href="#">张家界</a></li>
+                <li><a href="#">{{$scenic->name}}</a></li>
             </ul>
         </div>
         <div class="detail_main clearfix">
             <div class="detail_pic" >
-                <img src="images/zhangjiajie.jpg">
+                <img src="{{$scenic->image}}">
             </div>
             <div class="detail_word">
                 <div class="detail_word_head">
-                    <h2>张家界</h2>
+                    <h2>{{$scenic->name}}</h2>
                     <p>
-                        <span>门票&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;：</span>张家界(免费)
+                        <span>门票：</span>
                     </p>
-                    <p>
-                        <span>景区景点：</span>
-                        <input type="checkbox" id="checkbox-1">
-                        <label for="checkbox-1"></label>
-                        张家界国家森林公园(248元)
-                        <input type="checkbox" id="checkbox-2">
-                        <label for="checkbox-2"></label>
-                        天门山(255元)
-                    </p>
+                    @foreach($scenic->ticket as $ticket)
+                        <p>
+                            <span>门票名字：{{$ticket->name}}</span>
+                            <span>价格：{{$ticket->now_price}}</span>
+                            @if($ticket->price != $ticket->now_pice)
+                                <span>原价：{{$ticket->price}}</span>
+                            @endif
+                            @foreach($ticket->custom_price as $item)
+                                <br />
+                                <span>
+                                {{date('Y-m-d', $item['start_time'])}}
+                                <-->
+                                {{date('Y-m-d', $item['end_time'])}}
+                                <-->
+                                {{$item['price']}}
+                                </span>
+                            @endforeach
+                            <span>备注：{{$ticket->remark}}</span>
+                            <input type="checkbox" id="checkbox-1">
+                            <label for="checkbox-1"></label>
+                        </p>
+                    @endforeach
+
                     <p>
                         <input type="submit" class="btn btn-primary pull-right" value="购买">
                     </p>

@@ -3,6 +3,7 @@
 namespace App\Services;
 
 use App\Models\Scenic;
+use Illuminate\Support\Facades\Auth;
 
 class ScenicService{
 
@@ -11,7 +12,12 @@ class ScenicService{
      * @return mixed
      */
     public function getHotScenic($limit = 8){
-        return Scenic::orderBy('hot', 'desc')->offset(0)->limit($limit)->get();
+        $scenic = Scenic::query();
+        if (Auth::check()) {
+            echo 123;
+            $scenic->where('user_id', '!=', Auth::id());
+        }
+        return $scenic->orderBy('hot', 'desc')->offset(0)->limit($limit)->get();
     }
 
     /**获取特价商品
@@ -25,7 +31,11 @@ class ScenicService{
         while($i){
             $time = time();
             echo $i.'\n';
-            $scenic = Scenic::with('ticket')->offset(($i-1) * $limit)->limit($i * $limit)->get()->toArray();
+            $scenic = Scenic::query();
+            if (Auth::check()) {
+                $scenic->where('user_id', '!=', Auth::id());
+            }
+            $scenic = $scenic->with('ticket')->offset(($i-1) * $limit)->limit($i * $limit)->get()->toArray();
             foreach ($scenic as $key => $value) {
                 foreach ($value['ticket'] as $ticket) {
                     foreach ($ticket['custom_price'] as $item) {
