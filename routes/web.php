@@ -31,12 +31,13 @@ Route::get('/', 'HomeController@Index');
 Route::get('/home', 'HomeController@Index');
 
 
+Route::get('/get-scenic', 'HomeController@getScenic');
+
 Route::get('/get-code', 'User\MsgController@sendCode');
 
 Route::group(['prefix' => 'user', 'middleware' => 'auth', 'namespace' => 'user'], function () {
 
     Route::get('/', 'UserController@Index');
-
 
     Route::get('/info', 'UserController@getUserInfo');
     Route::match(['get', 'post'], '/info-update', 'UserController@updateInfo');
