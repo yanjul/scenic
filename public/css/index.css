@@ -13,7 +13,6 @@
     width: 20%;
     height: 130px;
     text-align: center;
-    margin-left: 40%;
 }
 
 .logo p {
@@ -23,11 +22,27 @@
 .logo, .search_box {
     float: left;
 }
-
-.search_box input {
-    width: 300px;
+.search_box{
+    margin-left: 10%;
+    width: 70%;
+}
+#search_w,#search{float: left}
+#search{
+    border-radius: 0;
+    width: 88%;
+}
+#search_w{
+    width: 80px;
     height: 40px;
-    border: 1px solid lightblue;
+    background: black;
+    color: whitesmoke;
+    line-height: 40px;
+    text-align: center;
+}
+.search_box input {
+    width: 95%;
+    height: 40px;
+    border: 1px solid black;
     border-radius: 5px;
 
 }
@@ -121,9 +136,9 @@
 }
 
 .hot_box_introduce {
+    background: #F8F8F8;
     height: 65px;
     width: 100%;
-    background: #F8F8F8;
     overflow: hidden;
 }
 
