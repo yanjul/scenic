@@ -417,6 +417,90 @@ thead {
     position: relative;
 }
 
+/* 门票查看页面 */
+.section .con {
+    padding: 0 30px 20px 30px;
+}
+.section .con .ticket-info>li {
+    padding: 30px 0;
+    /*border-bottom: 1px solid #eaeaea;*/
+    position: relative;
+    zoom: 1;
+    z-index: 40;
+}
+.section .con .ticket-info>li .img-box{
+    display: block;
+    float: left;
+}
+.section .con .ticket-info li .scenic-img {
+    width: 300px;
+    height: 240px;
+    margin-right: 20px;
+}
+.section .con .ticket-info li .ri-infos {
+    margin-left: 320px;
+}
+.section .con ul li .ri-infos h5 {
+    font-size: 16px;
+    line-height: 16px;
+    font-family: 'Microsoft YaHei';
+    margin-top: -1px;
+    font-weight: 400;
+    margin-bottom: 8px;
+}
+.section .con ul li .ri-infos p {
+    color: #858585;
+    line-height: 12px;
+    padding: 10px 0;
+}
+.section .con ul li .ri-infos .start-time {
+    margin-right: 30px;
+}
+.section .con ul li .ri-infos strong {
+    font-weight: 400;
+}
+.section .ticket-price {
+    line-height: 12px;
+    padding: 10px 0 5px;
+    overflow: hidden;
+    zoom: 1;
+    color: #858585;
+}
+.section .con ul li .ri-infos .remark .remark-box {
+    text-indent: 2em;
+    font-size: 12px;
+    line-height: 16px;
+    color: red;
+}
+.section .edit-btns{
+    position: absolute;
+    bottom: 0;
+    right: 0;
+}
+.section .edit-btns .update-btn,.section .edit-btns .delete-btn {
+    background: url(//localhost:8000/images/system/index-icon.png) no-repeat scroll 0 -321px;
+    _background: url(//localhost:8000/images/system/ie6/index-icon.gif) no-repeat scroll 0 -321px;
+    width: 87px;
+    height: 27px;
+    text-align: center;
+    color: #fff;
+    font-size: 14px;
+    font-family: 'Microsoft YaHei';
+    line-height: 27px;
+    margin-right: 20px;
+    float: left;
+}
+.section .edit-btns .update-btn:hover {
+    color: #333;
+}
+.section .edit-btns .delete-btn:hover {
+    color: #333;
+}
+
+
+
+
+
 /*个人信息info页面*/
 .tab-myfoot {
     margin-top: 23px;
