@@ -392,6 +392,10 @@ thead {
 
 
 /* 门票添加页面 */
+.scenic-name{
+    font-size: 24px;
+    color: #ff9d00;
+}
 
 .ticket-add{
     padding: 30px 0 0 85px;
