@@ -12,14 +12,13 @@
                 <p style="font-size: 60px">👣</p>
                 <p>FootPrint脚印</p>
             </div>
-            <div class="search_box">
+            <div class="search_box" >
                 <form action="">
                     <div class="form-group">
                         <label for="search"></label>
                         <input type="text" id="search" placeholder="请输入景区名称">
-                        <a href="#"><span class="glyphicon glyphicon-search"></span></a>
+                        <div  id="search_w">搜索</div>
                     </div>
-
                 </form>
             </div>
         </div>
