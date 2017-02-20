@@ -14,7 +14,6 @@ class ScenicService{
     public function getHotScenic($limit = 8){
         $scenic = Scenic::query();
         if (Auth::check()) {
-            echo 123;
             $scenic->where('user_id', '!=', Auth::id());
         }
         return $scenic->orderBy('hot', 'desc')->offset(0)->limit($limit)->get();
