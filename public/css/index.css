@@ -121,9 +121,10 @@
 }
 
 .hot_box_introduce {
-    height: 68px;
+    height: 65px;
+    width: 100%;
     background: #F8F8F8;
-
+    overflow: hidden;
 }
 
 .hot_box_introduce span {
