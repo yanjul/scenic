@@ -11,10 +11,6 @@
                     <span>门票添加</span>
                 </div>
                 <div class="section">
-                    {{--<div class="scenic-name">--}}
-                        {{--<h4>景区名字：<span>{{$scenic['name']}}</span></h4>--}}
-                        {{--<img src="{{$scenic['image']}}" height="120">--}}
-                    {{--</div>--}}
                     <form class="form-horizontal"
                           action="{{isset($scenic['ticket'])? '/user/scenic/ticket/'.$scenic['ticket']['id'] : '/user/add-ticket' }}"
                           method="post">
@@ -45,7 +41,7 @@
                             </li>
                             <li>
                                 <p class="caption01">门票价格：</p>
-                                <div class="info">
+                                <div>
                                     <input class="t" type="number" id="ticket-price" name="price"
                                            value="{{isset($scenic['ticket'])? $scenic['ticket']['price']: ''}}">
                                     @if ($errors->has('price'))
@@ -55,53 +51,52 @@
                             </li>
                             <li id="custom-price">
                                 <p class="caption01">自定义价格：</p>
-                                <div class="info">
-                                    @if(isset($scenic['ticket']) && count($scenic['ticket']))
-                                        @foreach($scenic['ticket']['custom_price'] as $ticket)
-                                            <div>
-                                                <input type="date" class="t" name="start_time[]"
-                                                       value="{{date('Y-m-d', $ticket['start_time']-1)}}"
-                                                       placeholder="开始时间">---
-                                                <input type="date" class="t" name="end_time[]"
-                                                       value="{{date('Y-m-d', $ticket['end_time']-1)}}"
-                                                       placeholder="结束时间">
-                                                <input type="tel" class="t" name="custom_price[]"
-                                                       value="{{$ticket['price']}}" placeholder="价格">
-                                                <button class="btn del" type="button" onclick="delNode(this)">删除
-                                                </button>
-                                            </div>
-                                        @endforeach
-                                    @else
-                                        <div>
-                                            <input type="date" name="start_time[]" placeholder="开始时间">---
-                                            <input type="date" name="end_time[]" placeholder="结束时间">
-                                            <input type="tel" name="custom_price[]" placeholder="价格">
+                                @if(isset($scenic['ticket']) && count($scenic['ticket']))
+                                    @foreach($scenic['ticket']['custom_price'] as $ticket)
+                                        <div style="margin-left: 100px;">
+                                            <input type="date" class="t" name="start_time[]"
+                                                   value="{{date('Y-m-d', $ticket['start_time']-1)}}"
+                                                   placeholder="开始时间">---
+                                            <input type="date" class="t" name="end_time[]"
+                                                   value="{{date('Y-m-d', $ticket['end_time']-1)}}"
+                                                   placeholder="结束时间">
+                                            <input type="tel" class="t" name="custom_price[]"
+                                                   value="{{$ticket['price']}}" placeholder="价格">
                                             <button class="btn del" type="button" onclick="delNode(this)">删除</button>
                                         </div>
-                                    @endif
-                                    <button class="btn" type="button" onclick="addNode(this)">添加</button>
-                                    <script>
-                                        function addNode(node) {
-                                            var element = document.querySelectorAll('#custom-price>div');
-                                            if (element) {
-                                                node.parentNode.insertBefore(element[element.length - 1].cloneNode(true), node)
-                                            }
+                                    @endforeach
+                                @else
+                                    <div style="margin-left: 100px;">
+                                        <input type="date" name="start_time[]" placeholder="开始时间">---
+                                        <input type="date" name="end_time[]" placeholder="结束时间">
+                                        <input type="tel" name="custom_price[]" placeholder="价格">
+                                        <button class="btn del" type="button" onclick="delNode(this)">删除</button>
+                                    </div>
+                                @endif
+                                <button class="btn binding" type="button" onclick="addNode(this)"
+                                        style="display: block">添加
+                                </button>
+                                <script>
+                                    function addNode(node) {
+                                        var element = document.querySelectorAll('#custom-price>div');
+                                        if (element) {
+                                            node.parentNode.insertBefore(element[element.length - 1].cloneNode(true), node)
                                         }
-                                        function delNode(node) {
-                                            var element = document.querySelectorAll('#custom-price > div');
-                                            if (element.length > 1) {
-                                                node.parentNode.parentNode.removeChild(node.parentNode);
-                                            } else {
-                                                element[0].children[0].value = '';
-                                                element[0].children[1].value = '';
-                                                element[0].children[2].value = '';
-                                            }
+                                    }
+                                    function delNode(node) {
+                                        var element = document.querySelectorAll('#custom-price > div');
+                                        if (element.length > 1) {
+                                            node.parentNode.parentNode.removeChild(node.parentNode);
+                                        } else {
+                                            element[0].children[0].value = '';
+                                            element[0].children[1].value = '';
+                                            element[0].children[2].value = '';
                                         }
-                                    </script>
-                                    @if ($errors->has('custom_price'))
-                                        error
-                                    @endif
-                                </div>
+                                    }
+                                </script>
+                                @if ($errors->has('custom_price'))
+                                    error
+                                @endif
                             </li>
                             <li>
                                 <p class="caption01">门票有效时间：</p>
