@@ -122,7 +122,7 @@
             </ul>
             <div id="myTabContent" class="tab-content clearfix">
                 <div class="tab-pane fade in active" id="hot">
-                    <script>
+                    <script type="text/javascript">
                         window.onload = function () {
                             $.ajax({
                                 url: '/get-scenic',
@@ -149,118 +149,33 @@
                 </div>
 
                 <div class="tab-pane fade" id="sale">
-                    {{--<script>--}}
-                        {{--window.onload = function () {--}}
-                            {{--$.ajax({--}}
-                                {{--url: '/get-scenic',--}}
-                                {{--type: 'GET',--}}
-                                {{--data: {--}}
-                                    {{--type: 'price',--}}
-                                    {{--length: 8--}}
-                                {{--},--}}
-                                {{--dataType: 'JSON',--}}
-                                {{--success: function (data) {--}}
-                                    {{--var container = $('#sale');--}}
-                                    {{--for (var i = 0; i < data.length; i ++) {--}}
-                                        {{--var content = $('<div class="hot_box"></div>');--}}
-                                        {{--content.append('<a href="/scenic/'+data[i].id+'"><img src="'+data[i].image+'"></a>');--}}
-                                        {{--content.append('<div class="hot_box_introduce"><p>'+data[i].name+'<del>¥'+data[i].old_price+'</del><span>¥'+data[i].now_price+'</span></p> <p>'+data[i].info+'</p> </div>');--}}
-                                        {{--container.append(content);--}}
-                                    {{--}--}}
-
-                                {{--},--}}
-                                {{--error: function () {--}}
-
-                                {{--}--}}
-                            {{--});--}}
-                        {{--}--}}
-                    {{--</script>--}}
-
-
-
-
-
-                    {{--<div class="hot_box">--}}
-                        {{--<a href="#"><img src="images/fenghuang.jpg"></a>--}}
-                        {{--<div class="hot_box_introduce">--}}
-                            {{--<p>凤凰&nbsp;&nbsp;--}}
-                                {{--<del>¥100</del>--}}
-                                {{--&nbsp;&nbsp;<span>¥80</span></p>--}}
-                            {{--<p>"凤凰是个美丽安逸的小城，风景好，民风也淳朴。这里有古朴的气息..."</p>--}}
-                        {{--</div>--}}
-                    {{--</div>--}}
-
-                    {{--<div class="hot_box">--}}
-                        {{--<a href="#"><img src="images/sanya.jpg"></a>--}}
-                        {{--<div class="hot_box_introduce">--}}
-                            {{--<p>三亚&nbsp;&nbsp;--}}
-                                {{--<del>¥200</del>--}}
-                                {{--&nbsp;&nbsp;<span>¥100</span></p>--}}
-                            {{--<p>"是个旅游度假的好地方，气候宜人，有很多好玩的地方。海水很清澈.."</p>--}}
-                        {{--</div>--}}
-                    {{--</div>--}}
-
-                    {{--<div class="hot_box">--}}
-                        {{--<a href="#"><img src="images/huashan.png"></a>--}}
-                        {{--<div class="hot_box_introduce">--}}
-                            {{--<p>华山&nbsp;&nbsp;--}}
-                                {{--<del>¥100</del>--}}
-                                {{--&nbsp;&nbsp;<span>¥80</span></p>--}}
-                            {{--<p>"奇险天下第一山，西峰绝壁，东峰日出，南峰奇松，北峰云雾，名不..."</p>--}}
-                        {{--</div>--}}
-                    {{--</div>--}}
-
-                    {{--<div class="hot_box">--}}
-                        {{--<a href="#"><img src="images/zhangjiajie.jpg"></a>--}}
-                        {{--<div class="hot_box_introduce">--}}
-                            {{--<p>张家界&nbsp;&nbsp;--}}
-                                {{--<del>¥130</del>--}}
-                                {{--&nbsp;&nbsp;<span>¥80</span></p>--}}
-                            {{--<p>"张家界景色很美，门票有点贵，火车站建得太小气了，不过森林公园..."</p>--}}
-                        {{--</div>--}}
-                    {{--</div>--}}
-
-                    {{--<div class="hot_box">--}}
-                        {{--<a href="#"><img src="images/emeishan.jpg"></a>--}}
-                        {{--<div class="hot_box_introduce">--}}
-                            {{--<p>峨眉山&nbsp;&nbsp;--}}
-                                {{--<del>¥130</del>--}}
-                                {{--&nbsp;&nbsp;<span>¥60</span></p>--}}
-                            {{--<p>"呼吸着清新的空气，云海和金顶日出非常壮观，就是门票有点贵。东..."</p>--}}
-                        {{--</div>--}}
-                    {{--</div>--}}
-
-                    {{--<div class="hot_box">--}}
-                        {{--<a href="#"><img src="images/dujiangyan.jpg"></a>--}}
-                        {{--<div class="hot_box_introduce">--}}
-                            {{--<p>都江堰&nbsp;&nbsp;--}}
-                                {{--<del>¥130</del>--}}
-                                {{--&nbsp;&nbsp;<span>¥80</span></p>--}}
-                            {{--<p>"景区环境好，到成都没有不去都江堰的，真的是古人的奇迹，几千年..."</p>--}}
-                        {{--</div>--}}
-                    {{--</div>--}}
-
-                    {{--<div class="hot_box">--}}
-                        {{--<a href="#"><img src="images/taishan.jpg"></a>--}}
-                        {{--<div class="hot_box_introduce">--}}
-                            {{--<p>泰山&nbsp;&nbsp;--}}
-                                {{--<del>¥150</del>--}}
-                                {{--&nbsp;&nbsp;<span>¥50</span></p>--}}
-                            {{--<p>"山上的饭很难吃，住宿很贵，但是景色壮观。沿途风光旖旎，日出和.."</p>--}}
-                        {{--</div>--}}
-                    {{--</div>--}}
-
-                    {{--<div class="hot_box">--}}
-                        {{--<a href="#"><img src="images/pingyao.jpg"></a>--}}
-                        {{--<div class="hot_box_introduce">--}}
-                            {{--<p>平遥&nbsp;&nbsp;--}}
-                                {{--<del>¥120</del>--}}
-                                {{--&nbsp;&nbsp;<span>¥90</span></p>--}}
-                            {{--<p>"巍峨的古老城垣厚重深沉，古城内的街道、店铺和民居依旧保持着传..."</p>--}}
-                        {{--</div>--}}
-                    {{--</div>--}}
+                    <script>
+//                        window.onload = function () {
+//                            $.ajax({
+//                                url: '/get-scenic',
+//                                type: 'GET',
+//                                data: {
+//                                    type: 'price',
+//                                    length: 8
+//                                },
+//                                dataType: 'JSON',
+//                                success: function (data) {
+//                                    var container = $('#sale');
+//                                    for (var i = 0; i < data.length; i ++) {
+//                                        var content = $('<div class="hot_box"></div>');
+//                                        content.append('<a href="/scenic/'+data[i].id+'"><img src="'+data[i].image+'"></a>');
+//                                        content.append('<div class="hot_box_introduce"><p>'+data[i].name+'<del>¥'+data[i].old_price+'</del><span>¥'+data[i].now_price+'</span></p> <p>'+data[i].info+'</p> </div>');
+//                                        container.append(content);
+//                                    }
+//
+//                                },
+//                                error: function () {
+//
+//                                }
+//                            });
+//                        }
+                    </script>
                 </div>
-
             </div>
         </div>
     </div>

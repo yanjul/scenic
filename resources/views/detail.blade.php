@@ -5,7 +5,6 @@
 @endsection
 
 @section('content')
-
     <!--商品详情内容-->
     <div class="detail_content clearfix">
         <div class="detail_head">
@@ -43,7 +42,8 @@
                                 </span>
                             @endforeach
                             <span>备注：{{$ticket->remark}}</span>
-                            <input type="checkbox" id="checkbox-1">
+                            <input type="checkbox" name="ticket_id">
+                            <input type="number" name="ticket_number" >
                             <label for="checkbox-1"></label>
                         </p>
                     @endforeach

@@ -29,7 +29,6 @@ class ScenicService{
         $i = 1;
         while($i){
             $time = time();
-            echo $i.'\n';
             $scenic = Scenic::query();
             if (Auth::check()) {
                 $scenic->where('user_id', '!=', Auth::id());
