@@ -82,21 +82,37 @@ input[type="checkbox"] + label {
     box-shadow: 0 1px 2px rgba(0, 0, 0, 0.05), inset 0px 1px 3px rgba(0, 0, 0, 0.1);
 }
 
-[id="checkbox-1"]:checked + label {
+/*[id="checkbox-1"]:checked + label {
+    background-color: #F47164;
+    border: 1px solid #F47164;
+}*/
+.checkbox:checked+label{
     background-color: #F47164;
     border: 1px solid #F47164;
 }
-
+/*
 [id="checkbox-2"]:checked + label {
     background-color: #84CBC5;
     border: 1px solid #84CBC5;
 }
-
+*/
+/*.label2{*/
+    /*background-color: #84CBC5;*/
+    /*border: 1px solid #84CBC5;*/
+/*}*/
 .detail_else {
     margin-top: 3%;
     margin-left: 10%;
     width: 80%;
     height: 450px;
 }
-
+.sale_time{
+    /*border: 1px solid black;*/
+}
+#sale_time_box>div{
+    display: none;
+}
+#sale_time_box .sale_time_show{
+    display: block;
+}
 /*# sourceMappingURL=detail.css.map */
