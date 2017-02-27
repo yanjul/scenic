@@ -1,0 +1,10 @@
+.table1 {
+    width: 80%;
+    margin-top: 5%;
+    margin-left: 10%; }
+
+.table tr td {
+    height: 80px;
+    vertical-align: middle !important; }
+
+/*# sourceMappingURL=payment.css.map */
