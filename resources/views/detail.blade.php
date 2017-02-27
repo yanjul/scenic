@@ -29,16 +29,17 @@
                             景区景点：
                             <input type="checkbox" name="ticket_id" id="checkbox-1" class="checkbox">
                             <label for="checkbox-1" id="checkbox-11" ></label>
-                            张家界国家森林公园(248元)
+                            张家界国家森林公园(
+                            {{$ticket->price}}
+                            )
                             <input type="checkbox" id="checkbox-2">
                             <label for="checkbox-2" id="checkbox-22" ></label>
                             天门山(255元)
                         </p>
                         <div id="sale_time_box">
                             <div class="sale_time sale_time_show" id="sale_time_1">
-                                <span>价格：{{$ticket->now_price}}</span>
+                                <span style="color: darkorange">限时特价:</span>
                                 @if($ticket->price != $ticket->now_pice)
-                                    <span>原价：{{$ticket->price}}</span>
                                 @endif
                                 @foreach($ticket->custom_price as $item)
                                     <br/>
@@ -47,20 +48,23 @@
                                         至
                                         {{date('Y-m-d', $item['end_time'])}}
                                         价格
-                                        {{$item['price']}}
+                                        <span style="color: brown">{{$item['price']}}</span>
+                                        元
                                 </span>
+                                    <input type="number" name="ticket_number" min="0" style="width: 30px">
                                 @endforeach
-                                <span>备注：{{$ticket->remark}}</span>
+                                <br>
+                                <span>(备注：{{$ticket->remark}})</span>
 
-                                <input type="number" name="ticket_number" min="0">
+
                             </div>
                             <div id="sale_time_2">
-                               bbb222
+                                d2
                             </div>
                         </div>
 
                     @endforeach
-                    <input type="submit" class="btn btn-primary pull-right" value="购买">
+                    <input type="submit" class="btn btn-primary pull-right " value="购买" id="sale_buy">
                 </div>
 
             </div>

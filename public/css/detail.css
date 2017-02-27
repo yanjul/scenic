@@ -52,7 +52,7 @@
 }
 
 .detail_main .detail_word .detail_word_head p {
-    margin-top: 50px;
+    margin-top: 30px;
 }
 
 .detail_pic, .detail_word {
@@ -113,6 +113,14 @@ input[type="checkbox"] + label {
     display: none;
 }
 #sale_time_box .sale_time_show{
-    display: block;
+
+}
+#sale_buy{
+    position: absolute;
+    top: 480px;
+    left: 78%;
+}
+#num-11,#checkbox-11{
+
 }
 /*# sourceMappingURL=detail.css.map */
