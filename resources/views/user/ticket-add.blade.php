@@ -110,12 +110,23 @@
                                 </div>
                             </li>
                             <li>
-                                <p class="caption01">门票最迟时间：</p>
+                                <p class="caption01">门票提前时间：</p>
                                 <div class="info">
                                     <input class="t" type="tel" pattern="^[0-9]+$" id="ticket-lead-time"
                                            name="lead_time"
                                            value="{{isset($scenic['ticket'])? $scenic['ticket']['lead_time']: ''}}">
-                                    @if ($errors->has('lead_time'))
+                                    @if ($errors->has('valid_time'))
+                                        error
+                                    @endif
+                                </div>
+                            </li>
+                            <li>
+                                <p class="caption01">门票最迟时间：</p>
+                                <div class="info">
+                                    <input class="t" type="tel" pattern="^[0-9]+$" id="ticket-last-time"
+                                           name="last_time"
+                                           value="{{isset($scenic['ticket'])? $scenic['ticket']['last_time']: ''}}">
+                                    @if ($errors->has('last_time'))
                                         error
                                     @endif
                                 </div>

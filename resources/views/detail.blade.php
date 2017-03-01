@@ -2,6 +2,14 @@
 
 @section('css')
     <link href="/css/detail.css" rel="stylesheet">
+    <style>
+        ._content{
+            display: none;
+        }
+        #sale_menu:hover ._content{
+            display: block;
+        }
+    </style>
 @endsection
 
 @section('content')
@@ -21,72 +29,59 @@
             <div class="detail_word">
                 <div class="detail_word_head">
                     <h2>{{$scenic->name}}</h2>
-                    @foreach($scenic->ticket as $ticket)
-                        <p>
-                            <span>门票：{{$ticket->name}}</span>
-                        </p>
-                        <p id="sale_menu">
-                            景区景点：
-                            <input type="checkbox" name="ticket_id" id="checkbox-1" class="checkbox">
-                            <label for="checkbox-1" id="checkbox-11" ></label>
-                            张家界国家森林公园(
-                            {{$ticket->price}}
-                            )
-                            <input type="checkbox" id="checkbox-2">
-                            <label for="checkbox-2" id="checkbox-22" ></label>
-                            天门山(255元)
-                        </p>
-                        <div id="sale_time_box">
-                            <div class="sale_time sale_time_show" id="sale_time_1">
-                                <span style="color: darkorange">限时特价:</span>
-                                @if($ticket->price != $ticket->now_pice)
+                    <form action="/order/create" method="post">
+                        <input type="hidden" name="scenic_id" value="{{$scenic->id}}">
+                        @foreach($scenic->ticket as $ticket)
+                            <div id="sale_menu" style="border: 1px solid #ff6666">
+                                门票：<span style="border: 1px solid #ff9d00">{{$ticket->name}}</span>
+                                现价{{$ticket->now_price}}
+                                @if($ticket->price != $ticket->now_price)
+                                    原价{{$ticket->price}}
                                 @endif
-                                @foreach($ticket->custom_price as $item)
-                                    <br/>
-                                    <span>
-                                {{date('Y-m-d', $item['start_time'])}}
-                                        至
-                                        {{date('Y-m-d', $item['end_time'])}}
-                                        价格
-                                        <span style="color: brown">{{$item['price']}}</span>
-                                        元
-                                </span>
-                                    <input type="number" name="ticket_number" min="0" style="width: 30px">
-                                @endforeach
-                                <br>
-                                <span>(备注：{{$ticket->remark}})</span>
 
+                                <input type="number" name="ticket_number[]" min="1" value="1">
+                                <input type="checkbox" name="ticket_id[]" value="{{$ticket->id}}" id="checkbox-1" class="checkbox">
+                                <label for="checkbox-1" id="checkbox-11" ></label>
+
+                                <div class="_content">
+                                    @foreach($ticket->custom_price as $item)
+                                        <br />
+                                        <span>
+                                        {{date('Y-m-d', $item['start_time'])}}至{{date('Y-m-d', $item['end_time'])}}价格<span style="color: brown">{{$item['price']}}</span>元
+                                        </span>
+                                    @endforeach
+                                    <br>
+                                    <p>有效天数：{{$ticket->valid_time}}</p>
+                                    <p>提前天数：{{$ticket->lead_time}}</p>
+                                    <p>最迟天数：{{$ticket->last_time}}</p>
+                                    <span>(备注：{{$ticket->remark}})</span>
+                                </div>
 
                             </div>
-                            <div id="sale_time_2">
-                                d2
-                            </div>
-                        </div>
-
-                    @endforeach
-                    <input type="submit" class="btn btn-primary pull-right " value="购买" id="sale_buy">
+                        @endforeach
+                        <input type="submit" class="btn btn-primary pull-right " value="购买" id="sale_buy" {{Auth::guest()?'':'disable'}} sss>
+                    </form>
                 </div>
-
             </div>
         </div>
     </div>
     <script>
-        window.onload = function () {
-            var oMenu=document.getElementById('sale_menu');
-            var oinput=oMenu.getElementsByTagName('input');
-            var oLabel=oMenu.getElementsByTagName('label');
-            var oSale_box=document.getElementById('sale_time_box');
-            var oSale_box_each=oSale_box.getElementsByTagName('div');
-            for(let i=0;i<oLabel.length;i++){
-                 oLabel[i].onclick=function () {
-                     for(let j=0;j<oLabel.length;j++){
-                         oSale_box_each[j].style.display='none';
-                     }
-                     oSale_box_each[i].style.display='block';
-                     oinput[i].className='checkbox';
-                 }
-            }
-        }
+//        window.onload = function () {
+//            var oMenu=document.getElementById('sale_menu');
+//            var oinput=oMenu.getElementsByTagName('input');
+//            var oLabel=oMenu.getElementsByTagName('label');
+//            var oSale_box=document.getElementById('sale_time_box');
+//            var oSale_box_each=oSale_box.getElementsByTagName('div');
+//            for(let i=0;i<oLabel.length;i++){
+//                 oLabel[i].onclick=function () {
+//                     for(let j=0;j<oLabel.length;j++){
+//                         oSale_box_each[j].style.display='none';
+//                     }
+//                     oSale_box_each[i].style.display='block';
+//                     oinput[i].className='checkbox';
+//                 }
+//            }
+//        }
 
     </script>
     <!--景区基本信息-->
@@ -103,7 +98,6 @@
             <div role="tabpanel" class="tab-pane active" id="home">
                 <h3>基本信息</h3>
                 <table class="table table-hover table-bordered">
-
                     <tr>
                         <td>走进张家界</td>
                         <td>张家界是湖南一个地级市，位于湖南西北部，属武陵山脉腹地，为中国最重要的旅游城市之一。
@@ -111,10 +105,8 @@
                             除武陵源核心景区外，武陵源区有“中华最佳洞府”“地下龙宫”黄龙洞、“人间瑶池”宝峰湖、“江南名刹”普光禅寺、土家人的“圣地”土家风情园等等旅游景点。
                         </td>
                     </tr>
-
                 </table>
             </div>
-
         </div>
     </div>
 

@@ -58,8 +58,13 @@ Route::group(['prefix' => 'user', 'middleware' => 'auth', 'namespace' => 'user']
     Route::post('/scenic/ticket/{id}', 'TicketController@updateTicket')->where('id', '^[0-9]+$');
     Route::post('/add-ticket', 'TicketController@createTicket');
     Route::get('/del-ticket/{id}', 'TicketController@deleteTicket')->where('id', '^[0-9]+$');
+
 });
 
+Route::group(['prefix' => 'order', 'middleware' => 'auth'], function () {
+    Route::post('/create', 'OrderController@create')->middleware('mobile');
+
+});
 
 //测试
 Route::get('/detail', function () {

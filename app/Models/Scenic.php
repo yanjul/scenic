@@ -27,5 +27,8 @@ class Scenic extends Model {
     public function ticket() {
         return $this->hasMany('App\Models\Ticket');
     }
+    public function user() {
+        return $this->belongsTo('App\Models\Users', 'user_id', 'id');
+    }
 
 }

@@ -16,11 +16,13 @@ class Users extends Authenticatable {
         'name',
         'password',
         'telephone',
-        'status'
+        'status',
+        'remember_token'
     ];
 
     protected $hidden = [
-        'password'
+        'password',
+        'remember_token'
     ];
 
     public function scenic(){

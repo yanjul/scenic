@@ -5,11 +5,12 @@ namespace App\Models;
 use Illuminate\Database\Eloquent\Model;
 
 class OrderInfo extends Model {
-    protected $table = 'order_payment_details';
+    protected $table = 'order_info';
 
     protected $fillable = [
         'sn',
-        'tourist_id',
+        'scenic_id',
+        'scenic_name',
         'tourist_name',
         'mobile',
         'distributor_id',
@@ -27,7 +28,7 @@ class OrderInfo extends Model {
     ];
 
     public function user() {
-        return $this->belongsTo('App\Models\Users', 'id', 'tourist_id');
+        return $this->belongsTo('App\Models\Users', 'tourist_id', 'id');
     }
 
     public function detail() {
@@ -36,5 +37,9 @@ class OrderInfo extends Model {
 
     public function payment() {
         return $this->hasOne('App\Models\OrderPaymentDetails', 'order_id', 'id');
+    }
+
+    public function scenic() {
+        return $this->belongsTo('App\Models\Scenic', 'scenic_id', 'id');
     }
 }
