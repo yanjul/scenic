@@ -15,6 +15,7 @@ class OrderPaymentDetails extends Model {
         'pay_account',
         'pay_at',
         'pay_price',
+        'debit_note',
         'remark'
     ];
 

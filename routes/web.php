@@ -59,10 +59,13 @@ Route::group(['prefix' => 'user', 'middleware' => 'auth', 'namespace' => 'user']
     Route::post('/add-ticket', 'TicketController@createTicket');
     Route::get('/del-ticket/{id}', 'TicketController@deleteTicket')->where('id', '^[0-9]+$');
 
+    Route::get('/order', 'OrderController@getOrder');
+
 });
 
 Route::group(['prefix' => 'order', 'middleware' => 'auth'], function () {
     Route::post('/create', 'OrderController@create')->middleware('mobile');
+    Route::match(['get', 'post'], '/pay/{id}', 'OrderController@pay')->where('id', '^[0-9]+$');
 
 });
 

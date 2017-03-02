@@ -23,7 +23,11 @@ class OrderService{
     {
         $order = [];
         $scenic = Scenic::with('user')->find($data['scenic_id']);
+        if ($scenic->user->id == Auth::id()){
+            return false;
+        }
         $order['info']['sn'] = time().rand(1000, 9999);
+        $order['info']['user_id'] = Auth::id();
         $order['info']['scenic_id'] = $scenic->id;
         $order['info']['scenic_name'] = $scenic->name;
         $order['info']['distributor_id'] = $scenic->user->id;
@@ -31,6 +35,7 @@ class OrderService{
         $order['info']['tourist_name'] = $this->user->name;
         $order['info']['mobile'] = $this->user->telephone;
         $order['detail'] = $this->getInitOrderDetailData($scenic, $data);
+        $order['info']['pay_status'] = 1;
         $order['info']['pay_price'] = 0;
         foreach ($order['detail'] as $key=>$item){
             $order['detail'][$key]['order_sn'] = $order['info']['sn'];
@@ -50,6 +55,9 @@ class OrderService{
             $order_detail[$key]['ticket_price'] = TicketService::getPrice($ticket);
             $order_detail[$key]['ticket_numbers'] = $data['ticket_number'][$key];
             $order_detail[$key]['ticket_amount'] = $order_detail[$key]['ticket_price'] * $order_detail[$key]['ticket_numbers'];
+            $order_detail[$key]['valid_time'] = $ticket->valid_time;
+            $order_detail[$key]['lead_time'] = $ticket->lead_time;
+            $order_detail[$key]['last_time'] = $ticket->last_time;
         }
         return $order_detail;
     }

@@ -12,11 +12,12 @@ class Ticket extends Model {
         'name',
         'price',
         'custom_price',
+        'number',
         'valid_time',
         'lead_time',
         'last_time',
         'remark',
-        'state'
+        'status'
     ];
 
     protected $casts = [

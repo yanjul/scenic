@@ -16,6 +16,7 @@ class Users extends Authenticatable {
         'name',
         'password',
         'telephone',
+        'role',
         'status',
         'remember_token'
     ];

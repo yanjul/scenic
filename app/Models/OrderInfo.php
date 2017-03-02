@@ -9,6 +9,7 @@ class OrderInfo extends Model {
 
     protected $fillable = [
         'sn',
+        'user_id',
         'scenic_id',
         'scenic_name',
         'tourist_name',
@@ -28,11 +29,11 @@ class OrderInfo extends Model {
     ];
 
     public function user() {
-        return $this->belongsTo('App\Models\Users', 'tourist_id', 'id');
+        return $this->belongsTo('App\Models\Users', 'user_id', 'id');
     }
 
     public function detail() {
-        return $this->hasOne('App\Models\OrderDetails', 'order_id', 'id');
+        return $this->hasMany('App\Models\OrderDetails', 'order_id', 'id');
     }
 
     public function payment() {
