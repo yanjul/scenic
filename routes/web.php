@@ -64,7 +64,7 @@ Route::group(['prefix' => 'user', 'middleware' => 'auth', 'namespace' => 'user']
 });
 
 Route::group(['prefix' => 'order', 'middleware' => 'auth'], function () {
-    Route::post('/create', 'OrderController@create')->middleware('mobile');
+    Route::post('/create', 'OrderController@create')->middleware('pur:mobile');
     Route::match(['get', 'post'], '/pay/{id}', 'OrderController@pay')->where('id', '^[0-9]+$');
 
 });

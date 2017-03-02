@@ -19,6 +19,7 @@ class OrderInfo extends Model {
         'pay_price',
         'paid_price',
         'pay_status',
+        'order_type',
         'order_status',
         'play_time',
         'admission_time',
