@@ -2,14 +2,7 @@
 
 @section('css')
     <link href="/css/detail.css" rel="stylesheet">
-    <style>
-        ._content{
-            display: none;
-        }
-        #sale_menu:hover ._content{
-            display: block;
-        }
-    </style>
+
 @endsection
 
 @section('content')
@@ -32,14 +25,14 @@
                     <form action="/order/create" method="post">
                         <input type="hidden" name="scenic_id" value="{{$scenic->id}}">
                         @foreach($scenic->ticket as $ticket)
-                            <div id="sale_menu" style="border: 1px solid #ff6666">
-                                门票：<span style="border: 1px solid #ff9d00">{{$ticket->name}}</span>
-                                现价{{$ticket->now_price}}
+                            <div id="sale_menu" >
+                                门票：<span style="color:limegreen">{{$ticket->name}}</span>
+                                <span style="margin-left: 15px">现价：<span style="color: #2e6da4">{{$ticket->now_price}}</span></span>
                                 @if($ticket->price != $ticket->now_price)
                                     原价{{$ticket->price}}
                                 @endif
 
-                                <input type="number" name="ticket_number[]" min="1" value="1">
+                                <input type="number" name="ticket_number[]" min="1" value="1"style="margin-left: 10px">
                                 <input type="checkbox" name="ticket_id[]" value="{{$ticket->id}}" id="checkbox-1" class="checkbox">
                                 <label for="checkbox-1" id="checkbox-11" ></label>
 
@@ -47,13 +40,13 @@
                                     @foreach($ticket->custom_price as $item)
                                         <br />
                                         <span>
-                                        {{date('Y-m-d', $item['start_time'])}}至{{date('Y-m-d', $item['end_time'])}}价格<span style="color: brown">{{$item['price']}}</span>元
+                                        {{date('Y-m-d', $item['start_time'])}}至{{date('Y-m-d', $item['end_time'])}}价格：<span style="color: brown">{{$item['price']}}</span>元
                                         </span>
                                     @endforeach
                                     <br>
-                                    <p>有效天数：{{$ticket->valid_time}}</p>
-                                    <p>提前天数：{{$ticket->lead_time}}</p>
-                                    <p>最迟天数：{{$ticket->last_time}}</p>
+                                    <p>有效天数：<span style="color: #FF4949">{{$ticket->valid_time}}</span></p>
+                                    <p>提前天数：<span style="color: #FF4949">{{$ticket->lead_time}}</span></p>
+                                    <p>最迟天数：<span style="color: #FF4949">{{$ticket->last_time}}</span></p>
                                     <span>(备注：{{$ticket->remark}})</span>
                                 </div>
 

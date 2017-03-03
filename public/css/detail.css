@@ -123,4 +123,16 @@ input[type="checkbox"] + label {
 #num-11,#checkbox-11{
 
 }
+#sale_menu{
+    box-shadow: 0px 0px 10px #58B7FF;
+}
+._content{
+    display: none;
+    border-top:1px solid bisque;
+    border-bottom: 1px solid green;
+    box-shadow: 0px 0px 5px green;
+}
+#sale_menu:hover ._content{
+    display: block;
+}
 /*# sourceMappingURL=detail.css.map */
