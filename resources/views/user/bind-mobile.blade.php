@@ -41,7 +41,7 @@
                                                value="{{old('code')}}">
                                         <button id="btn-code" type="button">获取验证码</button>
                                         @if($errors->has('code'))
-                                            error
+                                            <span style="color: red">请填写正确的验证码</span>
                                         @endif
                                     </div>
                                 </li>
@@ -56,25 +56,35 @@
                         window.onload = function () {
                             $('#btn-code').click(function () {
                                 var form = document.querySelector('#code-form');
-                                $.ajax({
-                                    url: '/get-code',
-                                    type: 'GET',
-                                    data: {
-                                        mobile: form.querySelector('#mobile').value
-                                    },
-                                    dataType: 'JSON',
-                                    success: function (data) {
-                                        form.querySelector('#msg-id').value = data.msg_id;
-                                        alert(data.code);
-                                        form.querySelector('#verification-code').value = data.code;
+                                var mobileValue = document.getElementById('mobile').value;
+                                var regTel = /^1\d{10}$/;
 
-                                    },
-                                    error: function () {
+                                if(mobileValue == ''){
+                                    alert('请填写电话号码');
+                                }
+                                else if(regTel.test(mobileValue)){
+                                    $.ajax({
+                                        url: '/get-code',
+                                        type: 'GET',
+                                        data: {
+                                            mobile: form.querySelector('#mobile').value
+                                        },
+                                        dataType: 'JSON',
+                                        success: function (data) {
+                                            form.querySelector('#msg-id').value = data.msg_id;
+                                            alert(data.code);
+                                            form.querySelector('#verification-code').value = data.code;
 
-                                    }
-                                })
+                                        },
+                                        error: function () {
+
+                                        }
+                                    });
+                                }else {
+                                    alert('请填写正确的手机号码')
+                                }
+
                             });
-
                         }
                     </script>
                 @endif
