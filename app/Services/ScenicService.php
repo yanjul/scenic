@@ -72,4 +72,20 @@ class ScenicService{
         return $cate;
     }
 
+    public function paginate(array $data, $range = 2){
+        $min = 1;
+        $max = $data['last_page'];
+        $current = $data['current_page'];
+        if($current > $range+1){
+            $min = $current-$range>1? $current-$range: 1;
+            $max = $current+$range<$current? $current+$range: $current;
+            $min = $max-$current < $range? $min+$max-$range-$current: $min;
+            $max = $current-$min < $range? $max+$min+$range-$current: $max;
+        }
+        $url = $data['next_page_url'];
+        if ($url) {
+            $prg = '(\\?|\\&)a=([^\\&]+)';
+        }
+    }
+
 }
