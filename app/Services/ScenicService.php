@@ -3,6 +3,7 @@
 namespace App\Services;
 
 use App\Models\Scenic;
+use App\Models\Category;
 use Illuminate\Support\Facades\Auth;
 
 class ScenicService{
@@ -58,6 +59,17 @@ class ScenicService{
             echo $i.'\n';
         }
         return $data;
+    }
+
+    public function getCategory($category){
+       
+        $cate = [];
+        foreach($category as $value){
+            foreach($value->child as $item){
+                 $cate[$item->id] = $item->name;     
+            }
+        }
+        return $cate;
     }
 
 }

@@ -29,6 +29,7 @@ Route::group(['namespace' => 'Auth'], function () {
 
 Route::get('/', 'HomeController@Index');
 Route::get('/home', 'HomeController@Index');
+Route::get('/search', 'SearchController@index');
 
 
 Route::get('/scenic/{id}', 'HomeController@ScenicDetail')->where('id', '^[0-9]+$');

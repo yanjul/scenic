@@ -76,9 +76,9 @@
     color: cornflowerblue;
 }
 
-.search_classify_box ul li:nth-of-type(2) a {
+/*.search_classify_box ul li:nth-of-type(2) a {
     color: cornflowerblue;
-}
+}*/
 
 /*其他搜索*/
 .search_else_box {
@@ -106,4 +106,39 @@
 }
 .search_else_word p:nth-of-type(2) span {
     color: coral
+}
+.action{
+
+}
+.action a{
+        color: cornflowerblue!important;
+}
+.null{
+    padding: 10px 20px;
+    font-size: 18px;
+}
+
+.page{
+    margin-top: 10px;
+    display: flex;
+    justify-content: center;
+    line-height: 30px;
+}
+.page a{
+    display: block;
+    padding: 4px 10px;
+    border: 1px solid red;
+    margin-right: 5px;
+    border-radius: 5px;
+}
+/*.page num{
+    display: flex;
+    flex-direction: row;
+    justify-content: center;
+}
+.page num a{
+    float: left;
+}*/
+.selected{
+    background: #ccc;
 }
