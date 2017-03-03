@@ -26,16 +26,23 @@
                         <input type="hidden" name="scenic_id" value="{{$scenic->id}}">
                         @foreach($scenic->ticket as $ticket)
                             <div id="sale_menu" >
-                                门票：<span style="color:limegreen">{{$ticket->name}}</span>
-                                <span style="margin-left: 15px">现价：<span style="color: #2e6da4">{{$ticket->now_price}}</span></span>
-                                @if($ticket->price != $ticket->now_price)
-                                    原价{{$ticket->price}}
-                                @endif
+                                <div class="or_menu" >
+                                    <div class="or_menpiao clearfix">
+                                        门票：<span style="color:limegreen">{{$ticket->name}}</span>
+                                    </div>
+                                    <div class="or_xianjia " >现价：<span style="color: #2e6da4">{{$ticket->now_price}}</span></div>
+                                    <div class="or_yuanjia">
+                                        @if($ticket->price != $ticket->now_price)
+                                            原价：{{$ticket->price}}
+                                        @endif
+                                    </div>
 
-                                <input type="number" name="ticket_number[]" min="1" value="1"style="margin-left: 10px">
-                                <input type="checkbox" name="ticket_id[]" value="{{$ticket->id}}" id="checkbox-1" class="checkbox">
-                                <label for="checkbox-1" id="checkbox-11" ></label>
+                                    <div class="or_kuang">
+                                        <input type="number" name="ticket_number[]" min="1" value="1"  style="width: 50px;margin-left: 40px">
+                                        <input type="checkbox" name="ticket_id[]" value="{{$ticket->id}}" id="checkbox-1" class="checkbox ">
+                                    </div>
 
+                                </div>
                                 <div class="_content">
                                     @foreach($ticket->custom_price as $item)
                                         <br />
@@ -43,40 +50,22 @@
                                         {{date('Y-m-d', $item['start_time'])}}至{{date('Y-m-d', $item['end_time'])}}价格：<span style="color: brown">{{$item['price']}}</span>元
                                         </span>
                                     @endforeach
-                                    <br>
-                                    <p>有效天数：<span style="color: #FF4949">{{$ticket->valid_time}}</span></p>
-                                    <p>提前天数：<span style="color: #FF4949">{{$ticket->lead_time}}</span></p>
-                                    <p>最迟天数：<span style="color: #FF4949">{{$ticket->last_time}}</span></p>
+                                    <br><br>
+                                    <span>有效天数：<span style="color: #FF4949">{{$ticket->valid_time}}</span></span>
+                                    <span>提前天数：<span style="color: #FF4949">{{$ticket->lead_time}}</span></span>
+                                    <span>最迟天数：<span style="color: #FF4949">{{$ticket->last_time}}</span></span>
                                     <span>(备注：{{$ticket->remark}})</span>
                                 </div>
-
                             </div>
+                            <br>
                         @endforeach
-                        <input type="submit" class="btn btn-primary pull-right " value="购买" id="sale_buy" {{Auth::guest()?'':'disable'}} sss>
+                        <input type="submit" class="btn btn-info pull-right" value="购买" id="sale_buy" {{Auth::guest()?'':'disable'}} sss>
                     </form>
                 </div>
             </div>
         </div>
     </div>
-    <script>
-//        window.onload = function () {
-//            var oMenu=document.getElementById('sale_menu');
-//            var oinput=oMenu.getElementsByTagName('input');
-//            var oLabel=oMenu.getElementsByTagName('label');
-//            var oSale_box=document.getElementById('sale_time_box');
-//            var oSale_box_each=oSale_box.getElementsByTagName('div');
-//            for(let i=0;i<oLabel.length;i++){
-//                 oLabel[i].onclick=function () {
-//                     for(let j=0;j<oLabel.length;j++){
-//                         oSale_box_each[j].style.display='none';
-//                     }
-//                     oSale_box_each[i].style.display='block';
-//                     oinput[i].className='checkbox';
-//                 }
-//            }
-//        }
 
-    </script>
     <!--景区基本信息-->
     <div class="detail_else">
 

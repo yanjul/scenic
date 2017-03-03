@@ -70,6 +70,6 @@ Route::group(['prefix' => 'order', 'middleware' => 'auth'], function () {
 });
 
 //测试
-Route::get('/payment', function () {
-    return view('payment');
+Route::get('/myPayment', function () {
+    return view('myPayment');
 });
