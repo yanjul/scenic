@@ -1,44 +1,79 @@
 @extends('layouts.app')
 
 @section('css')
-    <link href="/css/detail.css" rel="stylesheet">
+    <link href="/css/pay.css" rel="stylesheet">
 @endsection
 
 @section('content')
     <!--商品详情内容-->
     <div class="detail_content">
-        <div class="detail_head">
-            <ul>
-                <li><a href="#">脚印</a></li>
-            </ul>
-        </div>
-        <div>
-            <ul>
-                <li><b>订单号</b>{{$order->sn}}</li>
-                <li><b>景区名字</b>{{$order->scenic_name}}</li>
-                <li>
-                    <b>门票信息</b>
-                    @foreach($order->detail as $detail)
-                        <ul style="border: 1px solid #ff6666">
-                            <li style="display: inline-block"><b>门票名字</b>{{$detail->ticket_name}}</li>
-                            <li style="display: inline-block"><b>门票价格</b>{{$detail->ticket_price}}</li>
-                            <li style="display: inline-block"><b>门票数量</b>{{$detail->ticket_numbers}}</li>
-                            <li style="display: inline-block"><b>门票有效时间</b>{{$detail->valid_time}}</li>
-                        </ul>
-                    @endforeach
-                </li>
-                <li><b>游客姓名</b>{{$order->tourist_name}}</li>
-                <li><b>手机号</b>{{$order->mobile}}</li>
-                <li><b>价格</b>{{$order->pay_price}}</li>
-            </ul>
-            <form action="/order/pay/{{$order->sn}}" method="post">
-                <input type="hidden" name="id" value="{{$order->id}}">
-                <label>入园时间</label><input type="date" name="admission_time">
-                <label>支付方式</label><input type="radio" name="pay_type" value="1" checked>线上支付
-                <input type="radio" name="pay_type" value="2">受信支付
-                <button type="submit">支付</button>
-            </form>
-        </div>
+        <form action="/order/pay/{{$order->sn}}" method="post">
+            <table class="table table1">
+                <tr>
+                    <td>订单号</td>
+                    <td>{{$order->sn}}</td>
+                </tr>
+                <tr>
+                    <td>景区名字</td>
+                    <td>{{$order->scenic_name}}</td>
+                </tr>
+                <tr>
+                    <td>门票信息</td>
+                    <td></td>
+                </tr>
+                @foreach($order->detail as $detail)
+                    <tr>
+                        <td style="border-top: 0">
+                            <table class="table table-bordered" style="width: 100%">
+                                <tr>
+                                    <td style="color: darkcyan">门票名字</td>
+                                    <td style="color: darkcyan">门票价格</td>
+                                    <td style="color: darkcyan">门票数量</td>
+                                    <td style="color: darkcyan">门票有效时间</td>
+                                </tr>
+                                <tr>
+                                    <td>{{$detail->ticket_name}}</td>
+                                    <td>{{$detail->ticket_price}}</td>
+                                    <td>{{$detail->ticket_numbers}}</td>
+                                    <td>{{$detail->valid_time}}</td>
+                                </tr>
+                            </table>
+                        </td>
+                    </tr>
+                @endforeach
+                <tr>
+                    <td>游客姓名</td>
+                    <td>{{$order->tourist_name}}</td>
+                </tr>
+                <tr>
+                    <td>手机号</td>
+                    <td>{{$order->mobile}}</td>
+                </tr>
+                <tr>
+                    <td>价格</td>
+                    <td>{{$order->pay_price}}</td>
+                </tr>
+
+                <tr>
+                    <td><input type="hidden" name="id" value="{{$order->id}}"><label>入园时间</label></td>
+                    <td><input type="date" name="admission_time"></td>
+                </tr>
+                <tr>
+                    <td>支付方式</td>
+                    <td><input type="radio" name="pay_type" value="1" checked>线上支付
+                        <input type="radio" name="pay_type" value="2">受信支付
+
+                    </td>
+                </tr>
+                <tr>
+                    <td></td>
+                    <td>
+                        <button type="submit" class="btn btn-success">支付</button>
+                    </td>
+                </tr>
+
+            </table>
+        </form>
     </div>
     <!--底部-->
     <div class="index_footer">
