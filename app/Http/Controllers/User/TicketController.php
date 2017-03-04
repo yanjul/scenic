@@ -76,6 +76,7 @@ class TicketController extends Controller
         $input = $request->input();
         $ticket = Ticket::where(['id' => $id, 'scenic_id' => $input['scenic_id']])->first();
         if ($ticket) {
+            print_r($input);
             foreach ($input['custom_price'] as $key => $value) {
                 if ($value && ($input['start_time'][$key] || $input['end_time'][$key])) {
                     $data['custom_price'][] = [
@@ -92,6 +93,7 @@ class TicketController extends Controller
             $ticket->valid_time = $input['valid_time'];
             $ticket->lead_time = $input['lead_time'];
             $ticket->last_time = $input['last_time'];
+            $ticket->remark = $input['remark'];
             $ticket->save();
         }
         return redirect('user/scenic/' . $input['scenic_id']);
@@ -133,8 +135,9 @@ class TicketController extends Controller
      * @param $id
      * @return \Illuminate\Http\RedirectResponse
      */
-    function deleteTicket($id){
-        Ticket::with(['scenic'=> function($query){
+    function deleteTicket($id)
+    {
+        Ticket::with(['scenic' => function ($query) {
             $query->where('user_id', Auth::id());
         }])->where('id', $id)->delete();
         return redirect()->back();

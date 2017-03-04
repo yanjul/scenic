@@ -51,7 +51,7 @@
                             </li>
                             <li id="custom-price">
                                 <p class="caption01">自定义价格：</p>
-                                @if(isset($scenic['ticket']) && count($scenic['ticket']))
+                                @if(isset($scenic['ticket']) && count($scenic['ticket']) && count($scenic['ticket']['custom_price']))
                                     @foreach($scenic['ticket']['custom_price'] as $ticket)
                                         <div style="margin-left: 100px;">
                                             <input type="date" class="t" name="start_time[]"
