@@ -59,7 +59,7 @@
                             </div>
                             <br>
                         @endforeach
-                        <input type="submit" class="btn btn-info pull-right" value="购买" id="sale_buy" {{Auth::guest()?'':'disable'}} sss>
+                        <input type="submit" class="btn btn-info pull-right" value="购买" id="sale_buy" {{Auth::guest()?'disabled':''}} >
                     </form>
                 </div>
             </div>

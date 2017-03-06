@@ -53,16 +53,23 @@
                     <td>价格</td>
                     <td>{{$order->pay_price}}</td>
                 </tr>
-
                 <tr>
                     <td><input type="hidden" name="id" value="{{$order->id}}"><label>入园时间</label></td>
                     <td><input type="date" name="admission_time"></td>
                 </tr>
                 <tr>
                     <td>支付方式</td>
-                    <td><input type="radio" name="pay_type" value="1" checked>线上支付
+                    <td>
+                        <input type="radio" name="pay_type" value="1" checked>线上支付
                         <input type="radio" name="pay_type" value="2">受信支付
-
+                    </td>
+                </tr>
+                <tr>
+                    <td>支付方式</td>
+                    <td>
+                        <input type="radio" name="pay_mode" value="1" checked>支付宝
+                        <input type="radio" name="pay_mode" value="2">微信
+                        <input type="radio" name="pay_mode" value="3">银联
                     </td>
                 </tr>
                 <tr>
@@ -71,7 +78,6 @@
                         <button type="submit" class="btn btn-success">支付</button>
                     </td>
                 </tr>
-
             </table>
         </form>
     </div>

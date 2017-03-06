@@ -20,6 +20,7 @@ class UserController extends Controller {
     }
 
     public function getUserInfo(){
+
         $info = Users::with('info')->find(Auth::id())->toArray();
 
         return view('user.info')->with('info', $info);

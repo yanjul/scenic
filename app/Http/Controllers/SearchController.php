@@ -11,16 +11,6 @@ use App\Services\ScenicService;
 class SearchController extends Controller
 {
     /**
-     * Create a new controller instance.
-     *
-     * @return void
-     */
-    public function __construct()
-    {
-        $this->middleware('auth');
-    }
-
-    /**
      * Show the application dashboard.
      *
      * @return \Illuminate\Http\Response
@@ -45,6 +35,8 @@ class SearchController extends Controller
         $category = Category::with('child')->where('type', 1)->get();
         $scenic_service = new ScenicService();
         $cate = $scenic_service->getCategory($category);
+
+        $scenic = $scenic_service->paginate($scenic);
         // return $scenic;
         return view('search', ['scenic'=>$scenic, 'category'=> $category,'cate'=>$cate,'params'=>$data]);
     }

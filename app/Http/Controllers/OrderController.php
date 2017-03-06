@@ -30,11 +30,10 @@ class OrderController extends Controller
                 foreach ($order_data['detail'] as $value) {
                     OrderDetails::create(array_merge($value, ['order_id' => $orderInfo->id]));
                 }
-                OrderPaymentDetails::create(['order_id' => $orderInfo->id, 'order_sn' => $orderInfo->sn]);
+//                OrderPaymentDetails::create(['order_id' => $orderInfo->id, 'order_sn' => $orderInfo->sn]);
                 DB::commit();
                 return redirect('order/pay/'.$orderInfo->sn);
             } catch (\Exception $exception) {
-                print_r($exception);
                 DB::rollBack();
                 return redirect()->back();
             }
@@ -51,7 +50,37 @@ class OrderController extends Controller
         $this->validate($request, [
             'id'=> 'required',
             'admission_time'=> 'required|date|after:now',
-            'pay_type'=> 'required'
+            'pay_type'=> 'required',
+            'pay_mode'=> 'required'
         ]);
+        $data = $request->input();
+        $time = time();
+        $order = OrderInfo::where(['sn'=> $sn, 'id'=> $data['id']])->first();
+        if ($order) {
+            $pay_data = [
+                'order_id'=> $order->id,
+                'order_sn'=> $order->sn,
+                'pay_type'=> $data['pay_type'],
+                'pay_mode'=> $data['pay_mode'],
+                'pay_account'=> Auth::id(),
+                'pay_price'=> $order->pay_price,
+                'pay_at'=> $time,
+                'debit_note'=> $time.rand(1000, 9999)
+            ];
+
+            try {
+                DB::beginTransaction();
+                $order->paid_price = $order->pay_price;
+                $order->pay_status = 1;
+                $order->play_time = $data['play_time'];
+                OrderPaymentDetails::create($pay_data);
+                DB::commit();
+                return redirect()->back();
+            } catch (\Exception $exception) {
+                DB::rollBack();
+                return redirect()->back();
+            }
+        }
+
     }
 }

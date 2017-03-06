@@ -35,7 +35,8 @@ class OrderService{
         $order['info']['tourist_name'] = $this->user->name;
         $order['info']['mobile'] = $this->user->telephone;
         $order['detail'] = $this->getInitOrderDetailData($scenic, $data);
-        $order['info']['pay_status'] = 1;
+        $order['info']['pay_status'] = 0;
+        $order['info']['order_status'] = 1;
         $order['info']['pay_price'] = 0;
         foreach ($order['detail'] as $key=>$item){
             $order['detail'][$key]['order_sn'] = $order['info']['sn'];

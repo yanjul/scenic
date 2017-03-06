@@ -83,9 +83,13 @@ class ScenicService{
             $max = $current-$min < $range? $max+$min+$range-$current: $max;
         }
         $url = $data['next_page_url'];
+        $data['urls'] = [];
         if ($url) {
-            $prg = '(\\?|\\&)a=([^\\&]+)';
+            for ($i = $min; $i < $max; $i ++){
+                $data['urls'][$i] = preg_replace('/page=([^\\&]+)/i', 'page='.$i, $url);
+            }
         }
+        return $data;
     }
 
 }
