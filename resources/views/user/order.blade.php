@@ -44,29 +44,36 @@
                                             <td width="10%" class="price">{{$ticket->ticket_price}}¥</td>
 
                                             <td width="15%" class="total">{{$ticket->ticket_amount}}¥</td>
-                                            <td width="15%" class="statue">
-                                                @if($item->order_status == 1 && $item->pay_status == 0)
-                                                    <span>待付款</span>
-                                                @elseif($item->order_status == 2 && $item->pay_status == 1)
-                                                    <span>待确认</span>
-                                                @elseif($item->order_status == 2 && $item->pay_status == 2)
-                                                    <span>退款中</span>
-                                                @elseif($item->order_status == 2 && $item->pay_status == 3)
-                                                    <span>退款完成</span>
-                                                @elseif($item->order_status == 2 && $item->pay_status == 3)
-                                                    <span>退款取消</span>
-                                                @elseif($item->order_status == 3 && $item->pay_status == 1)
-                                                    <span>交易成功</span>
-                                                @elseif($item->order_status == 4 && $item->pay_status == 0)
-                                                    <span>交易取消</span>
-                                                @else
-                                                    <span>***bug***{{$item->order_status}}***{{$item->pay_status}}
-                                                        ***</span>
-                                                @endif
-                                            </td>
-                                            <td width="15%">
-                                                @if($item->order_status == 1 && $item->pay_status == 0)
-                                                    <span>
+                                            <td width="30%" colspan="2"></td>
+                                        </tr>
+                                    @endforeach
+                                    <tr>
+                                        <td width="55%%" colspan="2"></td>
+                                        <td width="9%"><span>总价</span></td>
+                                        <td width="10%" class="total">{{$item->pay_price}}¥</td>
+                                        <td width="15%" class="statue">
+                                            @if($item->order_status == 1 && $item->pay_status == 0)
+                                                <span>待付款</span>
+                                            @elseif($item->order_status == 2 && $item->pay_status == 1)
+                                                <span>待确认</span>
+                                            @elseif($item->order_status == 2 && $item->pay_status == 2)
+                                                <span>退款中</span>
+                                            @elseif($item->order_status == 2 && $item->pay_status == 3)
+                                                <span>退款完成</span>
+                                            @elseif($item->order_status == 2 && $item->pay_status == 3)
+                                                <span>退款取消</span>
+                                            @elseif($item->order_status == 3 && $item->pay_status == 1)
+                                                <span>交易成功</span>
+                                            @elseif($item->order_status == 4 && $item->pay_status == 0)
+                                                <span>交易取消</span>
+                                            @else
+                                                <span>***bug***{{$item->order_status}}***{{$item->pay_status}}
+                                                    ***</span>
+                                            @endif
+                                        </td>
+                                        <td width="15%">
+                                            @if($item->order_status == 1 && $item->pay_status == 0)
+                                                <span>
                                                     <a href="/order/pay/{{$item->sn}}">付款</a>
                                                     <a>取消</a>
                                                 </span>
@@ -74,25 +81,24 @@
                                                     <span>
                                                     <a>申请退款</a>
                                                 </span>
-                                                @elseif($item->order_status == 2 && $item->pay_status == 2)
-                                                    <span>
+                                            @elseif($item->order_status == 2 && $item->pay_status == 2)
+                                                <span>
                                                     <a>取消退款</a>
                                                 </span>
-                                                @elseif($item->order_status == 2 && $item->pay_status == 3)
+                                            @elseif($item->order_status == 2 && $item->pay_status == 3)
 
-                                                @elseif($item->order_status == 2 && $item->pay_status == 3)
+                                            @elseif($item->order_status == 2 && $item->pay_status == 3)
 
-                                                @elseif($item->order_status == 3 && $item->pay_status == 1)
+                                            @elseif($item->order_status == 3 && $item->pay_status == 1)
 
-                                                @elseif($item->order_status == 4 && $item->pay_status == 0)
+                                            @elseif($item->order_status == 4 && $item->pay_status == 0)
 
-                                                @else
-                                                    <span>***bug***{{$item->order_status}}***{{$item->pay_status}}
-                                                        ***</span>
-                                                @endif
-                                            </td>
-                                        </tr>
-                                    @endforeach
+                                            @else
+                                                <span>***bug***{{$item->order_status}}***{{$item->pay_status}}
+                                                    ***</span>
+                                            @endif
+                                        </td>
+                                    </tr>
                                     </tbody>
                                 </table>
                             @endforeach
