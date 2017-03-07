@@ -781,12 +781,13 @@ thead {
     text-align: center;
 }
 .m-orderList .order-del {
-    float: right;
-    margin-right: 15px;
     color: #f9644e;
 }
-.m-orderList td.o_info span {
-    padding: 0 20px;
+.m-orderList .order-check {
+    color: #f9644e;
+}
+.m-orderList .o_info .col-md-2{
+    text-align: center;
 }
 .m-orderList .title {
     width: 21%;
