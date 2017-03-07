@@ -24,7 +24,7 @@
                     <h2>{{$scenic->name}}</h2>
                     <form action="/order/create" method="post">
                         <input type="hidden" name="scenic_id" value="{{$scenic->id}}">
-                        @foreach($scenic->ticket as $ticket)
+                        @foreach($scenic->ticket as $key=>$ticket)
                             <div id="sale_menu" >
                                 <div class="or_menu" >
                                     <div class="or_menpiao clearfix">
@@ -36,12 +36,36 @@
                                             原价：{{$ticket->price}}
                                         @endif
                                     </div>
-
                                     <div class="or_kuang">
-                                        <input type="number" name="ticket_number[]" min="1" value="1"  style="width: 50px;margin-left: 40px">
+                                        <div class="math">
+                                            <span class="minus" onclick="minus( {{$key}} )">-</span>
+                                            <!-- <input type="number" class="num" name="ticket_number[]" min="1" value="1"  style="width: 50px;margin-left: 40px">-->
+                                            <span class="input_num"><input name="ticket_number[]"  id="num{{$key}}" type="text" value="1" readonly/></span>
+                                            <span class="add" onclick="add( {{$key}} )">+</span>
+                                        </div>
                                         <input type="checkbox" name="ticket_id[]" value="{{$ticket->id}}" id="checkbox-1" class="checkbox ">
+                                        @section('js')
+                                            <script>
+                                                function minus(ind){
+                                                    var index = ind; 
+                                                    var id = 'num'+index;
+                                                   document.getElementById(id).value--;
+                                                   if(document.getElementById(id).value<=1){
+                                                       document.getElementById(id).value = 1;
+                                                   }
+                                                }
+                                                function add(ind){
+                                                    var index = ind; 
+                                                    var id = 'num'+index;
+                                                    document.getElementById(id).value ++;
+                                                    if(document.getElementById(id).value >3){
+                                                        document.getElementById(id).value = 3;
+                                                        alert("购买数量大于3");
+                                                    }
+                                                }
+                                            </script>
+                                        @endsection
                                     </div>
-
                                 </div>
                                 <div class="_content">
                                     @foreach($ticket->custom_price as $item)
@@ -59,7 +83,7 @@
                             </div>
                             <br>
                         @endforeach
-                        <input type="submit" class="btn btn-info pull-right" value="购买" id="sale_buy" {{Auth::guest()?'disabled':''}} >
+                        <input type="submit" class="btn btn-info pull-right" value="立即购买" id="sale_buy"  >
                     </form>
                 </div>
             </div>

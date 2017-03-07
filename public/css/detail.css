@@ -49,6 +49,7 @@
     height: 400px;
     margin-left: 5%;
     margin-top: 20px;
+    position: relative;
 }
 
 .detail_main .detail_word .detail_word_head p {
@@ -76,7 +77,9 @@
 
 }
 #sale_buy{
-
+    position: absolute;
+    top: 77%;
+    right: 0px;
 
 }
 #num-11,#checkbox-11{
@@ -84,23 +87,33 @@
 }
 #sale_menu{
 
-    box-shadow: 0px 0px 10px #58B7FF;
+    /*box-shadow: 0px 0px 4px #58B7FF;*/
+    border: 1px solid #ccc;
+    width: 75%;
+    position: relative;
 }
 ._content{
+    width: 100%;
     display: none;
-    border-top:1px solid bisque;
-    border-bottom: 1px solid green;
-    box-shadow: 0px 0px 5px green;
+    position: absolute;
+    border: 1px solid #ccc;
+    word-wrap: break-word;
+    background: antiquewhite;
+    z-index: 20;
 }
 #sale_menu:hover ._content{
     display: block;
+    padding: 5px;
 }
 .checkbox{
     float: right;
+    margin: 8px!important;
 }
+
 .or_menu{
     display: flex;
-
+    line-height: 30px;
+    padding: 0 5px;
 }
 .or_menpiao,.or_xianjia,.or_kuang,.or_yuanjia{
     text-overflow:ellipsis;
@@ -118,7 +131,37 @@
     flex:1 1  20% ;
 }
 .or_kuang{
-    flex: 1 1 30%;
+    /*flex: 1 1 30%;*/
 }
-
+.or_kuang .math{
+    border: 1px solid #ccc;
+    display: inline-block;
+    border-top: none;
+    border-bottom: none;
+}
+.or_kuang .math span{
+    display: inline-block;
+    width: 20px;
+    height: 50%;
+    cursor: default;
+    text-align: center;
+}
+.minus{
+    border-right: 1px solid #ccc;
+}
+.add{
+    border-left: 1px solid #ccc;
+    
+}
+.input_num input{
+    border: none;
+    width: 100%;
+    text-align: center;
+}
+.or_kuang .num{
+    height: 100%;
+    border-style: none solid ;
+    border-width: 1px;
+    border-color: #ccc;
+}
 /*# sourceMappingURL=detail.css.map */
