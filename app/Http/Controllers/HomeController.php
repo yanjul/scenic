@@ -7,6 +7,8 @@ use Illuminate\Http\Request;
 use App\Services\ScenicService;
 use App\Services\TicketService;
 use Illuminate\Support\Facades\Auth;
+use Illuminate\Support\Facades\Session;
+use Illuminate\Support\Facades\URL;
 
 class HomeController extends Controller
 {
@@ -47,9 +49,9 @@ class HomeController extends Controller
             foreach ($scenic->ticket as $key=>$value){
                 $scenic->ticket[$key]->now_price = $ticket->getPrice($value);
             }
+            Session::put('old_url', Url::current());
             return view('detail')->with('scenic', $scenic);
         }
-
         return redirect()->back();
     }
 }

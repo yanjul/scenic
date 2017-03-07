@@ -8,6 +8,7 @@ use App\Models\Users;
 use Illuminate\Support\Facades\Auth;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Hash;
+use Illuminate\Support\Facades\Session;
 
 class UserController extends Controller {
 
@@ -45,6 +46,12 @@ class UserController extends Controller {
             $user = Auth::user();
             $user->telephone = $data['mobile'];
             $user->save();
+            $url = 'user/bind-mobile';
+            if(Session::has('old_url')){
+                $url = Session::get('old_url', '/');
+                Session::forget('old_url');
+            }
+            return redirect($url);
         }
         return redirect('user/bind-mobile')->withErrors(['code'=> 'error'])->withInput($data);
     }
@@ -79,7 +86,6 @@ class UserController extends Controller {
 
         if($request->isMethod('get')){
             $info = Users::with('info')->find(Auth::id())->toArray();
-
             return view('user.info-update')->with('info', $info);
         }
 

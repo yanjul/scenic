@@ -10,6 +10,7 @@ use App\Models\Scenic;
 use App\Services\OrderService;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\DB;
+use Illuminate\Support\Facades\Session;
 
 class OrderController extends Controller
 {
@@ -55,8 +56,8 @@ class OrderController extends Controller
         ]);
         $data = $request->input();
         $time = time();
-        $order = OrderInfo::where(['sn'=> $sn, 'id'=> $data['id']])->first();
-        if ($order) {
+        $order = OrderInfo::with('payment')->where(['sn'=> $sn, 'id'=> $data['id']])->first();
+        if ($order && $order->order_status == 1 && $order->pay_status == 0 && !$order->payment) {
             $pay_data = [
                 'order_id'=> $order->id,
                 'order_sn'=> $order->sn,
@@ -72,15 +73,23 @@ class OrderController extends Controller
                 DB::beginTransaction();
                 $order->paid_price = $order->pay_price;
                 $order->pay_status = 1;
-                $order->play_time = $data['play_time'];
+                $order->order_status = 2;
+                $order->play_time = strtotime($data['admission_time']);
+                $order->save();
                 OrderPaymentDetails::create($pay_data);
                 DB::commit();
-                return redirect()->back();
+                return redirect('user/order');
             } catch (\Exception $exception) {
+                print_r($exception);
                 DB::rollBack();
-                return redirect()->back();
+                return redirect(Session::get('old_url', '/'));
             }
         }
+        return redirect(Session::get('old_url', '/'));
+
+    }
+
+    public function cancel(){
 
     }
 }

@@ -45,7 +45,7 @@
                         <li>|</li>
                         <li><a href="/user">我的脚印</a></li>
                         <li>|</li>
-                        <li><a href="#">我的订单</a></li>
+                        <li><a href="/user/order">我的订单</a></li>
                     </ul>
                 @endif
             </div>
