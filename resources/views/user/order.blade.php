@@ -33,7 +33,7 @@
                                             <span class="col-md-4">订单编号：{{$item->sn}}</span>
                                             <span class="col-md-4">创建时间：{{$item->created_at}}</span>
                                             <a href="/user/order-detail" class="order-check col-md-2">查看订单</a>
-                                            <a href="" class="order-del col-md-2">删除订单</a>
+                                            <a href="#" class="order-del col-md-2">删除订单</a>
                                         </td>
                                     </tr>
                                     @foreach($item->detail as $ticket)
