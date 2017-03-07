@@ -20,6 +20,11 @@
         <dl>
             <dt>订单管理</dt>
             <dd>
+                <a href="/user/order">
+                    <span>订单状态</span>
+                </a>
+            </dd>
+            <dd>
                 <a href="">
                     <span>交易记录</span>
                 </a>
@@ -29,11 +34,7 @@
                     <span>数据分析</span>
                 </a>
             </dd>
-            <dd>
-                <a href="/user/order">
-                    <span>订单状态</span>
-                </a>
-            </dd>
+
         </dl>
         <dl>
             <dt>账户管理</dt>

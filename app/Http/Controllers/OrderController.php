@@ -89,7 +89,18 @@ class OrderController extends Controller
 
     }
 
-    public function cancel(){
+    public function detail($sn){
+        return view('user.order-detail');
+    }
 
+    public function cancel(Request $request){
+        $this->validate($request, [
+            'sn'=> 'required'
+        ]);
+        $order = OrderInfo::where(['user_id'=> Auth::id(), 'sn'=> $request->input('sn')])->first();
+        if($order){
+
+        }
+        return redirect()->back();
     }
 }
