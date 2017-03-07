@@ -99,7 +99,10 @@ class OrderController extends Controller
         ]);
         $order = OrderInfo::where(['user_id'=> Auth::id(), 'sn'=> $request->input('sn')])->first();
         if($order){
-
+            if($order->order_status == 1 && $order->pay_status == 0) {
+                $order->order_status = 4;
+                $order->save();
+            }
         }
         return redirect()->back();
     }
