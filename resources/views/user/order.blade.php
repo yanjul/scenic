@@ -62,8 +62,10 @@
                                                 <span>退款完成</span>
                                             @elseif($item->order_status == 2 && $item->pay_status == 3)
                                                 <span>退款取消</span>
-                                            @elseif($item->order_status == 3 && $item->pay_status == 1)
-                                                <span>交易成功</span>
+                                            @elseif($item->order_status == 3 && $item->pay_status == 1 && !$item->admission_time)
+                                                <span>待入园</span>
+                                            @elseif($item->order_status == 3 && $item->pay_status == 1 && $item->admission_time)
+                                                <span>已入园(订单完成)</span>
                                             @elseif($item->order_status == 4 && $item->pay_status == 0)
                                                 <span>交易取消</span>
                                             @else
@@ -89,8 +91,10 @@
 
                                             @elseif($item->order_status == 2 && $item->pay_status == 3)
 
-                                            @elseif($item->order_status == 3 && $item->pay_status == 1)
-
+                                            @elseif($item->order_status == 3 && $item->pay_status == 1 && !$item->admission_time)
+                                                <span>待入园</span>
+                                            @elseif($item->order_status == 3 && $item->pay_status == 1 && $item->admission_time)
+                                                <span>已入园(订单完成)</span>
                                             @elseif($item->order_status == 4 && $item->pay_status == 0)
 
                                             @else
