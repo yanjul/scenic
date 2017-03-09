@@ -9,8 +9,9 @@
     </style>
 @endsection
 
-
-
+@section('js')
+<script src="/js/materialize.js"></script>
+@endsection
 
 @section('content')
 

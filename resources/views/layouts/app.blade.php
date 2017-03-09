@@ -54,7 +54,6 @@
     </div>
     <!-- Scripts -->
     <script src="/js/jQuery.js"></script>
-    <script src="/js/materialize.js"></script>
     <script src="/js/bootstrap.js"></script>
     <script src="/js/select.js"></script>
 
