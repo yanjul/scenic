@@ -72,12 +72,12 @@
                                 <div class="col m6">
 
                                     <span>
-                                    <input name="group1" type="radio" id="test1"/>
+                                    <input name="role" value="0" type="radio" id="test1"/>
                                     <label for="test1">游客</label>
                                     </span>
 
                                     <span>
-                                    <input name="group1" type="radio" id="test2"/>
+                                    <input name="role" value="1" type="radio" id="test2"/>
                                     <label for="test2">商家</label>
                                     </span>
                                 </div>
