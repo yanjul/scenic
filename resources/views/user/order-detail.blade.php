@@ -19,21 +19,19 @@
                             @if($order->order_status == 1 && $order->pay_status == 0)
                                 <span class="highlight">未支付</span>
                                 <a href="/order/pay/{{$order->sn}}" class="btn">去支付</a>
+                                <a href="/order/cancel?sn={{$order->sn}}" class="btn">取消</a>
                             @elseif($order->order_status == 2 && $order->pay_status == 1)
                                 <span class="highlight">待确认</span>
-                                {{--<a href="#" class="btn">去支付</a>--}}
-                            @elseif($order->order_status == 2 && $order->pay_status == 2)
+                                <a href="/order/refunds?sn={{$order->sn}}" class="btn">申请退款</a>
+                            @elseif(($order->order_status == 2 || $order->order_status == 3) && $order->pay_status == 2)
                                 <span class="highlight">退款中</span>
-                                {{--<a href="#" class="btn">去支付</a>--}}
+                                <a href="/order/cancel?sn={{$order->sn}}" class="btn">取消退款</a>
                             @elseif($order->order_status == 2 && $order->pay_status == 3)
                                 <span class="highlight">退款完成</span>
                                 {{--<a href="#" class="btn">去支付</a>--}}
-                            @elseif($order->order_status == 2 && $order->pay_status == 3)
-                                <span class="highlight">退款取消</span>
-                                {{--<a href="#" class="btn">去支付</a>--}}
                             @elseif($order->order_status == 3 && $order->pay_status == 1 && !$order->admission_time)
                                 <span class="highlight">待入园</span>
-                                {{--<a href="#" class="btn">去支付</a>--}}
+                                <a href="/order/refunds?sn={{$order->sn}}" class="btn">申请退款</a>
                             @elseif($order->order_status == 3 && $order->pay_status == 1 && $order->admission_time)
                                 <span class="highlight">已入园(订单完成)</span>
                                 {{--<a href="#" class="btn">去支付</a>--}}
