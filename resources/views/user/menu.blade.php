@@ -1,4 +1,5 @@
 @section('css')
+    <link href="/css/bootstrap.css" rel="stylesheet">
     <link rel="stylesheet" href="/css/user/main.css">
 @endsection
 <div class="col-md-3 sidenav">

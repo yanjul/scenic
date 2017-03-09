@@ -11,7 +11,7 @@
     <title>{{ config('app.name', 'scenic') }}</title>
 
     <!-- Styles -->
-    <link href="/css/bootstrap.css" rel="stylesheet">
+    <link href="https://fonts.googleapis.com/icon?family=Material+Icons" rel="stylesheet">
     <link rel="stylesheet" href="/css/layout.css">
 @yield('css')
 <!-- Scripts -->
@@ -23,7 +23,7 @@
     <div id="app">
         <div class="header_index clearfix">
             <div class="header_logo"><a href="/">FootPrint脚印👣</a></div>
-            <div class="header_content clearfix">
+            <div class="header_content ">
                 <span>Hi~</span>
                 @if(Auth::guest())
                     <span>
@@ -53,7 +53,11 @@
         @yield('content')
     </div>
     <!-- Scripts -->
-    <script src="/js/app.js"></script>
+    <script src="/js/jQuery.js"></script>
+    <script src="/js/materialize.js"></script>
+    <script src="/js/bootstrap.js"></script>
+    <script src="/js/select.js"></script>
+
     @yield('js')
 </body>
 </html>

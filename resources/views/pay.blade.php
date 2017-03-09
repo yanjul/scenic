@@ -1,6 +1,7 @@
 @extends('layouts.app')
 
 @section('css')
+    <link href="/css/bootstrap.css" rel="stylesheet">
     <link href="/css/pay.css" rel="stylesheet">
 @endsection
 
@@ -8,7 +9,7 @@
     <!--商品详情内容-->
     <div class="detail_content">
         <form action="/order/pay/{{$order->sn}}" method="post">
-            <table class="table table1">
+            <table class="table table1 table-condensed">
                 <tr>
                     <td>订单号</td>
                     <td>{{$order->sn}}</td>

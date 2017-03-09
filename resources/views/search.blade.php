@@ -1,6 +1,7 @@
 @extends('layouts.app')
 
 @section('css')
+    <link href="/css/bootstrap.css" rel="stylesheet">
     <link href="/css/search.css" rel="stylesheet">
 @endsection
 
