@@ -14,6 +14,11 @@ use Illuminate\Support\Facades\Session;
 
 class OrderController extends Controller
 {
+    /**
+     * 创建订单
+     * @param Request $request
+     * @return \Illuminate\Http\RedirectResponse|\Illuminate\Routing\Redirector
+     */
     function create(Request $request)
     {
         $this->validate($request, [
@@ -43,6 +48,12 @@ class OrderController extends Controller
         }
     }
 
+    /**
+     * 支付
+     * @param $sn
+     * @param Request $request
+     * @return $this|\Illuminate\Http\RedirectResponse|\Illuminate\Routing\Redirector
+     */
     public function pay($sn, Request $request){
         if ($request->isMethod('get')) {
             $order = OrderInfo::with('detail')->where('sn', $sn)->first();
@@ -74,7 +85,7 @@ class OrderController extends Controller
                 $order->paid_price = $order->pay_price;
                 $order->pay_status = 1;
                 $order->order_status = 2;
-                $order->play_time = strtotime($data['admission_time']);
+                $order->play_time = strtotime($data['admission_time'].' +1day') - 1;
                 $order->save();
                 OrderPaymentDetails::create($pay_data);
                 DB::commit();
@@ -89,6 +100,11 @@ class OrderController extends Controller
 
     }
 
+    /**
+     * 订单详情
+     * @param $sn
+     * @return $this|\Illuminate\Http\RedirectResponse
+     */
     public function detail($sn){
         $order = OrderInfo::with(['detail', 'payment'])->where(['user_id'=> Auth::id(), 'sn'=> $sn])->first();
         if($order){
@@ -98,6 +114,11 @@ class OrderController extends Controller
         return redirect()->back();
     }
 
+    /**
+     * 取消订单
+     * @param Request $request
+     * @return \Illuminate\Http\RedirectResponse
+     */
     public function cancel(Request $request){
         $this->validate($request, [
             'sn'=> 'required'
@@ -106,8 +127,24 @@ class OrderController extends Controller
         if($order){
             if ($order->order_status == 1 && $order->pay_status == 0) {
                 $order->order_status = 4;
-            } else if ($order->order_status == 2 && $order->pay_status == 2) {
-                $order->pay_status = 4;
+            } else if (($order->order_status == 2 || $order->order_status == 3) && $order->pay_status == 2) {
+                $order->pay_status = 1;
+            }
+            $order->save();
+        }
+        return redirect()->back();
+    }
+
+    public function refunds(Request $request){
+        $this->validate($request, [
+            'sn'=> 'required'
+        ]);
+        $order = OrderInfo::where(['user_id'=> Auth::id(), 'sn'=> $request->input('sn')])->first();
+        if($order){
+            if ($order->order_status == 2 && $order->pay_status == 1) {
+                $order->pay_status = 2;
+            } else if ($order->order_status == 3 && $order->pay_status == 1 && $order->play_time < (time() - 7200)) {
+                $order->pay_status = 2;
             }
             $order->save();
         }
