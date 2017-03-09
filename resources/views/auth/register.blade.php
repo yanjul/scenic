@@ -18,7 +18,7 @@
 
                 <div class="row">
                     <div class="col m12">
-                        注册
+                        注册x
                     </div>
                 </div>
 
