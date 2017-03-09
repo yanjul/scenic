@@ -33,7 +33,7 @@
                                             <span class="col-md-4">订单编号：{{$item->sn}}</span>
                                             <span class="col-md-4">创建时间：{{$item->created_at}}</span>
                                             <a href="/order/detail/{{$item->sn}}" class="order-check col-md-2">查看订单</a>
-                                            <a href="/order/cancel?sn={{$item->sn}}" class="order-del col-md-2">删除订单</a>
+                                            <a href="" class="order-del col-md-2">删除订单</a>
                                         </td>
                                     </tr>
                                     @foreach($item->detail as $ticket)
@@ -56,14 +56,14 @@
                                                 <span>待付款</span>
                                             @elseif($item->order_status == 2 && $item->pay_status == 1)
                                                 <span>待确认</span>
-                                            @elseif($item->order_status == 2 && $item->pay_status == 2)
+                                            @elseif(($item->order_status == 2 || $item->order_status == 3) && $item->pay_status == 2)
                                                 <span>退款中</span>
                                             @elseif($item->order_status == 2 && $item->pay_status == 3)
                                                 <span>退款完成</span>
-                                            @elseif($item->order_status == 2 && $item->pay_status == 3)
-                                                <span>退款取消</span>
-                                            @elseif($item->order_status == 3 && $item->pay_status == 1)
-                                                <span>交易成功</span>
+                                            @elseif($item->order_status == 3 && $item->pay_status == 1 && !$item->admission_time)
+                                                <span>待入园</span>
+                                            @elseif($item->order_status == 3 && $item->pay_status == 1 && $item->admission_time)
+                                                <span>已入园(订单完成)</span>
                                             @elseif($item->order_status == 4 && $item->pay_status == 0)
                                                 <span>交易取消</span>
                                             @else
@@ -75,24 +75,25 @@
                                             @if($item->order_status == 1 && $item->pay_status == 0)
                                                 <span>
                                                     <a href="/order/pay/{{$item->sn}}">付款</a>
-                                                    <a>取消</a>
+                                                    <a href="/order/cancel?sn={{$item->sn}}">取消</a>
                                                 </span>
-                                                @elseif($item->order_status == 2 && $item->pay_status == 1)
-                                                    <span>
-                                                    <a>申请退款</a>
+                                            @elseif($item->order_status == 2 && $item->pay_status == 1)
+                                                <span>
+                                                    <a href="/order/refunds?sn={{$item->sn}}">申请退款</a>
                                                 </span>
                                             @elseif($item->order_status == 2 && $item->pay_status == 2)
                                                 <span>
-                                                    <a>取消退款</a>
+                                                    <a href="/order/cancel?sn={{$item->sn}}">取消退款</a>
                                                 </span>
                                             @elseif($item->order_status == 2 && $item->pay_status == 3)
 
-                                            @elseif($item->order_status == 2 && $item->pay_status == 3)
-
-                                            @elseif($item->order_status == 3 && $item->pay_status == 1)
-
+                                            @elseif($item->order_status == 3 && $item->pay_status == 1 && !$item->admission_time)
+                                                <span>
+                                                    <a href="/order/refunds?sn={{$item->sn}}">申请退款</a>
+                                                </span>
+                                            @elseif($item->order_status == 3 && $item->pay_status == 1 && $item->admission_time)
+                                                <span>已入园(订单完成)</span>
                                             @elseif($item->order_status == 4 && $item->pay_status == 0)
-
                                             @else
                                                 <span>***bug***{{$item->order_status}}***{{$item->pay_status}}
                                                     ***</span>

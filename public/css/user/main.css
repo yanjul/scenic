@@ -827,3 +827,98 @@ thead {
     padding-right: 15px;
     padding-bottom: 10px;
 }
+
+/* 订单详情 页面 */
+.order-detail {
+    padding: 10px 15px 50px;
+    background: #fff;
+    border: 1px solid #e7e7e7;
+    box-shadow: 0 1px 2px rgba(0,0,0,0.05);
+}
+.order-detail dt {
+    margin-bottom: 5px;
+    font-size: 18px;
+    line-height: 30px;
+}
+.order-detail .desc {
+    margin-bottom: 25px;
+}
+.order-detail .desc dd {
+    padding: 0 10px;
+    background-color: #f3f3f3;
+    font-size: 18px;
+    line-height: 50px;
+}
+.order-detail .desc .btn {
+    margin-left: 10px;
+    display: inline;
+    height: 29px;
+    width: 76px;
+    padding: 0 5px;
+    background-color: #ff8a00;
+    line-height: 28px;
+    font-size: 14px;
+    font-weight: bold;
+    color: #fff;
+    border-radius: 3px;
+    text-align: center;
+    float: right;
+    position: relative;
+    margin-top: 11px;
+}
+.order-detail dl.info dt {
+    padding-bottom: 8px;
+    border-bottom: 1px solid #e8e8e8;
+}
+.order-detail dl.info dd {
+    line-height: 34px;
+    font-size: 14px;
+}
+.order-detail dl.info .title {
+    margin-top: 5px;
+}
+.order-detail dl.info .title a {
+    color: #996657;
+    text-decoration: underline;
+}
+.order-detail .m-orderList {
+    margin: 10px 0 30px;
+    border: 0 none;
+    padding: 0;
+}
+.m-orderList .title .info {
+    color: #f9644e;
+}
+.m-orderList .total ul {
+    float: right;
+    padding-right: 35px;
+    text-align: right;
+}
+.m-orderList .total .label {
+    display: inline-block;
+    width: 115px;
+    color: #333;
+    font-weight: normal;
+}
+.m-orderList .total .price {
+    font-size: 14px;
+    font-weight: bold;
+}
+.order-detail dl.person, .order-detail dl.supplier {
+    padding-bottom: 15px;
+    margin-bottom: 15px;
+    border-bottom: 1px dashed #d8d8d8;
+}
+.order-detail dl .s1 {
+    width: 265px;
+}
+.order-detail dl .s1 {
+    display: inline-block;
+    font-size: 16px;
+    line-height: 30px;
+}
+.order-detail dl .s0 {
+    display: block;
+    font-size: 16px;
+    line-height: 30px;
+}

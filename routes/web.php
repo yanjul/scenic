@@ -69,6 +69,7 @@ Route::group(['prefix' => 'order', 'middleware' => 'auth'], function () {
     Route::match(['get', 'post'], '/pay/{id}', 'OrderController@pay')->where('id', '^[0-9]+$');
     Route::get('/detail/{sn}', 'OrderController@detail')->where('sn', '^[0-9]+$');;
     Route::get('/cancel', 'OrderController@cancel');
+    Route::get('/refunds', 'OrderController@refunds');
 });
 
 //测试

@@ -47,15 +47,15 @@
                             </div>
                         </div>
 
-                        <div class="form-group">
-                            <div class="col-md-6 col-md-offset-4">
-                                <div class="checkbox">
-                                    <label>
-                                        <input type="checkbox" name="remember" {{ old('remember') ? 'checked' : '' }}> 记住密码
-                                    </label>
-                                </div>
-                            </div>
-                        </div>
+                        {{--<div class="form-group">--}}
+                            {{--<div class="col-md-6 col-md-offset-4">--}}
+                                {{--<div class="checkbox">--}}
+                                    {{--<label>--}}
+                                        {{--<input type="checkbox" name="remember" {{ old('remember') ? 'checked' : '' }}> 记住密码--}}
+                                    {{--</label>--}}
+                                {{--</div>--}}
+                            {{--</div>--}}
+                        {{--</div>--}}
 
                         <div class="form-group">
                             <div class="col-md-8 col-md-offset-4">
@@ -63,9 +63,9 @@
                                     登录
                                 </button>
 
-                                <a class="btn btn-link" href="{{ route('password.request') }}">
-                                    忘记密码？
-                                </a>
+                                {{--<a class="btn btn-link" href="{{ route('password.request') }}">--}}
+                                    {{--忘记密码？--}}
+                                {{--</a>--}}
                             </div>
                         </div>
                     </form>
