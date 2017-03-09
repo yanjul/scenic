@@ -16,18 +16,43 @@
                         <dt>订单详情</dt>
                         <dd>
                             当前订单状态：
-                            <span class="highlight">未支付</span>
-                            <a href="#" class="btn">去支付</a>
+                            @if($order->order_status == 1 && $order->pay_status == 0)
+                                <span class="highlight">未支付</span>
+                                <a href="/order/pay/{{$order->sn}}" class="btn">去支付</a>
+                            @elseif($order->order_status == 2 && $order->pay_status == 1)
+                                <span class="highlight">待确认</span>
+                                {{--<a href="#" class="btn">去支付</a>--}}
+                            @elseif($order->order_status == 2 && $order->pay_status == 2)
+                                <span class="highlight">退款中</span>
+                                {{--<a href="#" class="btn">去支付</a>--}}
+                            @elseif($order->order_status == 2 && $order->pay_status == 3)
+                                <span class="highlight">退款完成</span>
+                                {{--<a href="#" class="btn">去支付</a>--}}
+                            @elseif($order->order_status == 2 && $order->pay_status == 3)
+                                <span class="highlight">退款取消</span>
+                                {{--<a href="#" class="btn">去支付</a>--}}
+                            @elseif($order->order_status == 3 && $order->pay_status == 1 && !$order->admission_time)
+                                <span class="highlight">待入园</span>
+                                {{--<a href="#" class="btn">去支付</a>--}}
+                            @elseif($order->order_status == 3 && $order->pay_status == 1 && $order->admission_time)
+                                <span class="highlight">已入园(订单完成)</span>
+                                {{--<a href="#" class="btn">去支付</a>--}}
+                            @elseif($order->order_status == 4 && $order->pay_status == 0)
+                                <span class="highlight">交易取消</span>
+                                {{--<a href="#" class="btn">去支付</a>--}}
+                            @else
+                                <span>***bug***{{$order->order_status}}***{{$order->pay_status}}***</span>
+                            @endif
                         </dd>
                     </dl>
                     <dl class="info">
                         <dt>订单信息</dt>
                         <dd>
-                            <span>订单编号：14888540645833</span>
-                            <span>创建时间：2017-03-07 02:34:24</span>
+                            <span>订单编号：{{$order->sn}}</span>
+                            <span>创建时间：{{$order->created_at}}</span>
                         </dd>
                         <dd class="title">
-                            <a href="#">武隆仙女山两日游</a>
+                            <a href="/scenic/{{$order->scenic_id}}">{{$order->scenic_name}}</a>
                         </dd>
                     </dl>
                     <div class="m-orderList">
@@ -38,25 +63,28 @@
                                 <th width="10%">数 &nbsp; 量</th>
                                 <th width="20%">单 &nbsp; 价</th>
                                 <th width="25%">总 &nbsp; 价</th>
-                                <th width="20%">操 &nbsp; 作</th>
+                                <th width="20%">有效时间</th>
                             </tr>
                             </thead>
                             <tbody>
-                            <tr>
-                                <td class="title">
-                                    <span class="info">3天两晚武隆自由行</span>
-                                </td>
-                                <td class="num">1</td>
-                                <td class="price">￥555</td>
-                                <td class="price">￥555</td>
-                                <td class="action"></td>
-                            </tr>
+                            @foreach($order->detail as $ticket)
+                                <tr>
+                                    <td class="title">
+                                        <span class="info">{{$ticket->ticket_name}}</span>
+                                    </td>
+                                    <td class="num">{{$ticket->ticket_numbers}}张</td>
+                                    <td class="price">{{$ticket->ticket_price}}¥</td>
+                                    <td class="price">{{$ticket->ticket_amount}}¥</td>
+                                    <td class="action">{{$ticket->valid_time}}天</td>
+                                </tr>
+                            @endforeach
+
                             <tr>
                                 <td class="total" colspan="5">
                                     <ul>
                                         <li>
                                             <span class="label">总价（实付款）:</span>
-                                            <span class="price">￥555</span>
+                                            <span class="price">{{$order->pay_price}}¥</span>
                                         </li>
                                     </ul>
                                 </td>
@@ -67,16 +95,16 @@
                     <dl class="person">
                         <dt>预定人信息：</dt>
                         <dd>
-                            <span class="s1">姓名：晏均</span>
-                            <span class="s1">手机：12345678910</span>
-                            <span class="s1">邮箱：123456789@qq.com</span>
+                            <span class="s1">姓名：{{$order->tourist_name}}</span>
+                            <span class="s1">手机：{{$order->mobile}}</span>
+                            <span class="s1">邮箱：{{Auth::user()->email}}</span>
                         </dd>
                     </dl>
                     <dl class="supplier">
                         <dt>供应商信息：</dt>
                         <dd>
-                            <span class="s0">供应商：虫师国际旅游集团</span>
-                            <span class="s0">联系电话：68629315</span>
+                            <span class="s0">供应商：{{$supplier->user->name}}</span>
+                            <span class="s0">联系电话：{{$supplier->user->telephone}}</span>
                         </dd>
                     </dl>
                 </div>

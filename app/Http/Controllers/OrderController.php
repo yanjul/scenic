@@ -90,7 +90,12 @@ class OrderController extends Controller
     }
 
     public function detail($sn){
-        return view('user.order-detail');
+        $order = OrderInfo::with(['detail', 'payment'])->where(['user_id'=> Auth::id(), 'sn'=> $sn])->first();
+        if($order){
+            $supplier = Scenic::with('user')->where('id', $order->scenic_id)->first();
+            return view('user.order-detail')->with(['order'=> $order, 'supplier'=> $supplier]);
+        }
+        return redirect()->back();
     }
 
     public function cancel(Request $request){
