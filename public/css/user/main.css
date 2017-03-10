@@ -680,7 +680,10 @@ thead {
 .per-edit-list dd {
     float: left;
 }
-
+.per-edit-list dd .valid {
+    color: red;
+    margin-left: 40px;
+}
 .per-edit-list dd .input-text-2 {
     width: 120px;
     height: 22px;
@@ -696,12 +699,26 @@ thead {
     border: 1px solid #efefef;
     border-top: 1px solid #d5d5d5;
 }
+.per-edit-list dl dd .onSuccess{
+    width: 300px;
+    height:80px;
+    word-wrap:break-word;
+    text-overflow:ellipsis;
+    overflow:hidden;
+    text-indent: 2em;
+}
 
 .per-edit-list button {
     border: none;
     margin: 0 0 0 150px;
 }
-
+.per-edit-list a{
+    border: none;
+    margin: 0 0 0 150px;
+}
+.per-edit-list a:hover{
+    color: #fff3e0;
+}
 .btn05 {
     background: url(//localhost:8000/images/system/b.png) no-repeat;
     background-position: -243px -93px;

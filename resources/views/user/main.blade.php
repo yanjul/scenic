@@ -10,7 +10,7 @@
                         <div class="infos">
                             <div class="infos-lf">
                                 <div class="img">
-                                    <img src="https://perico.damai.cn/userheadphotos/294450/58890122_150_150.jpg" alt="" id="userPhoto">
+                                    <img src="//localhost:8000/images/system/personImg.jpg" alt="" id="userPhoto">
                                     <a href="" class="c1">修改头像</a>
                                 </div>
                                 <a href="/user/info">编辑个人信息</a>
