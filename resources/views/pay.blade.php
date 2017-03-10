@@ -9,7 +9,7 @@
     <!--商品详情内容-->
     <div class="detail_content">
         <form action="/order/pay/{{$order->sn}}" method="post">
-            <table class="table table1 table-condensed">
+            <table class="table table1 table-condensed table-bordered">
                 <tr>
                     <td>订单号</td>
                     <td>{{$order->sn}}</td>
@@ -19,12 +19,14 @@
                     <td>{{$order->scenic_name}}</td>
                 </tr>
                 <tr>
-                    <td>门票信息</td>
-                    <td></td>
+                    <td colspan="2" style="border-bottom: 0">
+                        门票信息
+                    </td>
+
                 </tr>
                 @foreach($order->detail as $detail)
                     <tr>
-                        <td style="border-top: 0">
+                        <td style="border-top: 0" colspan="2">
                             <table class="table table-bordered" style="width: 100%">
                                 <tr>
                                     <td style="color: darkcyan">门票名字</td>
@@ -33,10 +35,10 @@
                                     <td style="color: darkcyan">门票有效时间</td>
                                 </tr>
                                 <tr>
-                                    <td>{{$detail->ticket_name}}</td>
-                                    <td>{{$detail->ticket_price}}</td>
-                                    <td>{{$detail->ticket_numbers}}</td>
-                                    <td>{{$detail->valid_time}}</td>
+                                    <td style="color: orange;">{{$detail->ticket_name}}</td>
+                                    <td style="color: orange;">{{$detail->ticket_price}}</td>
+                                    <td style="color: orange;">{{$detail->ticket_numbers}}</td>
+                                    <td style="color: orange;">{{$detail->valid_time}}</td>
                                 </tr>
                             </table>
                         </td>
@@ -74,9 +76,9 @@
                     </td>
                 </tr>
                 <tr>
-                    <td></td>
-                    <td>
-                        <button type="submit" class="btn btn-success">支付</button>
+
+                    <td colspan="2">
+                        <button type="submit" class="btn btn-success pull-right">支付</button>
                     </td>
                 </tr>
             </table>
