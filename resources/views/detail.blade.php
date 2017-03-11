@@ -72,7 +72,7 @@
                                     @foreach($ticket->custom_price as $item)
                                         <br />
                                         <span>
-                                        {{date('Y-m-d', $item['start_time'])}}至{{date('Y-m-d', $item['end_time'])}}价格：<span style="color: brown">{{$item['price']}}</span>元
+                                        {{date('Y-m-d', $item['start_time'])}}至{{date('Y-m-d', $item['end_time'])}}价格：<span style="color:#FF4949">{{$item['price']}}</span>元
                                         </span>
                                     @endforeach
                                     <br><br>

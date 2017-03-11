@@ -66,10 +66,10 @@
                             <dl>
                                 <dt>备&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;注：</dt>
                                 <dd>
-                                    <span class="onSuccess">{{$info['info']['remark'] or '暂未填写'}}</span>
+                                    <p class="onSuccess" style="width: 300px;height:80px;word-wrap:break-word; text-overflow:ellipsis;overflow:hidden;">{{$info['info']['remark'] or '暂未填写'}}</p>
                                 </dd>
                             </dl>
-                            <a id="sumBgn" class="btn05" href="/user/info-update">修改</a>
+                            <a id="sumBgn" class="btn05 btn" href="/user/info-update">修改</a>
                         </div>
                     </div>
                 </div>
