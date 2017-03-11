@@ -98,9 +98,9 @@
     position: absolute;
     border: 1px solid #ccc;
     word-wrap: break-word;
-    background:black;
+    background:whitesmoke;
     z-index: 20;
-    color: white;
+    color: black;
 }
 #sale_menu:hover ._content{
     display: block;

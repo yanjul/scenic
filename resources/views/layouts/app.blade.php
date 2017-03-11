@@ -33,7 +33,7 @@
                 @else
                     <span>
                         <span>{{ Auth::user()->name }}</span>
-                        <a href="{{ route('logout') }}"
+                        <a  style="margin-left: 10px" href="{{ route('logout') }}"
                            onclick="event.preventDefault(); document.getElementById('logout-form').submit();">
                             退出
                         </a>

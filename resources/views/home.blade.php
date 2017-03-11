@@ -1,8 +1,11 @@
 @extends('layouts.app')
 
 @section('css')
-    <link href="/css/bootstrap.css" rel="stylesheet">
+    <link href="/css/materialize.css" rel="stylesheet">
     <link href="/css/index.css" rel="stylesheet">
+@endsection
+@section('js')
+    <script src="/js/materialize.js"></script>
 @endsection
 
 @section('content')
@@ -13,46 +16,46 @@
                 <p style="font-size: 60px">👣</p>
                 <p>FootPrint脚印</p>
             </div>
-            <div class="search_box" >
+            <div class="search_box">
                 <form action="">
                     <div class="form-group">
                         <label for="search"></label>
                         <input type="text" id="search" name="search" placeholder="请输入景区名称">
-                        <div  id="search_w" onclick="search()">搜索</div>
+                        <div id="search_w" onclick="search()">搜索</div>
                         @section('js')
-                        <script>
-                            function search(){
-                                var keywords = document.getElementById("search").value;
-                                // alert(searchs); 
-                                var url = geturl('/search', {keyword: keywords})
-                                
-                                location.href=url; 
-                               
-                            }
-                           function geturl(baseUrl, obj) {
-                                var url = baseUrl + '?';
-                                for (var attr in obj) {
-                                    url += attr + '=' + obj[attr].replace(/^(\s+)|(\s+)$/g, '') + '&';
+                            <script>
+                                function search() {
+                                    var keywords = document.getElementById("search").value;
+                                    // alert(searchs);
+                                    var url = geturl('/search', {keyword: keywords})
+
+                                    location.href = url;
+
                                 }
-                                return url.replace(/(\&)$/g, '');
-                            }
-                           function getParams(url) {
-                                if (url.indexOf('?') < 0) {
-                                    return {};
-                                }
-                                var str = url.replace(/^(.+\?)/, '');
-                                if (str) {
-                                    var arr = str.split('&');
-                                    var params = {};
-                                    for (var i = 0; i < arr.length; i ++) {
-                                        params[arr[i].split('=')[0]] = arr[i].split('=')[1];
+                                function geturl(baseUrl, obj) {
+                                    var url = baseUrl + '?';
+                                    for (var attr in obj) {
+                                        url += attr + '=' + obj[attr].replace(/^(\s+)|(\s+)$/g, '') + '&';
                                     }
-                                    return params;
-                                } else {
-                                    return {};
+                                    return url.replace(/(\&)$/g, '');
                                 }
-                            }
-                        </script>
+                                function getParams(url) {
+                                    if (url.indexOf('?') < 0) {
+                                        return {};
+                                    }
+                                    var str = url.replace(/^(.+\?)/, '');
+                                    if (str) {
+                                        var arr = str.split('&');
+                                        var params = {};
+                                        for (var i = 0; i < arr.length; i++) {
+                                            params[arr[i].split('=')[0]] = arr[i].split('=')[1];
+                                        }
+                                        return params;
+                                    } else {
+                                        return {};
+                                    }
+                                }
+                            </script>
                         @endsection
                     </div>
                 </form>
@@ -60,158 +63,116 @@
         </div>
 
         <!--分类-->
-        <div class="bck clearfix">
-            <div class="classify">
-                <ul class="nav nav-tabs" role="tablist">
-                    <li role="presentation" class="active"><a href="#inland" aria-controls="home" role="tab"
-                                                              data-toggle="tab">景点类型</a></li>
-                    <li role="presentation"><a href="#foreign" aria-controls="profile" role="tab" data-toggle="tab">适宜季节</a>
-                    </li>
-                </ul>
+        <div class="row ">
+            <div class="col s12">
+                <div class="col s12 ">
+                    <ul class="tabs">
+                        <li class="tab col s6"><a class="active" href="#test1">景点类型</a></li>
+                        <li class="tab col s6"><a href="#test2">适宜季节</a></li>
 
-                <!-- Tab panes -->
-                <div class="tab-content">
-                    <div role="tabpanel" class="tab-pane fade in active" id="inland">
-                        <ul>
-                            <li><a href="">城市</a></li>
-                            <li><a href="">海岛</a></li>
-                            <li><a href="">自然景观</a></li>
-                        </ul>
-
-                    </div>
-                    <div role="tabpanel" class="tab-pane fade" id="foreign">
-                        <ul>
-                            <li><a href="">春季</a></li>
-                            <li><a href="">夏季</a></li>
-                            <li><a href="">秋季</a></li>
-                            <li><a href="">冬季</a></li>
-                            <li><a href="">四季皆宜</a></li>
-                        </ul>
-                    </div>
-
+                    </ul>
+                </div>
+                <div id="test1" class="col s12">
+                    <ul class="classify">
+                        <li><a href="/search?type=4">城市</a></li>
+                        <li><a href="/search?type=5">海岛</a></li>
+                        <li><a href="/search?type=6">自然景观</a></li>
+                        <li><a href="/search?type=7">其他</a></li>
+                    </ul>
+                </div>
+                <div id="test2" class="col s12">
+                    <ul class="classify">
+                        <li><a href="/search?season=13">春季</a></li>
+                        <li><a href="/search?season=14">夏季</a></li>
+                        <li><a href="/search?season=15">秋季</a></li>
+                        <li><a href="/search?season=16">冬季</a></li>
+                        <li><a href="/search?season=17">四季皆宜</a></li>
+                    </ul>
                 </div>
             </div>
+        </div>
 
+        <!--滚动图-->
 
-            <!--滚动图-->
-
-            <div class="top_content">
-                <div id="carousel-example-generic" class="carousel slide" data-ride="carousel">
-                    <!-- Indicators -->
-                    <ol class="carousel-indicators">
-                        <li data-target="#carousel-example-generic" data-slide-to="0" class="active"></li>
-                        <li data-target="#carousel-example-generic" data-slide-to="1"></li>
-                        <li data-target="#carousel-example-generic" data-slide-to="2"></li>
-                    </ol>
-
-                    <!-- Wrapper for slides -->
-                    <div class="carousel-inner" role="listbox">
-                        <div class="item active">
-                            <img src="images/img1.jpg" alt="...">
-                            <div class="carousel-caption">
-
-                            </div>
-                        </div>
-                        <div class="item">
-                            <img src="images/img2.jpg" alt="...">
-                            <div class="carousel-caption">
-
-                            </div>
-                        </div>
-                        <div class="item">
-                            <img src="images/img3.jpeg" alt="...">
-                            <div class="carousel-caption">
-
-                            </div>
-                        </div>
-
-                    </div>
-
-                    <!-- Controls -->
-                    <a class="left carousel-control" href="#carousel-example-generic" role="button" data-slide="prev">
-                        <span class="glyphicon glyphicon-chevron-left" aria-hidden="true"></span>
-                        <span class="sr-only">Previous</span>
-                    </a>
-                    <a class="right carousel-control" href="#carousel-example-generic" role="button" data-slide="next">
-                        <span class="glyphicon glyphicon-chevron-right" aria-hidden="true"></span>
-                        <span class="sr-only">Next</span>
-                    </a>
+        <div class="row ">
+            <div class="col s12">
+                <div class="carousel">
+                    <a class="carousel-item" href="#one!"><img src="/images/system/img1.jpg" class="responsive-img"></a>
+                    <a class="carousel-item" href="#two!"><img src="/images/system/img2.jpg" class="responsive-img"></a>
+                    <a class="carousel-item" href="#three!"><img src="/images/system/img3.jpeg" class="responsive-img"></a>
                 </div>
-            </div>
-
-            <div class="jumbotron">
-                <h2>凤凰2日游</h2>
-                <p>只为在某个清晨或者黄昏，捧一盏茶，像《边城》里的翠翠一样，等一个偶然路过心上的人。</p>
-                <p><a class="btn btn-sm btn-success btn-lg pull-right" href="#" role="button">了解更多</a></p>
             </div>
         </div>
 
         <!--内容-->
-        <div class="content">
-            <ul id="myTab" class="nav nav-tabs">
-                <li class="active">
-                    <a href="#hot" data-toggle="tab">
-                        热门推荐
-                    </a>
-                </li>
-                <li><a href="#sale" data-toggle="tab">限时特价</a></li>
-            </ul>
-            <div id="myTabContent" class="tab-content clearfix">
-                <div class="tab-pane fade in active" id="hot">
-                    <script type="text/javascript">
-                        window.onload = function () {
-                            $.ajax({
-                                url: '/get-scenic',
-                                type: 'GET',
-                                data: {
-                                    type: 'hot',
-                                    length: 8
-                                },
-                                dataType: 'JSON',
-                                success: function (data) {
-                                    var container = $('#hot');
-                                    for (var i = 0; i < data.length; i ++) {
-                                        var content = $('<div class="hot_box"></div>');
-                                        content.append('<a href="/scenic/'+data[i].id+'"><img src="'+data[i].image+'"></a>');
-                                        content.append('<div class="hot_box_introduce"><p>'+data[i].name+'</p> <p>'+data[i].info+'</p> </div>');
-                                        container.append(content);
-                                    }
+        <div class="row">
+            <div class="col s12">
+                <ul class="tabs">
+                    <li class="tab col s4"><a class="active" href="#hot">热门推荐</a></li>
+                    <li class="tab col s4" id="sale_btn"><a href="#sale">限时特价</a></li>
+                    <li class="tab col s4"><a href="#scenic">景区分销</a></li>
+                </ul>
+            </div>
+            <div id="hot" class="col s12">
+                <script type="text/javascript">
+                    window.onload = function () {
+                        $.ajax({
+                            url: '/get-scenic',
+                            type: 'GET',
+                            data: {
+                                type: 'hot',
+                                length: 8
+                            },
+                            dataType: 'JSON',
+                            success: function (data) {
+                                var container = $('#hot');
+                                for (var i = 0; i < data.length; i++) {
+                                    var content = $('<div class="hot_box"></div>');
+                                    content.append('<img class="materialboxed" src="' + data[i].image + '">');
+                                    content.append('<a class="black" href="/scenic/' + data[i].id + '"><div class="hot_box_introduce"><p>' + data[i].name + '</p> <p>' + data[i].info + '</p> </div></a>');
+                                    container.append(content);
+                                }
 
-                                },
-                                error: function () {}
-                            });
-                        }
-                    </script>
-                </div>
+                            },
+                            error: function () {
+                            }
+                        });
+                    }
+                </script>
+            </div>
+            <div id="sale" class="col s12">
+                <script>
+                    var oSaleC=document.getElementById('sale');
+                    var oSale=document.getElementById('sale_btn');
+                     oSale.onclick= function () {
+                        oSaleC.innerHTML='';
+                        $.ajax({
+                            url: '/get-scenic',
+                            type: 'GET',
+                            data: {
+                                type: 'price',
+                                length: 8
+                            },
+                            dataType: 'JSON',
+                            success: function (data) {
+                                var container = $('#sale');
+                                for (var i = 0; i < data.length; i++) {
+                                    var content = $('<div class="hot_box"></div>');
+                                    content.append('<img  src="' + data[i].image + '">');
+                                    content.append('<a  class=" black" href="/scenic/' + data[i].id + '"><div class="hot_box_introduce"><p>' + data[i].name + '<del style="margin-left: 10px">¥' + data[i].old_price + '</del><span style="margin-left: 10px">¥' + data[i].now_price + '</span></p> <p>' + data[i].info + '</p> </div></a>');
+                                    container.append(content);
+                                }
+                            },
+                            error: function () {
 
-                <div class="tab-pane fade" id="sale">
-                    <script>
-//                        window.onload = function () {
-//                            $.ajax({
-//                                url: '/get-scenic',
-//                                type: 'GET',
-//                                data: {
-//                                    type: 'price',
-//                                    length: 8
-//                                },
-//                                dataType: 'JSON',
-//                                success: function (data) {
-//                                    var container = $('#sale');
-//                                    for (var i = 0; i < data.length; i ++) {
-//                                        var content = $('<div class="hot_box"></div>');
-//                                        content.append('<a href="/scenic/'+data[i].id+'"><img src="'+data[i].image+'"></a>');
-//                                        content.append('<div class="hot_box_introduce"><p>'+data[i].name+'<del>¥'+data[i].old_price+'</del><span>¥'+data[i].now_price+'</span></p> <p>'+data[i].info+'</p> </div>');
-//                                        container.append(content);
-//                                    }
-//
-//                                },
-//                                error: function () {
-//
-//                                }
-//                            });
-//                        }
-                    </script>
-                </div>
+                            }
+                        });
+
+                    }
+                </script>
+            </div>
+            <div id="scenic" class="col s12">
+
             </div>
         </div>
     </div>
