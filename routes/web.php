@@ -53,6 +53,7 @@ Route::group(['prefix' => 'user', 'middleware' => 'auth', 'namespace' => 'user']
     Route::post('/update-scenic', 'ScenicController@updateScenic');
     Route::get('/scenic/status', 'ScenicController@changeStatus');
     Route::get('/del-scenic/{id}', 'ScenicController@deleteScenic')->where('id', '^[0-9]+$');
+    Route::get('/scenic/distribution', 'ScenicController@distribution');
 
     Route::get('/scenic/{id}', 'TicketController@index')->where('id', '^[0-9]+$');
     Route::get('/add-ticket/{id}', 'TicketController@add')->where('id', '^[0-9]+$');
@@ -61,6 +62,8 @@ Route::group(['prefix' => 'user', 'middleware' => 'auth', 'namespace' => 'user']
     Route::post('/add-ticket', 'TicketController@createTicket');
     Route::get('/ticket/status', 'TicketController@changeStatus');
     Route::get('/del-ticket/{id}', 'TicketController@deleteTicket')->where('id', '^[0-9]+$');
+
+
 
     Route::get('/order', 'OrderController@getOrder');
 

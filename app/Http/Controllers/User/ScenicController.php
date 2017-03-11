@@ -125,4 +125,9 @@ class ScenicController extends Controller
         Scenic::where('id', $data['id'])->update(['status'=> $data['status']]);
         return redirect()->back();
     }
+
+    public function distribution()
+    {
+        return view('user.distribution');
+    }
 }
