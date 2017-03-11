@@ -19,8 +19,8 @@
             </dd>
             @if(Auth::user()->role == 1)
                 <dd>
-                    <a href="#">
-                        <span>分销景区</span>
+                    <a href="/user/scenic/distribution">
+                        <span>景区分销</span>
                     </a>
                 </dd>
             @endif

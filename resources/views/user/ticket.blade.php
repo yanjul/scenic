@@ -23,43 +23,49 @@
 
                         </div>
                         <ul class="ticket-info">
-                            @foreach($scenic['ticket'] as $ticket)
-                                <li>
-                                    <div class="ri-infos">
-                                        <p class="row">
-                                            <span class="col-md-4">门票名称：{{$ticket['name']}}</span>
-                                            <span class="col-md-4">原价票价：{{$ticket['price']}}元</span>
-                                        </p>
-                                        @foreach($ticket['custom_price'] as $item)
+                            @if(count($scenic['ticket'])){
+                                @foreach($scenic['ticket'] as $ticket)
+                                    <li>
+                                        <div class="ri-infos">
                                             <p class="row">
-                                                <span class="col-md-4">
-                                                    开始时间：<strong>{{date('Y-m-d', $item['start_time'])}}</strong>
-                                                </span>
-                                                <span class="col-md-4">
-                                                    结束时间：<strong>{{date('Y-m-d', $item['end_time']-1)}}</strong>
-                                                </span>
-                                                 <span class="col-md-4">
-                                                    限时价格：<strong>{{ $item['price']}}</strong>
-                                                </span>
+                                                <span class="col-md-4">门票名称：{{$ticket['name']}}</span>
+                                                <span class="col-md-4">原价票价：{{$ticket['price']}}元</span>
                                             </p>
-                                        @endforeach
-                                        <p class="row">
-                                            <span class="col-md-4">有效时间：{{$ticket['valid_time']}}天</span>
-                                            <span class="col-md-4">提前时间：{{$ticket['lead_time']}}天</span>
-                                            <span class="col-md-4">最迟入园时间：{{$ticket['last_time']}} 点</span>
-                                        </p>
-                                        <p class="remark">备注：<span class="remark-box">{{$ticket['remark']}}</span></p>
-                                        <div class="edit-btns">
-                                            <a href="#"
-                                               class="delete-btn down up">下架</a>
-                                            <a href="{{url('user/scenic/ticket/'.$ticket['id'])}}" class="update-btn">修改门票</a>
-                                            <a href="{{url('user/del-ticket/'.$ticket['id'])}}"
-                                               class="delete-btn">删除门票</a>
+                                            @foreach($ticket['custom_price'] as $item)
+                                                <p class="row">
+                                                    <span class="col-md-4">
+                                                        开始时间：<strong>{{date('Y-m-d', $item['start_time'])}}</strong>
+                                                    </span>
+                                                    <span class="col-md-4">
+                                                        结束时间：<strong>{{date('Y-m-d', $item['end_time']-1)}}</strong>
+                                                    </span>
+                                                     <span class="col-md-4">
+                                                        限时价格：<strong>{{ $item['price']}}</strong>
+                                                    </span>
+                                                </p>
+                                            @endforeach
+                                            <p class="row">
+                                                <span class="col-md-4">有效时间：{{$ticket['valid_time']}}天</span>
+                                                <span class="col-md-4">提前时间：{{$ticket['lead_time']}}天</span>
+                                                <span class="col-md-4">最迟入园时间：{{$ticket['last_time']}} 点</span>
+                                            </p>
+                                            <p class="remark">备注：<span class="remark-box">{{$ticket['remark']}}</span></p>
+                                            <div class="edit-btns">
+                                                <a href="#"
+                                                   class="delete-btn down up">下架</a>
+                                                <a href="{{url('user/scenic/ticket/'.$ticket['id'])}}" class="update-btn">修改门票</a>
+                                                <a href="{{url('user/del-ticket/'.$ticket['id'])}}"
+                                                   class="delete-btn" disabled>删除门票</a>
 
+                                            </div>
                                         </div>
-                                    </div>
+                                    </li>
+                                @endforeach
+                            @else
+                                <li>
+                                    该景区还没有门票，赶快去 <a href="/user/add-ticket/{{$scenic['id']}}">添加</a> 吧！
                                 </li>
-                            @endforeach
+                            @endif
                         </ul>
                     </div>
                 </div>

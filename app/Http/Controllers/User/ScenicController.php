@@ -115,4 +115,9 @@ class ScenicController extends Controller
         }
         return redirect('user/scenic');
     }
+
+    public function distribution()
+    {
+        return view('user.distribution');
+    }
 }
