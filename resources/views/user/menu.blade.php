@@ -17,6 +17,13 @@
                     <span>景区添加</span>
                 </a>
             </dd>
+            @if(Auth::user()->role == 1)
+                <dd>
+                    <a href="#">
+                        <span>分销景区</span>
+                    </a>
+                </dd>
+            @endif
         </dl>
         <dl>
             <dt>订单管理</dt>
