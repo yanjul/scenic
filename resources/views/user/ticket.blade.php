@@ -50,12 +50,13 @@
                                         </p>
                                         <p class="remark">备注：<span class="remark-box">{{$ticket['remark']}}</span></p>
                                         <div class="edit-btns">
-                                            <a href="#"
-                                               class="delete-btn down up">下架</a>
                                             <a href="{{url('user/scenic/ticket/'.$ticket['id'])}}" class="update-btn">修改门票</a>
-                                            <a href="{{url('user/del-ticket/'.$ticket['id'])}}"
-                                               class="delete-btn">删除门票</a>
-
+                                            {{--<a href="{{url('user/del-ticket/'.$ticket['id'])}}" class="delete-btn">删除门票</a>--}}
+                                            @if($ticket['status'])
+                                                <a href="/user/ticket/status?id={{$ticket['id']}}&status=0" class="btn btn-danger">下架</a>
+                                            @else
+                                                <a href="/user/ticket/status?id={{$ticket['id']}}&status=1" class="btn btn-success">上架</a>
+                                            @endif
                                         </div>
                                     </div>
                                 </li>

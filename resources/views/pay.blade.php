@@ -68,7 +68,7 @@
                     </td>
                 </tr>
                 <tr>
-                    <td>支付方式</td>
+                    <td>支付途径</td>
                     <td>
                         <input type="radio" name="pay_mode" value="1" checked>支付宝
                         <input type="radio" name="pay_mode" value="2">微信
@@ -76,7 +76,6 @@
                     </td>
                 </tr>
                 <tr>
-
                     <td colspan="2">
                         <button type="submit" class="btn btn-success pull-right">支付</button>
                     </td>

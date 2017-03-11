@@ -115,4 +115,14 @@ class ScenicController extends Controller
         }
         return redirect('user/scenic');
     }
+
+    public function changeStatus(Request $request){
+        $this->validate($request, [
+            'id'=> 'required',
+            'status'=> 'required'
+        ]);
+        $data = $request->input();
+        Scenic::where('id', $data['id'])->update(['status'=> $data['status']]);
+        return redirect()->back();
+    }
 }
