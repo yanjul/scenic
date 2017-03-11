@@ -12,7 +12,7 @@
                 </div>
                 @if(count($list))
                     @foreach($list as $item)
-                        <div class="scenic-list">
+                        <div class="scenic-list scenicShow">
                             <div class="media">
                                 <div class="media-left">
                                     <a href="#" class="imgBox">

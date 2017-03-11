@@ -130,4 +130,8 @@ class ScenicController extends Controller
     {
         return view('user.distribution');
     }
+    public function distributionAdd()
+    {
+        return view('user.add-distribution');
+    }
 }

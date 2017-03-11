@@ -41,12 +41,12 @@
                                 </thead>
                                 <tbody>
                                 <tr>
-                                    <td>武隆两日游</td>
+                                    <td>td</td>
                                     <td>130元</td>
                                     <td>2</td>
                                     <td class="action">
-                                        <button class="btn">修改</button>
-                                        <button class="btn">删除</button>
+                                        <a class="btn" href="/user/scenic/add-distribution">修改</a>
+                                        <a href="#" class="btn">删除</a>
                                     </td>
                                 </tr>
                                 </tbody>

@@ -328,16 +328,16 @@ thead {
     font-size: 18px;
 }
 
-.media {
+.scenic-list .media {
     border: 1px solid #efefef;
     padding: 10px;
 }
 
-.media:hover {
+.scenic-list .media:hover {
     background-color: #F8F8F8;
 }
 
-.media:hover .imgTitle {
+.scenic-list .media:hover .imgTitle {
     color: #fff;
     opacity: .8;
     filter: alpha(opacity=80);
@@ -345,7 +345,7 @@ thead {
     font-size: 26px;
 }
 
-.media:hover .des_span {
+.scenicShow .media:hover .des_span {
     border-color: #ff9d00;
     background-color: #fff;
     color: #ff9d00;
@@ -355,11 +355,11 @@ thead {
     color: #000000;
 }
 
-.media:hover .media-heading .scenic-title {
+.scenicShow .media:hover .media-heading .scenic-title {
     color: #ff9d00;
 }
 
-.media:hover .scenic-content {
+.scenicShow .media:hover .scenic-content {
     color: #ff9d00;
     text-decoration: underline;
     cursor: pointer;
@@ -985,9 +985,15 @@ thead {
 .scenic-list .media .ticket-desc {
 
 }
+
 .distribution .media:hover {
     background-color: #fff;
 }
+
+.distribution .media:hover .scenic-content {
+
+}
+
 .distribution .imgTitle {
     width: 300px;
 }
@@ -1032,10 +1038,12 @@ thead {
     margin-top: 20px;
 
 }
-.distribution .media .m-orderList{
+
+.distribution .media .m-orderList {
     border: none;
 }
-.distribution .media .m-orderList .action .btn{
+
+.distribution .media .m-orderList .action .btn {
     display: inline-block;
     height: 29px;
     width: auto;
@@ -1047,4 +1055,9 @@ thead {
     color: #fff;
     border-radius: 3px;
     text-align: center;
+}
+
+/*  景区分销修改 页面 */
+
+.distribution-add .media:hover .scenic-content {
 }
