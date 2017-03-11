@@ -60,7 +60,7 @@
                     <td>
                         <input type="date" name="admission_time">
                         @if($errors->has('admission_time'))
-                            <div>error</div>
+                            <div style="color: brown">请您选择正确的入园时间</div>
                         @endif
                     </td>
                 </tr>
@@ -84,7 +84,7 @@
                     <td>
                         <input type="tel" name="pay_account">
                         @if($errors->has('pay_account'))
-                            <div>error</div>
+                            <div style="color: brown">请您输入支付账号</div>
                         @endif
                     </td>
                 </tr>
