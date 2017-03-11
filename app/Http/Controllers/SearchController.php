@@ -31,7 +31,7 @@ class SearchController extends Controller
         if(array_key_exists('season', $data) && $data['season']){
             $query->where('category->season', $data['season']);
         }  
-        $scenic = $query->paginate(1)->toArray();
+        $scenic = $query->paginate(16)->toArray();
         $category = Category::with('child')->where('type', 1)->get();
         $scenic_service = new ScenicService();
         $cate = $scenic_service->getCategory($category);

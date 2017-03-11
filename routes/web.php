@@ -63,8 +63,6 @@ Route::group(['prefix' => 'user', 'middleware' => 'auth', 'namespace' => 'user']
     Route::get('/ticket/status', 'TicketController@changeStatus');
     Route::get('/del-ticket/{id}', 'TicketController@deleteTicket')->where('id', '^[0-9]+$');
 
-
-
     Route::get('/order', 'OrderController@getOrder');
 
 });
@@ -75,9 +73,4 @@ Route::group(['prefix' => 'order', 'middleware' => 'auth'], function () {
     Route::get('/detail/{sn}', 'OrderController@detail')->where('sn', '^[0-9]+$');;
     Route::get('/cancel', 'OrderController@cancel');
     Route::get('/refunds', 'OrderController@refunds');
-});
-
-//测试
-Route::get('/myPayment', function () {
-    return view('myPayment');
 });
