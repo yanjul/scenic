@@ -1,3 +1,56 @@
+.index_search {
+    display: flex;
+    width: 80%;
+    margin-left: 10%;
+    justify-content: center;
+    align-items: center;
+}
+
+.logo {
+    width: 20%;
+    height: 130px;
+    text-align: center;
+}
+
+.logo p {
+    color: burlywood;
+}
+
+.logo, .search_box {
+    float: left;
+}
+
+.search_box {
+    margin-left: 10%;
+    width: 70%;
+}
+
+#search_w, #search {
+    float: left
+}
+
+#search {
+    border-radius: 0;
+    width: 88%;
+}
+
+#search_w {
+    width: 80px;
+    height: 40px;
+    background: black;
+    color: whitesmoke;
+    line-height: 40px;
+    text-align: center;
+    cursor: pointer;
+}
+
+.search_box input {
+    width: 95%;
+    height: 40px;
+    border: 1px solid black;
+    border-radius: 5px;
+
+}
 /*主要搜索*/
 .search_content {
     margin-top: 3%;
@@ -116,29 +169,4 @@
 .null{
     padding: 10px 20px;
     font-size: 18px;
-}
-
-.page{
-    margin-top: 10px;
-    display: flex;
-    justify-content: center;
-    line-height: 30px;
-}
-.page a{
-    display: block;
-    padding: 4px 10px;
-    border: 1px solid red;
-    margin-right: 5px;
-    border-radius: 5px;
-}
-/*.page num{
-    display: flex;
-    flex-direction: row;
-    justify-content: center;
-}
-.page num a{
-    float: left;
-}*/
-.selected{
-    background: #ccc;
 }

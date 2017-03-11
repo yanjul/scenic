@@ -42,7 +42,7 @@
 
 #search_w {
     width: 80px;
-    height: 42px;
+    height: 44px;
     background: black;
     color: whitesmoke;
     line-height: 40px;
@@ -52,7 +52,7 @@
 
 .search_box input {
     width: 95%;
-    height: 40px;
+    height: 42px;
     border: 1px solid black;
     border-radius: 5px;
 

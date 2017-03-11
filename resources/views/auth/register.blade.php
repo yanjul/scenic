@@ -14,7 +14,7 @@
 @section('content')
     <div class="container">
         <div class="row">
-            <div class="col m8 push-m2">
+            <div class="col m6 push-m3">
 
                 <div class="row">
                     <div class="col m12">

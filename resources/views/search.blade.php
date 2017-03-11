@@ -6,6 +6,54 @@
 @endsection
 
 @section('content')
+    <div class="index_search clearfix">
+        <div class="logo">
+            <p style="font-size: 60px">👣</p>
+            <p>FootPrint脚印</p>
+        </div>
+        <div class="search_box">
+            <form action="">
+                <div class="form-group">
+                    <label for="search"></label>
+                    <input type="text" id="search" name="search" placeholder="请输入景区名称">
+                    <div id="search_w" onclick="search()">搜索</div>
+                    <script>
+                        function search() {
+                            var keywords = document.getElementById("search").value;
+                            // alert(searchs);
+                            var url = geturl('/search', {keyword: keywords})
+
+                            location.href = url;
+
+                        }
+                        function geturl(baseUrl, obj) {
+                            var url = baseUrl + '?';
+                            for (var attr in obj) {
+                                url += attr + '=' + obj[attr].replace(/^(\s+)|(\s+)$/g, '') + '&';
+                            }
+                            return url.replace(/(\&)$/g, '');
+                        }
+                        function getParams(url) {
+                            if (url.indexOf('?') < 0) {
+                                return {};
+                            }
+                            var str = url.replace(/^(.+\?)/, '');
+                            if (str) {
+                                var arr = str.split('&');
+                                var params = {};
+                                for (var i = 0; i < arr.length; i++) {
+                                    params[arr[i].split('=')[0]] = arr[i].split('=')[1];
+                                }
+                                return params;
+                            } else {
+                                return {};
+                            }
+                        }
+                    </script>
+                </div>
+            </form>
+        </div>
+    </div>
     <!--搜索分类-->
     <div class="search_classify">
         @foreach($category as $item)
@@ -67,8 +115,7 @@
         <!-- Nav tabs -->
         <ul class="nav nav-tabs" role="tablist">
             <li role="presentation" class="active"><a href="#home" aria-controls="home" role="tab"
-                                                      data-toggle="tab">按相关度</a></li>
-            <li role="presentation"><a href="#profile" aria-controls="profile" role="tab" data-toggle="tab">按热门</a></li>
+                                                      data-toggle="tab">景区</a></li>
         </ul>
         <!-- Tab panes -->
         <div class="tab-content">
@@ -88,14 +135,34 @@
                         </div>
 
                     @endforeach
-                    <div class="page">
-                        <a href="{{$scenic['prev_page_url']}}">上一页</a>
-                        @foreach($scenic['urls'] as $key=>$value)
-                            <a href="{{$key==$scenic['current_page']? '': $value}}"
-                               class="{{$key==$scenic['current_page']?'selected':''}}">{{$key}}</a>
-                        @endforeach
-                        <a href="{{$scenic['next_page_url']}}">下一页</a>
-                    </div>
+                    @if(count($scenic['urls']))
+                        <div class="container-fluid" >
+                            <div class="row col-md-12" style="display: flex;justify-content: center">
+                                <nav aria-label="Page navigation" >
+                                    <ul class="pagination">
+                                        <li>
+                                            <a href="{{$scenic['prev_page_url']}}" aria-label="Previous">
+                                                <span aria-hidden="true">&laquo;</span>
+                                            </a>
+                                        </li>
+                                        @foreach($scenic['urls'] as $key=>$value)
+                                            <li class="{{$key==$scenic['current_page']?'active':''}}">
+                                                <a href="{{$key==$scenic['current_page']? '': $value}}">{{$key}}</a>
+                                            </li>
+
+                                        @endforeach
+
+                                        <li>
+                                            <a href="{{$scenic['next_page_url']}}" aria-label="Next">
+                                                <span aria-hidden="true">&raquo;</span>
+                                            </a>
+                                        </li>
+                                    </ul>
+                                </nav>
+                            </div>
+                        </div>
+
+                    @endif
                 @else
                     <p class="null">没有你要搜索的内容</p>
                 @endif
