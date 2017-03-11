@@ -36,6 +36,9 @@
                                 @endif
                                 <div class="info">
                                     <input type="file" class="t" id="scenic-image" name="image">
+                                    @if($errors->has('image'))
+                                        <div>error</div>
+                                    @endif
                                 </div>
                             </li>
                             <li id="country">

@@ -143,4 +143,14 @@ class TicketController extends Controller
         return redirect()->back();
     }
 
+    public function changeStatus(Request $request){
+        $this->validate($request, [
+            'id'=> 'required',
+            'status'=> 'required'
+        ]);
+        $data = $request->input();
+        Ticket::where('id', $data['id'])->update(['status'=> $data['status']]);
+        return redirect()->back();
+    }
+
 }

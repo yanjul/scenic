@@ -63,7 +63,8 @@ class OrderController extends Controller
             'id'=> 'required',
             'admission_time'=> 'required|date|after:now',
             'pay_type'=> 'required',
-            'pay_mode'=> 'required'
+            'pay_mode'=> 'required',
+            'pay_account'=> 'required',
         ]);
         $data = $request->input();
         $time = time();
@@ -74,7 +75,7 @@ class OrderController extends Controller
                 'order_sn'=> $order->sn,
                 'pay_type'=> $data['pay_type'],
                 'pay_mode'=> $data['pay_mode'],
-                'pay_account'=> Auth::id(),
+                'pay_account'=> $data['pay_account'],
                 'pay_price'=> $order->pay_price,
                 'pay_at'=> $time,
                 'debit_note'=> $time.rand(1000, 9999)
@@ -85,6 +86,7 @@ class OrderController extends Controller
                 $order->paid_price = $order->pay_price;
                 $order->pay_status = 1;
                 $order->order_status = 2;
+                $order->remark = $request->input('remark', '');
                 $order->play_time = strtotime($data['admission_time'].' +1day') - 1;
                 $order->save();
                 OrderPaymentDetails::create($pay_data);
@@ -135,6 +137,11 @@ class OrderController extends Controller
         return redirect()->back();
     }
 
+    /**
+     * 取消退款
+     * @param Request $request
+     * @return \Illuminate\Http\RedirectResponse
+     */
     public function refunds(Request $request){
         $this->validate($request, [
             'sn'=> 'required'

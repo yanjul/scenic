@@ -32,8 +32,8 @@
                                         <td colspan="6" class="o_info row">
                                             <span class="col-md-4">订单编号：{{$item->sn}}</span>
                                             <span class="col-md-4">创建时间：{{$item->created_at}}</span>
-                                            <a href="/order/detail/{{$item->sn}}" class="order-check col-md-2">查看订单</a>
-                                            <a href="" class="order-del col-md-2">删除订单</a>
+                                            <a href="/order/detail/{{$item->sn}}" class="order-check col-md-offset-2 col-md-2">查看订单</a>
+                                            {{--<a href="" class="order-del col-md-2">删除订单</a>--}}
                                         </td>
                                     </tr>
                                     @foreach($item->detail as $ticket)
@@ -81,7 +81,7 @@
                                                 <span>
                                                     <a href="/order/refunds?sn={{$item->sn}}">申请退款</a>
                                                 </span>
-                                            @elseif($item->order_status == 2 && $item->pay_status == 2)
+                                            @elseif(($item->order_status == 3 || $item->order_status == 2) && $item->pay_status == 2)
                                                 <span>
                                                     <a href="/order/cancel?sn={{$item->sn}}">取消退款</a>
                                                 </span>

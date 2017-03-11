@@ -16,7 +16,8 @@
                             <div class="media">
                                 <div class="media-left">
                                     <a href="#" class="imgBox">
-                                        <img src="{{$item['image']}}" alt="" class="media-object" width="440px" height="260px">
+                                        <img src="{{$item['image']}}" alt="" class="media-object" width="440px"
+                                             height="260px">
                                         <p class="imgTitle">{{$item['name']}}</p>
                                     </a>
                                 </div>
@@ -27,21 +28,31 @@
                                         @foreach($category as $key=>$value)
                                             @foreach($value['child'] as $v)
                                                 @if($key == 0 && $v['id'] == $item['category']['type'])
-                                                    <span class="des_span des_span01">{{$value['name']}}:{{$v['name']}}</span>
+                                                    <span class="des_span des_span01">{{$value['name']}}
+                                                        :{{$v['name']}}</span>
                                                 @elseif($key == 1 && $v['id'] == $item['category']['time'])
-                                                    <span class="des_span des_span02">{{$value['name']}}:{{$v['name']}}</span>
+                                                    <span class="des_span des_span02">{{$value['name']}}
+                                                        :{{$v['name']}}</span>
                                                 @elseif($key == 2 && $v['id'] == $item['category']['season'])
-                                                    <span class="des_span des_span03">{{$value['name']}}:{{$v['name']}}</span>
+                                                    <span class="des_span des_span03">{{$value['name']}}
+                                                        :{{$v['name']}}</span>
                                                 @endif
                                             @endforeach
                                         @endforeach
                                     </div>
                                     <div class="handle">
                                         <p class="edit-btn">
-                                            <a href="{{url('user/scenic/'.$item['id'])}}" class="btn btn-primary">查看门票</a>
+                                            <a href="{{url('user/scenic/'.$item['id'])}}"
+                                               class="btn btn-primary">查看门票</a>
                                             <a href="{{url('user/add-ticket/'.$item['id'])}}" class="btn btn-success">添加门票</a>
-                                            <a href="{{url('user/add-scenic/'.$item['id'])}}" class="btn btn-info btn-3">修改景区</a>
-                                            <a href="{{url('user/del-scenic/'.$item['id'])}}" class="btn btn-danger">删除景区</a>
+                                            <a href="{{url('user/add-scenic/'.$item['id'])}}"
+                                               class="btn btn-info btn-3">修改景区</a>
+                                            {{--<a href="{{url('user/del-scenic/'.$item['id'])}}" class="btn btn-danger">删除景区</a>--}}
+                                            @if($item['status'])
+                                                <a href="/user/scenic/status?id={{$item['id']}}&status=0" class="btn btn-danger">下架</a>
+                                            @else
+                                                <a href="/user/scenic/status?id={{$item['id']}}&status=1" class="btn btn-success">上架</a>
+                                            @endif
                                         </p>
                                     </div>
                                 </div>
