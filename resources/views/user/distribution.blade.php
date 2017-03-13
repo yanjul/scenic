@@ -11,6 +11,7 @@
                     <span>景区分销</span>
                 </div>
                 <div class="scenic-list distribution">
+                    <a href="/user/scenic/add-distribution">添加</a>
                     <div class="media">
                         <div class="media-left">
                             <a href="#" class="imgBox">

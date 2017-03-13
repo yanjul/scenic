@@ -35,8 +35,10 @@ Route::get('/search', 'SearchController@index');
 Route::get('/scenic/{id}', 'HomeController@ScenicDetail')->where('id', '^[0-9]+$');
 
 //ajax
-Route::get('/get-scenic', 'HomeController@getScenic');
+Route::get('/show-scenic', 'HomeController@getScenic');
 Route::get('/get-code', 'User\MsgController@sendCode');
+Route::get('/get-scenic', 'User\ScenicController@getScenic');
+Route::get('/get-ticket', 'User\TicketController@getTicket');
 //用户组
 Route::group(['prefix' => 'user', 'middleware' => 'auth', 'namespace' => 'user'], function () {
 

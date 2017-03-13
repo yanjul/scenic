@@ -108,14 +108,16 @@
                 <ul class="tabs">
                     <li class="tab col s4"><a class="active" href="#hot">热门推荐</a></li>
                     <li class="tab col s4" id="sale_btn"><a href="#sale">限时特价</a></li>
-                    <li class="tab col s4"><a href="#scenic">景区分销</a></li>
+                    @if(Auth::check() && Auth::user()->role)
+                        <li class="tab col s4"><a href="#scenic">景区分销</a></li>
+                    @endif
                 </ul>
             </div>
             <div id="hot" class="col s12">
                 <script type="text/javascript">
                     window.onload = function () {
                         $.ajax({
-                            url: '/get-scenic',
+                            url: '/show-scenic',
                             type: 'GET',
                             data: {
                                 type: 'hot',
@@ -145,7 +147,7 @@
                     oSale.onclick = function () {
                         oSaleC.innerHTML = '';
                         $.ajax({
-                            url: '/get-scenic',
+                            url: '/show-scenic',
                             type: 'GET',
                             data: {
                                 type: 'price',

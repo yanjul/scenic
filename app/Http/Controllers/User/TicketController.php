@@ -24,6 +24,21 @@ class TicketController extends Controller
         return view('user.ticket')->with('scenic', $scenic->toArray());
     }
 
+    public function getScenic(Request $request) {
+        $data = $request->all();
+        $query = Ticket::query();
+        if (array_key_exists('scenic', $data) && $data['scenic']) {
+            $query->with('scenic');
+        }
+        if (array_key_exists('id', $data) && $data['id']) {
+            return $query->find($data['id']);
+        }
+        if (array_key_exists('scenic_id', $data) && $data['scenic_id']) {
+            return $query->where('scenic_id', $data['scenic_id'])->get();
+        }
+        return [];
+    }
+
     /**创建门票
      * @param $id
      * @return $this|\Illuminate\Http\RedirectResponse|\Illuminate\Routing\Redirector

@@ -24,6 +24,21 @@ class ScenicController extends Controller
         return view('user.scenic')->with('list', $list)->with('category', $category);
     }
 
+    public function getScenic(Request $request) {
+        $data = $request->all();
+        $query = Scenic::query();
+        if (array_key_exists('ticket', $data) && $data['ticket']) {
+            $query->with('ticket');
+        }
+        if (array_key_exists('id', $data) && $data['id']) {
+            return $query->find($data['id']);
+        }
+        if (array_key_exists('user_id', $data) && $data['user_id']) {
+            return $query->where('user_id', $data['user_id'])->get();
+        }
+        return null;
+    }
+
     /**景区添加
      * @param null $id
      * @return $this|\Illuminate\Http\RedirectResponse|\Illuminate\Routing\Redirector
@@ -132,6 +147,7 @@ class ScenicController extends Controller
     }
     public function distributionAdd()
     {
-        return view('user.add-distribution');
+        $scenic = Scenic::where('user_id', Auth::id())->get();
+        return view('user.add-distribution')->with('list', $scenic);
     }
 }
