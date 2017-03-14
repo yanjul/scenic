@@ -624,15 +624,16 @@ thead {
     overflow: hidden;
     margin-left: 5px;
     _display: inline;
+    cursor: pointer;
 }
 
-.tab-myfoot .title li a.on, .tab-mydamai .title li a.on:hover {
+.tab-myfoot .title li.on, .tab-mydamai .title li.on:hover {
     background-position: -139px -93px;
     color: #fff;
     font-weight: 700;
 }
 
-.tab-myfoot .title li a {
+.tab-myfoot .title li{
     background: url(//dui.damai.cn/damai_v2/passport/images/b.png) no-repeat scroll -139px -122px;
     display: block;
     line-height: 29px;
@@ -650,7 +651,6 @@ thead {
     padding: 25px 40px;
     color: #666;
 }
-
 .per-edit-list .per-edit-msg {
     background: #fffdee;
     border: 1px solid #edd28b;
@@ -709,6 +709,7 @@ thead {
     text-overflow: ellipsis;
     overflow: hidden;
     text-indent: 2em;
+
 }
 
 .per-edit-list button {
@@ -733,7 +734,19 @@ thead {
     cursor: pointer;
     color: #fff;
 }
-
+.photoChange{
+    padding: 25px 40px;
+    position: relative;
+}
+.photoChange .btnSure{
+    position: absolute;
+    border: none;
+    right: 20%;
+    bottom: 6.5%;
+}
+#divContentBox>div{
+    display: none;
+}
 /* 绑定手机  修改密码 页面*/
 .popup-address {
     padding: 30px 0 0 85px;
@@ -1060,4 +1073,11 @@ thead {
 /*  景区分销修改 页面 */
 
 .distribution-add .media:hover .scenic-content {
+}
+
+/* 提示信息 */
+.warningTips{
+    margin-left: 10px;
+    color: red;
+
 }

@@ -37,7 +37,10 @@
                                 </dl>
                                 <dl>
                                     <dt>真实姓名：</dt>
-                                    <dd><input type="text" class="input-text-2" name="truename" value="{{$info['info']['truename']}}"></dd>
+                                    <dd>
+                                        <input type="text" class="input-text-2" id="true_name" name="truename" value="{{$info['info']['truename']}}">
+                                        <span class="valid ValidTrueName"></span>
+                                    </dd>
                                     @if($errors->has('truename'))
                                         error
                                     @endif
@@ -46,6 +49,7 @@
                                     <dt>公司地址：</dt>
                                     <dd>
                                         <input type="text" id="company_address" class="input-text-3" name="company_address" value="{{$info['info']['company_address']}}">
+                                        <span class="valid ValidTrueName"></span>
                                         @if($errors->has('company_adress'))
                                             error
                                         @endif
@@ -75,8 +79,21 @@
                                         @endif
                                     </dd>
                                 </dl>
-                                <button id="sumBgn" class="btn05" type="submit">保存</button>
+                                <button id="su mBgn" class="btn05  saveBtn" type="subm it">保存</button>
                             </form>
+                            <script>
+//                                window.onload = function () {
+//                                    $(".saveBtn").click(function () {
+//                                        if($("#true_name").val() ==''){
+//                                            $(".ValidTrueName").text("真实姓名不能为空！")
+//                                        }
+//                                        else if($("#company_address").val() ==''){
+//                                            $(".ValidTrueName").text("公司地址不能为空！")
+//                                        }
+//
+//                                    })
+//                                }
+                            </script>
                         </div>
                     </div>
                 </div>

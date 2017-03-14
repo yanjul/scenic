@@ -25,7 +25,7 @@
                                     <input type="text" class="t" id="scenic-name" name="name"
                                            value="{{isset($data['scenic'])? $data['scenic']['name']: ''}}">
                                     @if ($errors->has('name'))
-                                        error
+                                        <span class="warningTips">景区名字不能为空!</span>
                                     @endif
                                 </div>
                             </li>
@@ -37,7 +37,7 @@
                                 <div class="info">
                                     <input type="file" class="t" id="scenic-image" name="image">
                                     @if($errors->has('image'))
-                                        <div>error</div>
+                                        <span class="warningTips">景区图片不能为空!</span>
                                     @endif
                                 </div>
                             </li>

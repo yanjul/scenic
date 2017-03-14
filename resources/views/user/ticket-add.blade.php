@@ -35,7 +35,7 @@
                                     <input type="text" class="t" id="ticket-name" name="name"
                                            value="{{isset($scenic['ticket'])? $scenic['ticket']['name']: ''}}">
                                     @if ($errors->has('name'))
-                                        error
+                                        <span class="warningTips">门票名称不能为空!</span>
                                     @endif
                                 </div>
                             </li>
@@ -45,7 +45,7 @@
                                     <input class="t" type="number" id="ticket-price" name="price"
                                            value="{{isset($scenic['ticket'])? $scenic['ticket']['price']: ''}}">
                                     @if ($errors->has('price'))
-                                        error
+                                        <span class="warningTips">门票价格不能为空!</span>
                                     @endif
                                 </div>
                             </li>
