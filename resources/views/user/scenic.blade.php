@@ -43,15 +43,15 @@
                                     <div class="handle">
                                         <p class="edit-btn">
                                             <a href="{{url('user/scenic/'.$item['id'])}}"
-                                               class="btn btn-primary">查看门票</a>
-                                            <a href="{{url('user/add-ticket/'.$item['id'])}}" class="btn btn-success">添加门票</a>
+                                               class="btn btn-primary btn-sm">查看门票</a>
+                                            <a href="{{url('user/add-ticket/'.$item['id'])}}" class="btn btn-success btn-sm">添加门票</a>
                                             <a href="{{url('user/add-scenic/'.$item['id'])}}"
-                                               class="btn btn-info btn-3">修改景区</a>
-                                            {{--<a href="{{url('user/del-scenic/'.$item['id'])}}" class="btn btn-danger">删除景区</a>--}}
+                                               class="btn btn-info btn-sm btn-3">修改景区</a>
+                                            <a href="{{url('user/del-scenic/'.$item['id'])}}" class="btn btn-danger btn-sm">删除景区</a>
                                             @if($item['status'])
-                                                <a href="/user/scenic/status?id={{$item['id']}}&status=0" class="btn btn-danger">下架</a>
+                                                <a href="/user/scenic/status?id={{$item['id']}}&status=0" class="btn btn-danger btn-sm">下架</a>
                                             @else
-                                                <a href="/user/scenic/status?id={{$item['id']}}&status=1" class="btn btn-success">上架</a>
+                                                <a href="/user/scenic/status?id={{$item['id']}}&status=1" class="btn btn-success btn-sm">上架</a>
                                             @endif
                                         </p>
                                     </div>
