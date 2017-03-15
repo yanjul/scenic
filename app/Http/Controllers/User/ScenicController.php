@@ -10,6 +10,8 @@ use Illuminate\Support\Facades\Storage;
 use App\Models\SysPlace;
 use App\Models\SysCountries;
 use App\Models\Category;
+use App\Models\OrderInfo;
+use App\Models\OrderDetails;
 
 class ScenicController extends Controller
 {
@@ -145,9 +147,21 @@ class ScenicController extends Controller
     {
         return view('user.distribution');
     }
+
     public function distributionAdd()
     {
         $scenic = Scenic::where('user_id', Auth::id())->get();
         return view('user.add-distribution')->with('list', $scenic);
+    }
+
+
+    public function createDistribution(Request $request) {
+        $this->validate($request, [
+            'scenic_id'=> 'required',
+            'ticket_id'=> 'required|array',
+            'price'=> 'required|array',
+            'number'=> 'required|array',
+        ]);
+
     }
 }
