@@ -40,7 +40,7 @@ Route::get('/get-code', 'User\MsgController@sendCode');
 Route::get('/get-scenic', 'User\ScenicController@getScenic');
 Route::get('/get-ticket', 'User\TicketController@getTicket');
 //用户组
-Route::group(['prefix' => 'user', 'middleware' => 'auth', 'namespace' => 'user'], function () {
+Route::group(['prefix' => 'user', 'middleware' => 'auth', 'namespace' => 'User'], function () {
 
     Route::get('/', 'UserController@Index');
 
