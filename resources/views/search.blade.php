@@ -17,38 +17,6 @@
                     <label for="search"></label>
                     <input type="text" id="search" name="search" placeholder="请输入景区名称">
                     <div id="search_w" onclick="search()">搜索</div>
-                    <script>
-                        var params = getParams(location.href);
-                        document.getElementById("search").setAttribute('value', params.keyword || '');
-                        function search() {
-                            var keywords = document.getElementById("search").value;
-                            var url = geturl('/search', {keyword: keywords});
-                            location.href = url;
-                        }
-                        function geturl(baseUrl, obj) {
-                            var url = baseUrl + '?';
-                            for (var attr in obj) {
-                                url += attr + '=' + obj[attr].replace(/^(\s+)|(\s+)$/g, '') + '&';
-                            }
-                            return url.replace(/(\&)$/g, '');
-                        }
-                        function getParams(url) {
-                            if (url.indexOf('?') < 0) {
-                                return {};
-                            }
-                            var str = url.replace(/^(.+\?)/, '');
-                            if (str) {
-                                var arr = str.split('&');
-                                var params = {};
-                                for (var i = 0; i < arr.length; i++) {
-                                    params[arr[i].split('=')[0]] = arr[i].split('=')[1];
-                                }
-                                return params;
-                            } else {
-                                return {};
-                            }
-                        }
-                    </script>
                 </div>
             </form>
         </div>
@@ -69,8 +37,53 @@
 
                     @endforeach
                 </ul>
+
             </div>
         @endforeach
+        @section('js')
+            <script>
+                var params = getParams(location.href);
+                document.getElementById("search").setAttribute('value', params.keyword || '');
+                function search(el) {
+                    var params = getParams(location.href);
+                    if (el) {
+                        var data_id = el.getAttribute('data-id');
+                        var data_type = el.parentNode.getAttribute('data-type');
+                        params[data_type] = data_id || null;
+                        var url = getUrl('/search', params);
+                    } else {
+                        params['keyword'] = document.getElementById("search").value;
+                        var url = getUrl('/search', params);
+                    }
+                    location.href = url;
+                }
+                function getUrl(baseUrl, obj) {
+                    var url = baseUrl + '?';
+                    for (var attr in obj) {
+                        if (obj[attr] !== null) {
+                            url += attr + '=' + obj[attr].replace(/^(\s+)|(\s+)$/g, '') + '&';
+                        }
+                    }
+                    return url.replace(/(\&)$/g, '');
+                }
+                function getParams(url) {
+                    if (url.indexOf('?') < 0) {
+                        return {};
+                    }
+                    var str = url.replace(/^(.+\?)/, '');
+                    if (str) {
+                        var arr = str.split('&');
+                        var params = {};
+                        for (var i = 0; i < arr.length; i++) {
+                            params[arr[i].split('=')[0]] = arr[i].split('=')[1] || '';
+                        }
+                        return params;
+                    } else {
+                        return {};
+                    }
+                }
+            </script>
+        @endsection
     </div>
     <!--其他搜索-->
     <div class="search_else_box">
@@ -98,9 +111,9 @@
 
                     @endforeach
                     @if(count($scenic['urls']))
-                        <div class="container-fluid" >
+                        <div class="container-fluid">
                             <div class="row col-md-12" style="display: flex;justify-content: center">
-                                <nav aria-label="Page navigation" >
+                                <nav aria-label="Page navigation">
                                     <ul class="pagination">
                                         <li>
                                             <a href="{{$scenic['prev_page_url']}}" aria-label="Previous">
