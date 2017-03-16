@@ -5,7 +5,8 @@ namespace App\Models;
 use Illuminate\Notifications\Notifiable;
 use Illuminate\Foundation\Auth\User as Authenticatable;
 
-class Users extends Authenticatable {
+class Users extends Authenticatable
+{
 
     use Notifiable;
 
@@ -26,11 +27,13 @@ class Users extends Authenticatable {
         'remember_token'
     ];
 
-    public function scenic(){
-        return $this->hasMany('App\Models\Scenic');
+    public function scenic()
+    {
+        return $this->hasMany('App\Models\Scenic', 'user_id', 'id');
     }
 
-    public function info(){
+    public function info()
+    {
         return $this->hasOne('App\Models\UserInfo', 'user_id', 'id');
     }
 

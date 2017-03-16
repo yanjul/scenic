@@ -3,6 +3,7 @@
 namespace App\Http\Controllers\User;
 
 use App\Http\Controllers\Controller;
+use App\Models\Ticket;
 use Illuminate\Support\Facades\Auth;
 use Illuminate\Http\Request;
 use App\Models\Scenic;
@@ -10,8 +11,9 @@ use Illuminate\Support\Facades\Storage;
 use App\Models\SysPlace;
 use App\Models\SysCountries;
 use App\Models\Category;
-use App\Models\OrderInfo;
-use App\Models\OrderDetails;
+use App\Models\Distribution;
+use App\Models\DistributionDetails;
+use Illuminate\Support\Facades\DB;
 
 class ScenicController extends Controller
 {
@@ -26,7 +28,8 @@ class ScenicController extends Controller
         return view('user.scenic')->with('list', $list)->with('category', $category);
     }
 
-    public function getScenic(Request $request) {
+    public function getScenic(Request $request)
+    {
         $data = $request->all();
         $query = Scenic::query();
         if (array_key_exists('ticket', $data) && $data['ticket']) {
@@ -133,19 +136,22 @@ class ScenicController extends Controller
         return redirect('user/scenic');
     }
 
-    public function changeStatus(Request $request){
+    public function changeStatus(Request $request)
+    {
         $this->validate($request, [
-            'id'=> 'required',
-            'status'=> 'required'
+            'id' => 'required',
+            'status' => 'required'
         ]);
         $data = $request->input();
-        Scenic::where('id', $data['id'])->update(['status'=> $data['status']]);
+        Scenic::where('id', $data['id'])->update(['status' => $data['status']]);
         return redirect()->back();
     }
 
     public function distribution()
     {
-        return view('user.distribution');
+        $distribution = Distribution::with(['detail', 'scenic'])->where('user_id', Auth::id())->get();
+        $category = Category::with('child')->where('parent_id', 0)->get()->toArray();
+        return view('user.distribution')->with(['list' => $distribution, 'category' => $category]);
     }
 
     public function distributionAdd()
@@ -155,13 +161,44 @@ class ScenicController extends Controller
     }
 
 
-    public function createDistribution(Request $request) {
+    public function createDistribution(Request $request)
+    {
         $this->validate($request, [
-            'scenic_id'=> 'required',
-            'ticket_id'=> 'required|array',
-            'price'=> 'required|array',
-            'number'=> 'required|array',
+            'scenic_id' => 'required',
+            'ticket_id' => 'required|array',
+            'name' => 'required|array',
+            'price' => 'required|array',
+            'number' => 'required|array',
         ]);
-
+        $data = $request->input();
+        $items = array();
+        $scenic = Scenic::find($data['scenic_id']);
+        if (!$scenic) {
+            return redirect()->back();
+        }
+        $distribution = [
+            'user_id' => Auth::id(),
+            'scenic_id' => $data['scenic_id'],
+            'scenic_name' => $scenic->name,
+        ];
+        foreach ($data['ticket_id'] as $key => $value)
+            $items[$key] = [
+                'ticket_id' => $value,
+                'ticket_name' => $data['name'][$key],
+                'ticket_price' => $data['price'][$key],
+                'ticket_number' => $data['number'][$key],
+            ];
+        try {
+            DB::beginTransaction();
+            $distribution = Distribution::create($distribution);
+            foreach ($items as $item) {
+                DistributionDetails::create(array_merge($item, ['distribution_id' => $distribution->id]));
+            }
+            DB::commit();
+            return redirect('/user/scenic/distribution');
+        } catch (\Exception $exception) {
+            DB::rollBack();
+            return redirect()->back();
+        }
     }
 }

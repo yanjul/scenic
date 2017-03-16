@@ -26,12 +26,12 @@
                             <input id="scenic-id" type="hidden" name="scenic_id" value="0">
                             <table id="add-ticket" cellspacing="0" cellpadding="0">
                                 <thead>
-                                    <tr>
-                                        <th>门票名称</th>
-                                        <th>票价</th>
-                                        <th>数量</th>
-                                        <th>操作</th>
-                                    </tr>
+                                <tr>
+                                    <th>门票名称</th>
+                                    <th>票价</th>
+                                    <th>数量</th>
+                                    <th>操作</th>
+                                </tr>
                                 </thead>
                                 <tbody></tbody>
                             </table>
@@ -64,11 +64,12 @@
                                         t.append(' <table cellspacing="0" cellpadding="0"> <thead> <tr> <th>门票名称</th> <th>票价</th> <th>数量</th> <th>操作</th> </tr> </thead><tbody></tbody></table>');
                                         var t_b = t.find('tbody');
                                         for (var i = 0; i < data.ticket.length; i++) {
-                                            t_b.append('<tr data-id="' + data.ticket[i].id + '"><td>' + data.ticket[i].name + '</td><td>' + data.ticket[i].price + '</td><td>' + data.ticket[i].number + '</td><td><button onclick="add(this.parentNode.parentNode)">添加</button></td></tr>');
+                                            t_b.append('<tr data-id="' + data.ticket[i].id + '"><td>' + data.ticket[i].name + '</td><td>' + data.ticket[i].price + '</td><td>' + data.ticket[i].number + '</td><td><button class="btn btn-success btn-sm" onclick="add(this.parentNode.parentNode)">添加</button></td></tr>');
                                         }
                                         container.append(m_l, m_b, t);
                                     },
-                                    error: function () {}
+                                    error: function () {
+                                    }
                                 });
                             }
 
@@ -77,8 +78,9 @@
                                 var tbody = $('#add-ticket').find('tbody');
                                 if (!tbody.find('tr[data-id="' + id + '"]').length) {
                                     tr = tr.cloneNode(true);
+                                    tr.childNodes[0].innerHTML = '<input name="name[]" type="text" value="' + tr.childNodes[0].innerText + '">';
                                     tr.childNodes[1].innerHTML = '<input name="price[]" type="tel" value="' + tr.childNodes[1].innerText + '">';
-                                    $(tr.childNodes[1]).append('<input type="hidden" name="ticker_id[]" value="' + id + '">');
+                                    $(tr.childNodes[1]).append('<input type="hidden" name="ticket_id[]" value="' + id + '">');
                                     tr.childNodes[2].innerHTML = '<input name="number[]" type="tel" value="1">';
                                     tr.childNodes[3].innerHTML = '<buttom class="btn btn-warning btn-sm" onclick="del(this.parentNode.parentNode)">删除</buttom>';
                                     tbody.append(tr)

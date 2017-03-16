@@ -13,46 +13,63 @@
                 <div class="scenic-list distribution">
                     <a href="/user/scenic/add-distribution">添加</a>
                     <div class="media">
-                        <div class="media-left">
-                            <a href="#" class="imgBox">
-                                <img src="/images/scenic/wulong1.jpg" alt="" class="media-object" width="300px"
-                                     height="180px">
-                                <p class="imgTitle">武隆</p>
-                            </a>
-                        </div>
-                        <div class="media-body">
-                            <h4 class="media-heading"><a href="" class="scenic-title">武隆</a></h4>
-                            <p class="scenic-content">
-                                武隆，地处重庆市东南边缘，乌江下游，武陵山与大娄山结合部，东西长82.7公...最佳旅游时间：秋季较为适宜游览。因为武隆气候温湿，四季分明，春夏降水量较大。武隆，地处重庆市东南边缘，乌江下游，武陵山与大娄山结合部，东西长82.7公...最佳旅游时间：秋季较为适宜游览。因为武隆气候温湿，四季分明，春夏降水量较大。</p>
-                            <div class="des_div">
-                                <span class="des_span des_span01">景点类型：自然景观</span>
-                                <span class="des_span des_span02">游玩时间：2-4小时</span>
-                                <span class="des_span des_span03">适宜季节：四季皆宜</span>
+                        @foreach($list as $item)
+                            <div>
+                                <div class="media-left">
+                                    <a href="#" class="imgBox">
+                                        <img src="{{$item->scenic->image}}" alt="" class="media-object" width="300px"
+                                             height="180px">
+                                        <p class="imgTitle">{{$item->scenic->name}}</p>
+                                    </a>
+                                </div>
+                                <div class="media-body">
+                                    <h4 class="media-heading"><a href=""
+                                                                 class="scenic-title">{{$item->scenic->name}}</a></h4>
+                                    <p class="scenic-content">{{$item->scenic->info}}</p>
+                                    @foreach($category as $key=>$value)
+                                        @foreach($value['child'] as $v)
+                                            @if($key == 0 && $v['id'] == $item->scenic->category['type'])
+                                                <span class="des_span des_span01">{{$value['name']}}
+                                                    :{{$v['name']}}</span>
+                                            @elseif($key == 1 && $v['id'] == $item->scenic->category['time'])
+                                                <span class="des_span des_span02">{{$value['name']}}
+                                                    :{{$v['name']}}</span>
+                                            @elseif($key == 2 && $v['id'] == $item->scenic->category['season'])
+                                                <span class="des_span des_span03">{{$value['name']}}
+                                                    :{{$v['name']}}</span>
+                                            @endif
+                                        @endforeach
+                                    @endforeach
+                                </div>
+                                <div class="ticket-desc m-orderList">
+                                    <table cellspacing="0" cellpadding="0">
+                                        <thead>
+                                        <tr>
+                                            <th>门票名称</th>
+                                            <th>票价</th>
+                                            <th>数量</th>
+                                        </tr>
+                                        </thead>
+                                        <tbody>
+                                        @foreach($item->detail as $detail)
+                                            <tr>
+                                                <td>{{$detail->ticket_name}}</td>
+                                                <td>{{$detail->ticket_price}}</td>
+                                                <td>{{$detail->ticket_number}}</td>
+
+                                            </tr>
+                                        @endforeach
+                                        <tr>
+                                            <td colspan="3" class="action">
+                                                <a class="btn" href="/user/scenic/add-distribution">修改</a>
+                                                <a href="#" class="btn">删除</a>
+                                            </td>
+                                        </tr>
+                                        </tbody>
+                                    </table>
+                                </div>
                             </div>
-                        </div>
-                        <div class="ticket-desc m-orderList">
-                            <table cellspacing="0" cellpadding="0">
-                                <thead>
-                                <tr>
-                                    <th>门票名称</th>
-                                    <th>票价</th>
-                                    <th>数量</th>
-                                    <th>操作</th>
-                                </tr>
-                                </thead>
-                                <tbody>
-                                <tr>
-                                    <td>td</td>
-                                    <td>130元</td>
-                                    <td>2</td>
-                                    <td class="action">
-                                        <a class="btn" href="/user/scenic/add-distribution">修改</a>
-                                        <a href="#" class="btn">删除</a>
-                                    </td>
-                                </tr>
-                                </tbody>
-                            </table>
-                        </div>
+                        @endforeach
                     </div>
                 </div>
             </div>

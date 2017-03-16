@@ -4,7 +4,8 @@ namespace App\Models;
 
 use Illuminate\Database\Eloquent\Model;
 
-class Ticket extends Model {
+class Ticket extends Model
+{
     protected $table = 'ticket';
 
     protected $fillable = [
@@ -21,10 +22,11 @@ class Ticket extends Model {
     ];
 
     protected $casts = [
-        'custom_price'=> 'json'
+        'custom_price' => 'json'
     ];
 
-    public function scenic(){
-        return $this->belongsTo('App\Models\scenic');
+    public function scenic()
+    {
+        return $this->belongsTo('App\Models\scenic', 'scenic_id', 'id');
     }
 }
