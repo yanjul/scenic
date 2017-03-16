@@ -18,13 +18,12 @@
                     <input type="text" id="search" name="search" placeholder="请输入景区名称">
                     <div id="search_w" onclick="search()">搜索</div>
                     <script>
+                        var params = getParams(location.href);
+                        document.getElementById("search").setAttribute('value', params.keyword || '');
                         function search() {
                             var keywords = document.getElementById("search").value;
-                            // alert(searchs);
-                            var url = geturl('/search', {keyword: keywords})
-
+                            var url = geturl('/search', {keyword: keywords});
                             location.href = url;
-
                         }
                         function geturl(baseUrl, obj) {
                             var url = baseUrl + '?';
@@ -70,45 +69,8 @@
 
                     @endforeach
                 </ul>
-
             </div>
         @endforeach
-        @section('js')
-            <script>
-                function search(el) {
-                    var data_id = el.getAttribute('data-id');
-                    var data_type = el.parentNode.getAttribute('data-type');
-                    var params = getParams(location.href);
-                    params[data_type] = data_id || null;
-                    location.href = geturl('/search', params);
-                }
-                function geturl(baseUrl, obj) {
-                    var url = baseUrl + '?';
-                    for (var attr in obj) {
-                        if (obj[attr] !== null) {
-                            url += attr + '=' + obj[attr].replace(/^(\s+)|(\s+)$/g, '') + '&';
-                        }
-                    }
-                    return url.replace(/(\&)$/g, '');
-                }
-                function getParams(url) {
-                    if (url.indexOf('?') < 0) {
-                        return {};
-                    }
-                    var str = url.replace(/^(.+\?)/, '');
-                    if (str) {
-                        var arr = str.split('&');
-                        var params = {};
-                        for (var i = 0; i < arr.length; i++) {
-                            params[arr[i].split('=')[0]] = arr[i].split('=')[1] || '';
-                        }
-                        return params;
-                    } else {
-                        return {};
-                    }
-                }
-            </script>
-        @endsection
     </div>
     <!--其他搜索-->
     <div class="search_else_box">
