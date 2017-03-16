@@ -33,7 +33,7 @@
                 </a>
             </dd>
             <dd>
-                <a href="">
+                <a href="/user/payment">
                     <span>交易记录</span>
                 </a>
             </dd>

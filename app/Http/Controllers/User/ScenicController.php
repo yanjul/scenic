@@ -154,12 +154,20 @@ class ScenicController extends Controller
         return view('user.distribution')->with(['list' => $distribution, 'category' => $category]);
     }
 
-    public function distributionAdd()
+    public function distributionAdd($id = 0)
     {
-        $scenic = Scenic::where('user_id', Auth::id())->get();
-        return view('user.add-distribution')->with('list', $scenic);
+        $list = Scenic::where('user_id', Auth::id())->get();
+        $data['list'] = $list;
+        if ($id) {
+            $distribution = Distribution::with(['detail', 'scenic' => function ($query) {
+                $query->with('ticket');
+            }])->find($id);
+            if ($distribution) {
+                $data['distribution'] = $distribution;
+            }
+        }
+        return view('user.add-distribution')->with($data);
     }
-
 
     public function createDistribution(Request $request)
     {
@@ -176,11 +184,6 @@ class ScenicController extends Controller
         if (!$scenic) {
             return redirect()->back();
         }
-        $distribution = [
-            'user_id' => Auth::id(),
-            'scenic_id' => $data['scenic_id'],
-            'scenic_name' => $scenic->name,
-        ];
         foreach ($data['ticket_id'] as $key => $value)
             $items[$key] = [
                 'ticket_id' => $value,
@@ -190,12 +193,41 @@ class ScenicController extends Controller
             ];
         try {
             DB::beginTransaction();
-            $distribution = Distribution::create($distribution);
+            if (array_key_exists('distribution_id', $data) && $data['distribution_id']) {
+                $distribution_id = $data['distribution_id'];
+                DistributionDetails::where('distribution_id', $distribution_id)->delete();
+            }else{
+                $distribution = [
+                    'user_id' => Auth::id(),
+                    'scenic_id' => $data['scenic_id'],
+                    'scenic_name' => $scenic->name,
+                ];
+                $distribution_id = Distribution::create($distribution)->id;
+            }
             foreach ($items as $item) {
-                DistributionDetails::create(array_merge($item, ['distribution_id' => $distribution->id]));
+                DistributionDetails::create(array_merge($item, ['distribution_id' => $distribution_id]));
             }
             DB::commit();
             return redirect('/user/scenic/distribution');
+        } catch (\Exception $exception) {
+            DB::rollBack();
+            return redirect()->back();
+        }
+    }
+
+    public function deleteDistribution($id = 0){
+        if(!$id) {
+            return redirect()->back();
+        }
+        try {
+            DB::beginTransaction();
+            $distribution = Distribution::find($id);
+            if($distribution) {
+                DistributionDetails::where('distribution_id', $distribution->id)->delete();
+                Distribution::where('id', $id)->delete();
+            }
+            DB::commit();
+            return redirect()->back();
         } catch (\Exception $exception) {
             DB::rollBack();
             return redirect()->back();

@@ -17,13 +17,54 @@
                     <select id="scenic" onchange="showScenic(this.value)">
                         <option value="0">--选择景区--</option>
                         @foreach($list as $scenic)
-                            <option value="{{$scenic->id}}">{{$scenic->name}}</option>
+                            <option value="{{$scenic->id}}" {{isset($distribution) && $distribution->scenic_id == $scenic->id? 'selected': ''}}>{{$scenic->name}}</option>
                         @endforeach
                     </select>
-                    <div id="content"></div>
+                    <div id="content">
+                        @if(isset($distribution))
+                            <div class="media-left">
+                                <img src="{{$distribution->scenic->image}}" class="media-object" width="300px"
+                                     height="180px">
+                            </div>
+                            <div class="media-body">
+                                <h4 class="media-heading">{{$distribution->scenic->name}}</h4>
+                                <p class="scenic-content">{{$distribution->scenic->info}}</p>
+                            </div>
+                            <div class="ticket-desc m-orderList">
+                                <table cellspacing="0" cellpadding="0">
+                                    <thead>
+                                    <tr>
+                                        <th>门票名称</th>
+                                        <th>票价</th>
+                                        <th>数量</th>
+                                        <th>操作</th>
+                                    </tr>
+                                    </thead>
+                                    <tbody>
+                                    @foreach($distribution->scenic->ticket as $ticket)
+                                        <tr data-id="{{$ticket->id}}">
+                                            <td>{{$ticket->name}}</td>
+                                            <td>{{$ticket->price}}</td>
+                                            <td>{{$ticket->number}}</td>
+                                            <td>
+                                                <button class="btn btn-success btn-sm"
+                                                        onclick="add(this.parentNode.parentNode)">添加
+                                                </button>
+                                            </td>
+                                        </tr>
+                                    @endforeach
+                                    </tbody>
+                                </table>
+                            </div>
+                        @endif
+                    </div>
                     <div class="ticket-desc m-orderList">
                         <form method="post" action="/user/scenic/create-distribution">
-                            <input id="scenic-id" type="hidden" name="scenic_id" value="0">
+                            <input id="scenic-id" type="hidden" name="scenic_id"
+                                   value="{{isset($distribution)? $distribution->scenic_id: 0}}">
+                            @if(isset($distribution))
+                                <input type="hidden" name="distribution_id" value="{{$distribution->id}}">
+                            @endif
                             <table id="add-ticket" cellspacing="0" cellpadding="0">
                                 <thead>
                                 <tr>
@@ -33,9 +74,28 @@
                                     <th>操作</th>
                                 </tr>
                                 </thead>
-                                <tbody></tbody>
+                                <tbody>
+                                @if(isset($distribution))
+                                    @foreach($distribution->detail as $detail)
+                                        <tr data-id="{{$detail->ticket_id}}">
+                                            <td>
+                                                <input type="text" name="name[]" value="{{$detail->ticket_name}}">
+                                                <input type="hidden" name="ticket_id[]" value="{{$detail->ticket_id}}">
+                                            </td>
+                                            <td><input type="tel" name="price[]" value="{{$detail->ticket_price}}"></td>
+                                            <td><input type="tel" name="number[]" value="{{$detail->ticket_number}}">
+                                            </td>
+                                            <td>
+                                                <buttom class="btn btn-warning btn-sm"
+                                                        onclick="del(this.parentNode.parentNode)">删除
+                                                </buttom>
+                                            </td>
+                                        </tr>
+                                    @endforeach
+                                @endif
+                                </tbody>
                             </table>
-                            <button class="btn btn-success" type="submit">创建</button>
+                            <button class="btn btn-success" type="submit">{{isset($distribution)? '修改': '创建'}}</button>
                         </form>
                     </div>
                     @section('js')
@@ -58,7 +118,7 @@
                                         var m_l = $(' <div class="media-left"></div>');
                                         m_l.append('<img src="' + data.image + '" class="media-object" width="300px"height="180px">');
                                         var m_b = $(' <div class="media-body"></div>');
-                                        m_b.append('<h4 class="media-heading"><a href="" class="scenic-title">' + data.name + '</a></h4>');
+                                        m_b.append('<h4 class="media-heading">' + data.name + '</h4>');
                                         m_b.append('<p class="scenic-content">' + data.info + '</p>');
                                         var t = $('<div class="ticket-desc m-orderList"><div>');
                                         t.append(' <table cellspacing="0" cellpadding="0"> <thead> <tr> <th>门票名称</th> <th>票价</th> <th>数量</th> <th>操作</th> </tr> </thead><tbody></tbody></table>');
@@ -78,11 +138,12 @@
                                 var tbody = $('#add-ticket').find('tbody');
                                 if (!tbody.find('tr[data-id="' + id + '"]').length) {
                                     tr = tr.cloneNode(true);
-                                    tr.childNodes[0].innerHTML = '<input name="name[]" type="text" value="' + tr.childNodes[0].innerText + '">';
-                                    tr.childNodes[1].innerHTML = '<input name="price[]" type="tel" value="' + tr.childNodes[1].innerText + '">';
-                                    $(tr.childNodes[1]).append('<input type="hidden" name="ticket_id[]" value="' + id + '">');
-                                    tr.childNodes[2].innerHTML = '<input name="number[]" type="tel" value="1">';
-                                    tr.childNodes[3].innerHTML = '<buttom class="btn btn-warning btn-sm" onclick="del(this.parentNode.parentNode)">删除</buttom>';
+                                    var tds = $(tr).find('td');
+                                    tds[0].innerHTML = '<input name="name[]" type="text" value="' + tds[0].innerText + '">';
+                                    tds[1].innerHTML = '<input name="price[]" type="tel" value="' + tds[1].innerText + '">';
+                                    $(tds[1]).append('<input type="hidden" name="ticket_id[]" value="' + id + '">');
+                                    tds[2].innerHTML = '<input name="number[]" type="tel" value="1">';
+                                    tds[3].innerHTML = '<buttom class="btn btn-warning btn-sm" onclick="del(this.parentNode.parentNode)">删除</buttom>';
                                     tbody.append(tr)
                                 }
                             }
