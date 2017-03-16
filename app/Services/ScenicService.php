@@ -20,6 +20,7 @@ class ScenicService
         if (Auth::check()) {
             $scenic->where('user_id', '!=', Auth::id());
         }
+        $scenic->where('status', 1);
         return $scenic->orderBy('hot', 'desc')->offset(0)->limit($limit)->get();
     }
 
@@ -30,7 +31,7 @@ class ScenicService
     public function getHasCustomPrice($limit = 8)
     {
         $data = [];
-        $max = Scenic::count();
+        $max = Scenic::where('status', 1)->count();
         $i = 1;
         while ($i) {
             $time = time();
@@ -38,7 +39,10 @@ class ScenicService
             if (Auth::check()) {
                 $scenic->where('user_id', '!=', Auth::id());
             }
-            $scenic = $scenic->with('ticket')->offset(($i - 1) * $limit)->limit($i * $limit)->get()->toArray();
+            $scenic->where('status', 1);
+            $scenic = $scenic->with(['ticket' => function ($query) {
+                $query->where('status', 1);
+            }])->offset(($i - 1) * $limit)->limit($i * $limit)->get()->toArray();
             foreach ($scenic as $key => $value) {
                 foreach ($value['ticket'] as $ticket) {
                     foreach ($ticket['custom_price'] as $item) {

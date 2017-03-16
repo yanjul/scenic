@@ -142,7 +142,7 @@
                                 </div>
                             </li>
                             <li>
-                                <button class="btn btn-success binding"
+                                <button class="btn btn-warning binding"
                                         type="submit">{{isset($scenic['ticket'])? '修改': '添加'}}</button>
                             </li>
                         </ul>

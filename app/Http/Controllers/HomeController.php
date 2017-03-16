@@ -22,10 +22,11 @@ class HomeController extends Controller
         return view('home');
     }
 
-    public function getScenic(Request $request){
+    public function getScenic(Request $request)
+    {
         $this->validate($request, [
-            'type'=> 'required',
-            'length'=> 'required'
+            'type' => 'required',
+            'length' => 'required'
         ]);
         $params = $request->all();
         $scenic = new ScenicService();
@@ -38,15 +39,18 @@ class HomeController extends Controller
         return [];
     }
 
-    public function ScenicDetail($id){
+    public function ScenicDetail($id)
+    {
         $scenic = Scenic::query();
-        if(Auth::check()){
+        if (Auth::check()) {
             $scenic->where('user_id', '!=', Auth::id());
         }
-        $scenic = $scenic->with('ticket')->where('id', $id)->first();
+        $scenic = $scenic->with(['ticket' => function ($query) {
+            $query->where('status', 1);
+        }])->find($id);
         if ($scenic) {
             $ticket = new TicketService();
-            foreach ($scenic->ticket as $key=>$value){
+            foreach ($scenic->ticket as $key => $value) {
                 $scenic->ticket[$key]->now_price = $ticket->getPrice($value);
             }
             Session::put('old_url', Url::current());
