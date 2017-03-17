@@ -66,14 +66,15 @@
                         </div>
                         <div class="photoChange">
                             <div class="news_img">
-                                <label for="" style="display: inline;float: left">选择头像：</label>
-                                <input type="file" name="file1" class="file" value='浏览...'
-                                       onchange="PreviewImage(this,'imgView','pic_preview')"/>
-                                <div style="margin-top: 20px;">
-                                    <label class="ncLabel">头像预览：</label>
-                                    <img id="imgView" src="" alt="" width="240px" height="240px"/>
-                                </div>
-                                <button class="btn05 btn btnSure">确定</button>
+                                <form method="post" action="/user/info/photo" enctype="multipart/form-data">
+                                    <label for="" style="display: inline;float: left">选择头像：</label>
+                                    <input type="file" name="image" class="file" required onchange="PreviewImage(this,'imgView','pic_preview')"/>
+                                    <div style="margin-top: 20px;">
+                                        <label class="ncLabel">头像预览：</label>
+                                        <img id="imgView" src="{{$info['info']['photo'] ?: '/images/system/default-photo.jpg'}}" alt="" width="240px" height="240px"/>
+                                    </div>
+                                    <button class="btn btn-sm btn-success">保存</button>
+                                </form>
                             </div>
 
                         </div>

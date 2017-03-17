@@ -10,7 +10,7 @@
                         <div class="infos">
                             <div class="infos-lf">
                                 <div class="img">
-                                    <img src="//localhost:8000/images/system/personImg.jpg" alt="" id="userPhoto">
+                                    <img src="{{Auth::user()->info->photo ?: '/images/system/default-photo.jpg'}}" alt="" id="userPhoto">
                                     <a href="" class="c1">修改头像</a>
                                 </div>
                                 <a href="/user/info">编辑个人信息</a>

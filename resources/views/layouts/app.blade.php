@@ -30,6 +30,7 @@
                     </span>
                 @else
                     <span>
+                        <img src="{{Auth::user()->info->photo ?: '/images/system/default-photo.jpg'}}" width="32" height="32">
                         <span>{{ Auth::user()->name }}</span>
                         <a  style="margin-left: 10px" href="{{ route('logout') }}"
                            onclick="event.preventDefault(); document.getElementById('logout-form').submit();">

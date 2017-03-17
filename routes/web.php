@@ -48,6 +48,7 @@ Route::group(['prefix' => 'user', 'middleware' => 'auth', 'namespace' => 'User']
     Route::match(['get', 'post'], '/info-update', 'UserController@updateInfo');
     Route::match(['get', 'post'], '/reset-password', 'UserController@resetPassword');
     Route::match(['get', 'post'], '/bind-mobile', 'UserController@bindMobile');
+    Route::post('/info/photo', 'UserController@updatePhoto');
 
     Route::get('/scenic', 'ScenicController@getUserScenic');
     Route::get('/add-scenic/{id?}', 'ScenicController@add')->where('id', '^[0-9]+$');

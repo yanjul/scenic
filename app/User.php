@@ -25,7 +25,18 @@ class User extends Authenticatable
      * @var array
      */
     protected $hidden = [
-        'password', 'remember_token',
+        'password',
+        'remember_token'
     ];
+
+    public function scenic()
+    {
+        return $this->hasMany('App\Models\Scenic', 'user_id', 'id');
+    }
+
+    public function info()
+    {
+        return $this->hasOne('App\Models\UserInfo', 'user_id', 'id');
+    }
 
 }
