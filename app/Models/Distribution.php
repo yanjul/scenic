@@ -10,6 +10,7 @@ class Distribution extends Model
 
     protected $fillable = [
         'user_id',
+        'package_name',
         'scenic_id',
         'scenic_name',
     ];

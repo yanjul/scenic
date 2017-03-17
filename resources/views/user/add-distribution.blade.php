@@ -65,6 +65,9 @@
                             @if(isset($distribution))
                                 <input type="hidden" name="distribution_id" value="{{$distribution->id}}">
                             @endif
+                            <label for="name">套餐名称</label>
+                            <input id="name" type="text" name="package_name" required
+                                   value="{{isset($distribution)? $distribution->package_name: ''}}">
                             <table id="add-ticket" cellspacing="0" cellpadding="0">
                                 <thead>
                                 <tr>

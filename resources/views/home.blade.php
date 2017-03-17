@@ -185,10 +185,11 @@
                             dataType: 'JSON',
                             success: function (data) {
                                 var container = $('#scenic');
+                                container.empty();
                                 for (var i = 0; i < data.length; i++) {
                                     var content = $('<div class="hot_box"></div>');
                                     content.append('<img class="materialboxed" src="' + data[i].image + '">');
-                                    content.append('<a class="black" href="/scenic/' + data[i].id + '"><div class="hot_box_introduce"><p>' + data[i].name + '</p> <p>' + data[i].info + '</p> </div></a>');
+                                    content.append('<a class="black" href="/distribution/' + data[i].id + '"><div class="hot_box_introduce"><p>' + data[i].name + '</p> <p>' + data[i].info + '</p> </div></a>');
                                     container.append(content);
                                 }
 

@@ -21,7 +21,7 @@ class SearchController extends Controller
         $data = $request->input();
         $query = Scenic::query();
         if (Auth::check()) {
-            $query->where('user_id', '<=>', Auth::id());
+            $query->where('user_id', '!=', Auth::id());
         }
         if (array_key_exists('keyword', $data) && $data['keyword']) {
             $query->where('name', 'like', '%' . $data['keyword'] . '%');

@@ -149,9 +149,15 @@ class ScenicController extends Controller
 
     public function distribution()
     {
-        $distribution = Distribution::with(['detail', 'scenic'])->where('user_id', Auth::id())->get();
+        $scenic = Scenic::with(['distribution' => function ($query) {
+            $query->with('detail');
+        }])->select('scenic.*')
+            ->leftJoin('scenic_distribution as b', 'scenic.id', 'b.scenic_id')
+            ->whereNotNull('b.id')
+            ->groupBy('scenic.id')
+            ->where('scenic.user_id', Auth::id())->get();
         $category = Category::with('child')->where('parent_id', 0)->get()->toArray();
-        return view('user.distribution')->with(['list' => $distribution, 'category' => $category]);
+        return view('user.distribution')->with(['list' => $scenic, 'category' => $category]);
     }
 
     public function distributionAdd($id = 0)
@@ -173,6 +179,7 @@ class ScenicController extends Controller
     {
         $this->validate($request, [
             'scenic_id' => 'required',
+            'package_name' => 'required',
             'ticket_id' => 'required|array',
             'name' => 'required|array',
             'price' => 'required|array',
@@ -196,10 +203,11 @@ class ScenicController extends Controller
             if (array_key_exists('distribution_id', $data) && $data['distribution_id']) {
                 $distribution_id = $data['distribution_id'];
                 DistributionDetails::where('distribution_id', $distribution_id)->delete();
-            }else{
+            } else {
                 $distribution = [
                     'user_id' => Auth::id(),
                     'scenic_id' => $data['scenic_id'],
+                    'package_name' => $data['package_name'],
                     'scenic_name' => $scenic->name,
                 ];
                 $distribution_id = Distribution::create($distribution)->id;
@@ -215,14 +223,15 @@ class ScenicController extends Controller
         }
     }
 
-    public function deleteDistribution($id = 0){
-        if(!$id) {
+    public function deleteDistribution($id = 0)
+    {
+        if (!$id) {
             return redirect()->back();
         }
         try {
             DB::beginTransaction();
             $distribution = Distribution::find($id);
-            if($distribution) {
+            if ($distribution) {
                 DistributionDetails::where('distribution_id', $distribution->id)->delete();
                 Distribution::where('id', $id)->delete();
             }

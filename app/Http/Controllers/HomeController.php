@@ -61,4 +61,24 @@ class HomeController extends Controller
         }
         return redirect()->back();
     }
+
+    public function distributionDetail($id)
+    {
+        $scenic = Scenic::query();
+        if (Auth::check()) {
+            $scenic->where('scenic.user_id', '!=', Auth::id());
+        }
+        $scenic = $scenic->with(['distribution' => function ($query) {
+            $query->with('detail');
+        }])->select('scenic.*')
+            ->leftJoin('scenic_distribution as b', 'scenic.id', 'b.scenic_id')
+            ->whereNotNull('b.id')
+            ->groupBy('scenic.id')
+            ->where('scenic.status', 1)->find($id);
+        if ($scenic) {
+
+            return view('distribution')->with('scenic', $scenic);
+        }
+        return redirect()->back();
+    }
 }
