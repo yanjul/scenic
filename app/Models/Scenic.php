@@ -37,6 +37,6 @@ class Scenic extends Model
 
     public function distribution()
     {
-        return $this->hasMany('App\Models\Ticket', 'scenic_id', 'id');
+        return $this->hasMany('App\Models\Distribution', 'scenic_id', 'id');
     }
 }

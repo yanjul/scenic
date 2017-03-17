@@ -21,7 +21,7 @@ class ScenicTest extends TestCase
 
         $scenic = new \App\Services\ScenicService();
 
-        dd($scenic->getHasCustomPrice(2));
+        dd($scenic->getDistribution(8));
     }
 
 }

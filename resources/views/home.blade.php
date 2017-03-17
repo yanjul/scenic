@@ -109,7 +109,7 @@
                     <li class="tab col s4"><a class="active" href="#hot">热门推荐</a></li>
                     <li class="tab col s4" id="sale_btn"><a href="#sale">限时特价</a></li>
                     @if(Auth::check() && Auth::user()->role)
-                        <li class="tab col s4"><a href="#scenic">景区分销</a></li>
+                        <li class="tab col s4" id="scenic_btn"><a href="#scenic">景区分销</a></li>
                     @endif
                 </ul>
             </div>
@@ -172,7 +172,31 @@
                 </script>
             </div>
             <div id="scenic" class="col s12">
+                <script type="text/javascript">
+                    var oScenic = document.getElementById('scenic_btn');
+                    oScenic.onclick  = function () {
+                        $.ajax({
+                            url: '/show-scenic',
+                            type: 'GET',
+                            data: {
+                                type: 'distribution',
+                                length: 8
+                            },
+                            dataType: 'JSON',
+                            success: function (data) {
+                                var container = $('#scenic');
+                                for (var i = 0; i < data.length; i++) {
+                                    var content = $('<div class="hot_box"></div>');
+                                    content.append('<img class="materialboxed" src="' + data[i].image + '">');
+                                    content.append('<a class="black" href="/scenic/' + data[i].id + '"><div class="hot_box_introduce"><p>' + data[i].name + '</p> <p>' + data[i].info + '</p> </div></a>');
+                                    container.append(content);
+                                }
 
+                            },
+                            error: function () {}
+                        });
+                    }
+                </script>
             </div>
         </div>
     </div>

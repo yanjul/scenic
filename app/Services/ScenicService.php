@@ -64,9 +64,23 @@ class ScenicService
                 break;
             }
             $i++;
-            echo $i . '\n';
         }
         return $data;
+    }
+
+    public function getDistribution($limit = 8) {
+        $query = Scenic::query();
+        if (Auth::check()) {
+            $query->where('scenic.user_id', '!=', Auth::id());
+        }
+        return $query->with('distribution')
+            ->select('scenic.*')
+            ->leftJoin('scenic_distribution as b', 'scenic.id', 'b.scenic_id')
+            ->whereNotNull('b.id')
+            ->groupBy('scenic.id')
+            ->offset(0)->limit($limit)
+            ->where('scenic.status', 1)
+            ->get();
     }
 
     public function getCategory($category)

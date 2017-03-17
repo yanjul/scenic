@@ -36,6 +36,9 @@ class HomeController extends Controller
         if ($params['type'] == 'price') {
             return $scenic->getHasCustomPrice($params['length']);
         }
+        if ($params['type'] == 'distribution') {
+            return $scenic->getDistribution($params['length']);
+        }
         return [];
     }
 
