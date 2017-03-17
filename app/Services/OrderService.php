@@ -23,7 +23,7 @@ class OrderService{
     {
         $order = [];
         $scenic = Scenic::with(['ticket'=> function($query) use($data) {
-            $query->where('id', 'in', $data['ticket_id'])->where('status', 1);
+            $query->whereIn('id', $data['ticket_id'])->where('status', 1);
         }])->where('status', 1)->find($data['scenic_id']);
         if (!$scenic || ($scenic && ($scenic->user_id == Auth::id() || count($scenic->ticket) != count($data['ticket_id'])))){
             return false;
