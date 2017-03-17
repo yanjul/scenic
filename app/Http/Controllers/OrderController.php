@@ -21,6 +21,9 @@ class OrderController extends Controller
      */
     function create(Request $request)
     {
+        if ($request->isMethod('get')) {
+            return redirect(Session::get('old_url', '/'));
+        }
         $this->validate($request, [
             'scenic_id' => 'required',
             'ticket_id' => 'required|array',

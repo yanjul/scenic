@@ -22,8 +22,10 @@ class OrderService{
     public function getInitOrderData(array $data)
     {
         $order = [];
-        $scenic = Scenic::with('user')->find($data['scenic_id']);
-        if ($scenic->user->id == Auth::id()){
+        $scenic = Scenic::with(['ticket'=> function($query) use($data) {
+            $query->where('id', 'in', $data['ticket_id'])->where('status', 1);
+        }])->where('status', 1)->find($data['scenic_id']);
+        if (!$scenic || ($scenic && ($scenic->user_id == Auth::id() || count($scenic->ticket) != count($data['ticket_id'])))){
             return false;
         }
         $order['info']['sn'] = time().rand(1000, 9999);
