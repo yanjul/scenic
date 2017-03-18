@@ -84,9 +84,9 @@ class TicketController extends Controller
             'start_time' => 'array',
             'end_time' => 'array',
             'custom_price' => 'array',
-            'valid_time' => '',
-            'lead_time' => '',
-            'last_time' => ''
+            'valid_time' => 'required|between:1,60',
+            'lead_time' => 'required|between:1,5',
+            'last_time' => 'required|between:0,24'
         ]);
         $input = $request->input();
         $ticket = Ticket::where(['id' => $id, 'scenic_id' => $input['scenic_id']])->first();
@@ -123,13 +123,13 @@ class TicketController extends Controller
         $this->validate($request, [
             'scenic_id' => 'required',
             'name' => 'required|max:18',
-            'price' => 'required',
+            'price' => 'required|between:0,999999999',
             'start_time' => 'array',
             'end_time' => 'array',
             'custom_price' => 'array',
-            'valid_time' => '',
-            'lead_time' => '',
-            'last_time' => ''
+            'valid_time' => 'required|between:1,60',
+            'lead_time' => 'required|between:1,5',
+            'last_time' => 'required|between:0,24'
         ]);
         $input = $request->input();
         foreach ($input['custom_price'] as $key => $value) {

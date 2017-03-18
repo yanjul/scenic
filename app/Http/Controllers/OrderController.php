@@ -35,13 +35,13 @@ class OrderController extends Controller
         if ($order_data) {
             try {
                 DB::beginTransaction();
+                Scenic::where('id', $data['scenic_id'])->update(['hot' => $order_data['scenic']['hot']]);
                 $orderInfo = OrderInfo::create($order_data['info']);
                 foreach ($order_data['detail'] as $value) {
                     OrderDetails::create(array_merge($value, ['order_id' => $orderInfo->id]));
                 }
-//                OrderPaymentDetails::create(['order_id' => $orderInfo->id, 'order_sn' => $orderInfo->sn]);
                 DB::commit();
-                return redirect('order/pay/'.$orderInfo->sn);
+                return redirect('order/pay/' . $orderInfo->sn);
             } catch (\Exception $exception) {
                 DB::rollBack();
                 return redirect()->back();
@@ -57,31 +57,32 @@ class OrderController extends Controller
      * @param Request $request
      * @return $this|\Illuminate\Http\RedirectResponse|\Illuminate\Routing\Redirector
      */
-    public function pay($sn, Request $request){
+    public function pay($sn, Request $request)
+    {
         if ($request->isMethod('get')) {
             $order = OrderInfo::with('detail')->where('sn', $sn)->first();
             return view('pay')->with('order', $order);
         }
         $this->validate($request, [
-            'id'=> 'required',
-            'admission_time'=> 'required|date|after:now',
-            'pay_type'=> 'required',
-            'pay_mode'=> 'required',
-            'pay_account'=> 'required',
+            'id' => 'required',
+            'admission_time' => 'required|date|after:now',
+            'pay_type' => 'required',
+            'pay_mode' => 'required',
+            'pay_account' => 'required',
         ]);
         $data = $request->input();
         $time = time();
-        $order = OrderInfo::with('payment')->where(['sn'=> $sn, 'id'=> $data['id']])->first();
+        $order = OrderInfo::with('payment')->where(['sn' => $sn, 'id' => $data['id']])->first();
         if ($order && $order->order_status == 1 && $order->pay_status == 0 && !$order->payment) {
             $pay_data = [
-                'order_id'=> $order->id,
-                'order_sn'=> $order->sn,
-                'pay_type'=> $data['pay_type'],
-                'pay_mode'=> $data['pay_mode'],
-                'pay_account'=> $data['pay_account'],
-                'pay_price'=> $order->pay_price,
-                'pay_at'=> $time,
-                'debit_note'=> $time.rand(1000, 9999)
+                'order_id' => $order->id,
+                'order_sn' => $order->sn,
+                'pay_type' => $data['pay_type'],
+                'pay_mode' => $data['pay_mode'],
+                'pay_account' => $data['pay_account'],
+                'pay_price' => $order->pay_price,
+                'pay_at' => $time,
+                'debit_note' => $time . rand(1000, 9999)
             ];
 
             try {
@@ -89,8 +90,10 @@ class OrderController extends Controller
                 $order->paid_price = $order->pay_price;
                 $order->pay_status = 1;
                 $order->order_status = 2;
-                $order->remark = $request->input('remark', '');
-                $order->play_time = strtotime($data['admission_time'].' +1day') - 1;
+                if ($request->has('remark')) {
+                    $order->remark = $request->input('remark');
+                }
+                $order->play_time = strtotime($data['admission_time'] . ' +1day') - 1;
                 $order->save();
                 OrderPaymentDetails::create($pay_data);
                 DB::commit();
@@ -110,11 +113,12 @@ class OrderController extends Controller
      * @param $sn
      * @return $this|\Illuminate\Http\RedirectResponse
      */
-    public function detail($sn){
-        $order = OrderInfo::with(['detail', 'payment'])->where(['user_id'=> Auth::id(), 'sn'=> $sn])->first();
-        if($order){
+    public function detail($sn)
+    {
+        $order = OrderInfo::with(['detail', 'payment'])->where(['user_id' => Auth::id(), 'sn' => $sn])->first();
+        if ($order) {
             $supplier = Scenic::with('user')->where('id', $order->scenic_id)->first();
-            return view('user.order-detail')->with(['order'=> $order, 'supplier'=> $supplier]);
+            return view('user.order-detail')->with(['order' => $order, 'supplier' => $supplier]);
         }
         return redirect()->back();
     }
@@ -124,12 +128,13 @@ class OrderController extends Controller
      * @param Request $request
      * @return \Illuminate\Http\RedirectResponse
      */
-    public function cancel(Request $request){
+    public function cancel(Request $request)
+    {
         $this->validate($request, [
-            'sn'=> 'required'
+            'sn' => 'required'
         ]);
-        $order = OrderInfo::where(['user_id'=> Auth::id(), 'sn'=> $request->input('sn')])->first();
-        if($order){
+        $order = OrderInfo::where(['user_id' => Auth::id(), 'sn' => $request->input('sn')])->first();
+        if ($order) {
             if ($order->order_status == 1 && $order->pay_status == 0) {
                 $order->order_status = 4;
             } else if (($order->order_status == 2 || $order->order_status == 3) && $order->pay_status == 2) {
@@ -145,12 +150,13 @@ class OrderController extends Controller
      * @param Request $request
      * @return \Illuminate\Http\RedirectResponse
      */
-    public function refunds(Request $request){
+    public function refunds(Request $request)
+    {
         $this->validate($request, [
-            'sn'=> 'required'
+            'sn' => 'required'
         ]);
-        $order = OrderInfo::where(['user_id'=> Auth::id(), 'sn'=> $request->input('sn')])->first();
-        if($order){
+        $order = OrderInfo::where(['user_id' => Auth::id(), 'sn' => $request->input('sn')])->first();
+        if ($order) {
             if ($order->order_status == 2 && $order->pay_status == 1) {
                 $order->pay_status = 2;
             } else if ($order->order_status == 3 && $order->pay_status == 1 && $order->play_time < (time() - 7200)) {

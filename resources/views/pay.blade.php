@@ -84,7 +84,7 @@
                     <td>
                         <input type="tel" name="pay_account">
                         @if($errors->has('pay_account'))
-                            <div style="color: brown">请您输入支付账号</div>
+                            <div style="color: brown">请您输入支付账号php</div>
                         @endif
                     </td>
                 </tr>
