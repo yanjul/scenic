@@ -1,7 +1,7 @@
 @extends('layouts.app')
 
 @section('content')
-    <div class="container"  style="min-height: 830px;>
+    <div class="container"  style="min-height: 830px;">
         <div class="row">
             @include('user.menu')
             <div class="col-md-9">

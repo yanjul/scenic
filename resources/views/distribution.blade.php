@@ -72,7 +72,5 @@
     </div>
 
     <!--底部-->
-    <div class="index_footer">
-        &copy;2017&nbsp;FootPrint&nbsp;脚印
-    </div>
+    @include('user.footer')
 @endsection

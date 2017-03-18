@@ -60,3 +60,19 @@ body {
     line-height: 50px;
     background: #bce8f1;
 }
+.dm-bottom-wrap {
+    border-top: 1px solid #e5e5e5;
+    background: #fafafa;
+    margin-top: 20px;
+    width: 100%;
+}
+.dm-bottom {
+    width: 1000px;
+    margin: 0 auto;
+    overflow: hidden;
+}
+.dm-bottom .dm-copyright {
+    color: #666;
+    line-height: 55px;
+    text-align: center;
+}
