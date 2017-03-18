@@ -26,7 +26,9 @@
                     <form action="/order/create" method="post">
                         @foreach($scenic->distribution as $distribution)
                             <div id="sale_menu">
-                                <div><span>名称</span><b>{{$distribution->package_name}}</b></div>
+                                <div><span>名称:</span><b>{{$distribution->package_name}}</b>
+                                    <input type="radio" name="distribution_id" value="{{$distribution->id}}" style="float: right">
+                                </div>
                                 @foreach($distribution->detail as $detail)
                                     <div class="or_menu">
                                         <div class="or_menpiao clearfix">
@@ -36,11 +38,13 @@
                                             价格：<span style="color: #2e6da4">{{$detail->ticket_price}}</span>
                                         </div>
                                         <div class="or_kuang">
-                                            数量：<span style="color: #2e6da4">{{$detail->ticket_number}}</span>
+                                            数量：<span style="color: #2e6da4">{{$detail->ticket_number}}</span>&nbsp;&nbsp;&nbsp;
+
                                         </div>
+
                                     </div>
                                 @endforeach
-                                <input type="radio" name="distribution_id" value="{{$distribution->id}}">
+
                             </div>
                         @endforeach
                         <input type="submit" disabled class="btn btn-info pull-right" value="立即购买" id="sale_buy">
