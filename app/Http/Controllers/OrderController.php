@@ -2,6 +2,7 @@
 
 namespace App\Http\Controllers;
 
+use App\Models\Distribution;
 use App\Models\OrderInfo;
 use App\Models\OrderDetails;
 use App\Models\OrderPaymentDetails;
@@ -49,6 +50,20 @@ class OrderController extends Controller
         } else {
             return redirect()->back();
         }
+    }
+
+    function createDistribution(Request $request){
+        $this->validate($request, [
+            'distribution_id'=> 'required',
+            'scenic_id'=> 'required'
+        ]);
+        $distribution = Distribution::with('detail')->where([
+            'scenic_id'=> $request->input('scenic_id')
+        ])->find($request->input('distribution_id'));
+        if($distribution) {
+
+        }
+        return redirect()->back();
     }
 
     /**

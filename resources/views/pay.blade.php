@@ -106,9 +106,7 @@
 @section('js')
     <script>
             function queren() {
-                if(confirm("确定支付吗？")){
-                    return true;
-                }
+                return confirm("确定支付吗？");
             }
     </script>
 @endsection
