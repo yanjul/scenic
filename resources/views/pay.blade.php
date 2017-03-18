@@ -8,7 +8,7 @@
 @section('content')
     <!--商品详情内容-->
     <div class="detail_content">
-        <form action="/order/pay/{{$order->sn}}" method="post">
+        <form action="/order/pay/{{$order->sn}}" method="post" >
             <table class="table table1 table-condensed table-bordered">
                 <tr>
                     <td>订单号</td>
@@ -84,7 +84,7 @@
                     <td>
                         <input type="tel" name="pay_account">
                         @if($errors->has('pay_account'))
-                            <div style="color: brown">请您输入支付账号php</div>
+                            <div style="color: brown">请您输入支付账号</div>
                         @endif
                     </td>
                 </tr>
@@ -96,7 +96,24 @@
                 </tr>
                 <tr>
                     <td colspan="2">
-                        <button type="submit" class="btn btn-success pull-right">支付</button>
+                        <button type="submit" class="btn btn-success pull-right" data-toggle="modal" data-target="#myModal">支付</button>
+                        <div class="modal fade " id="myModal" tabindex="-1" role="dialog" aria-labelledby="myModalLabel">
+                            <div class="modal-dialog" role="document">
+                                <div class="modal-content">
+                                    <div class="modal-header">
+                                        <button type="button" class="close" data-dismiss="modal" aria-label="Close"><span aria-hidden="true">&times;</span></button>
+                                        <h4 class="modal-title" id="myModalLabel">支付详情</h4>
+                                    </div>
+                                    <div class="modal-body">
+                                       价格： {{$order->pay_price}}
+                                    </div>
+                                    <div class="modal-footer">
+                                        <button type="button" class="btn btn-default" data-dismiss="modal">取消支付</button>
+                                        <button type="button" class="btn btn-primary">确认支付</button>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
                     </td>
                 </tr>
             </table>
