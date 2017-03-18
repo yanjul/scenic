@@ -81,3 +81,7 @@ Route::group(['prefix' => 'order', 'middleware' => 'auth'], function () {
     Route::get('/cancel', 'OrderController@cancel');
     Route::get('/refunds', 'OrderController@refunds');
 });
+
+Route::get('/test', function (){
+    return view('auth.passwords.reset');
+});

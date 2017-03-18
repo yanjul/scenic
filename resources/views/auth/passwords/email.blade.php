@@ -1,26 +1,41 @@
 @extends('layouts.app')
 
+@section('css')
+    <link href="/css/materialize.css" rel="stylesheet">
+    <style>
+        .container {
+            margin-top: 80px;
+        }
+    </style>
+@endsection
+
+@section('js')
+    <script src="/js/materialize.js"></script>
+@endsection
+
 @section('content')
-<div class="container">
-    <div class="row">
-        <div class="col-md-8 col-md-offset-2">
-            <div class="panel panel-default">
-                <div class="panel-heading">Reset Password</div>
-                <div class="panel-body">
+    <div class="container">
+        <div class="row">
+            <div class="col m6 push-m3">
+                <div>重置密码</div>
+                <div class="row">
                     @if (session('status'))
                         <div class="alert alert-success">
                             {{ session('status') }}
                         </div>
                     @endif
 
-                    <form class="form-horizontal" role="form" method="POST" action="{{ route('password.email') }}">
+                    <form role="form" method="POST" action="{{ route('password.email') }}">
                         {{ csrf_field() }}
 
-                        <div class="form-group{{ $errors->has('email') ? ' has-error' : '' }}">
-                            <label for="email" class="col-md-4 control-label">E-Mail Address</label>
+                        <div class="{{ $errors->has('email') ? ' has-error' : '' }}">
+                            <div class="col m12 input-field">
+                                <i class="material-icons prefix">email</i>
+                                <label for="email" >邮箱</label>
 
-                            <div class="col-md-6">
-                                <input id="email" type="email" class="form-control" name="email" value="{{ old('email') }}" required>
+
+                                <input id="email" type="email" class="form-control" name="email"
+                                       value="{{ old('email') }}" required>
 
                                 @if ($errors->has('email'))
                                     <span class="help-block">
@@ -30,17 +45,17 @@
                             </div>
                         </div>
 
-                        <div class="form-group">
-                            <div class="col-md-6 col-md-offset-4">
+                        <div class="">
+                            <div class="col m4 push-m5">
                                 <button type="submit" class="btn btn-primary">
-                                    Send Password Reset Link
+                                    输入邮箱获取重置密码链接
                                 </button>
                             </div>
                         </div>
                     </form>
                 </div>
+
             </div>
         </div>
     </div>
-</div>
 @endsection
