@@ -1,7 +1,7 @@
 @extends('layouts.app')
 
 @section('content')
-    <div class="container">
+    <div class="container" style="min-height: 830px;">
         <div class="row">
             @include('user.menu')
             <div class="col-md-9">
@@ -29,20 +29,22 @@
                                                                      class="scenic-title">{{$item->name}}</a>
                                         </h4>
                                         <p class="scenic-content">{{$item->info}}</p>
-                                        @foreach($category as $key=>$value)
-                                            @foreach($value['child'] as $v)
-                                                @if($key == 0 && $v['id'] == $item->category['type'])
-                                                    <span class="des_span des_span01">{{$value['name']}}
-                                                        :{{$v['name']}}</span>
-                                                @elseif($key == 1 && $v['id'] == $item->category['time'])
-                                                    <span class="des_span des_span02">{{$value['name']}}
-                                                        :{{$v['name']}}</span>
-                                                @elseif($key == 2 && $v['id'] == $item->category['season'])
-                                                    <span class="des_span des_span03">{{$value['name']}}
-                                                        :{{$v['name']}}</span>
-                                                @endif
+                                        <div class="typeList">
+                                            @foreach($category as $key=>$value)
+                                                @foreach($value['child'] as $v)
+                                                    @if($key == 0 && $v['id'] == $item->category['type'])
+                                                        <span class="des_span des_span01">{{$value['name']}}
+                                                            :{{$v['name']}}</span>
+                                                    @elseif($key == 1 && $v['id'] == $item->category['time'])
+                                                        <span class="des_span des_span02">{{$value['name']}}
+                                                            :{{$v['name']}}</span>
+                                                    @elseif($key == 2 && $v['id'] == $item->category['season'])
+                                                        <span class="des_span des_span03">{{$value['name']}}
+                                                            :{{$v['name']}}</span>
+                                                    @endif
+                                                @endforeach
                                             @endforeach
-                                        @endforeach
+                                        </div>
                                     </div>
                                     @foreach($item->distribution as $distribution)
                                         <div class="ticket-desc m-orderList">
@@ -85,4 +87,5 @@
             </div>
         </div>
     </div>
+    @include('user.footer')
 @endsection

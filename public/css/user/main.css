@@ -99,6 +99,24 @@ ul {
     padding-right: 5px;
 }
 
+/* 底部 bottom */
+.dm-bottom-wrap {
+    border-top: 1px solid #e5e5e5;
+    background: #fafafa;
+    margin-top: 20px;
+    width: 100%;
+}
+.dm-bottom {
+    width: 1000px;
+    margin: 0 auto;
+    overflow: hidden;
+}
+.dm-bottom .dm-copyright {
+    color: #666;
+    line-height: 55px;
+    text-align: center;
+}
+
 /*用户栏*/
 .userInfo_box {
     background: url(//dui.damai.cn/damai_v2/passport/images/userbg1.png) repeat-x #fff;
@@ -331,6 +349,7 @@ thead {
 .scenic-list .media {
     border: 1px solid #efefef;
     padding: 10px;
+    margin-top: 15px;
 }
 
 .scenic-list .media:hover {
@@ -633,7 +652,7 @@ thead {
     font-weight: 700;
 }
 
-.tab-myfoot .title li{
+.tab-myfoot .title li {
     background: url(//dui.damai.cn/damai_v2/passport/images/b.png) no-repeat scroll -139px -122px;
     display: block;
     line-height: 29px;
@@ -651,6 +670,7 @@ thead {
     padding: 25px 40px;
     color: #666;
 }
+
 .per-edit-list .per-edit-msg {
     background: #fffdee;
     border: 1px solid #edd28b;
@@ -734,19 +754,23 @@ thead {
     cursor: pointer;
     color: #fff;
 }
-.photoChange{
+
+.photoChange {
     padding: 25px 40px;
     position: relative;
 }
-.photoChange .btnSure{
+
+.photoChange .btnSure {
     position: absolute;
     border: none;
     right: 20%;
     bottom: 6.5%;
 }
-#divContentBox>div{
+
+#divContentBox > div {
     display: none;
 }
+
 /* 绑定手机  修改密码 页面*/
 .popup-address {
     padding: 30px 0 0 85px;
@@ -1003,10 +1027,14 @@ thead {
     background-color: #fff;
 }
 
-.distribution .media:hover .scenic-content {
-
+.distribution .media .media-body {
+    position: relative;
 }
 
+.distribution .media .media-body .typeList{
+    position: absolute;
+    bottom: 0;
+}
 .distribution .imgTitle {
     width: 300px;
 }
@@ -1076,7 +1104,7 @@ thead {
 }
 
 /* 提示信息 */
-.warningTips{
+.warningTips {
     margin-left: 10px;
     color: red;
 
