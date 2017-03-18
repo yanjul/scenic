@@ -1,7 +1,7 @@
 @extends('layouts.app')
 
 @section('content')
-    <div class="container">
+    <div class="container" style="min-height: 830px;">
         <div class="row">
             @include('user.menu')
             <div class="col-md-9">
@@ -147,9 +147,9 @@
                             </li>
                         </ul>
                     </form>
-                    </form>
                 </div>
             </div>
         </div>
     </div>
+    @include('user.footer')
 @endsection
