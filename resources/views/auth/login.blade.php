@@ -73,9 +73,7 @@
                     <div class="row">
                     </div>
                     <div class="col m5 push-m3">
-                        <button type="button" class="waves-effect waves-light btn" content="">
-                            <a class=" right" href="{{ route('password.request') }}" style="color: white">忘记密码？</a>
-                        </button>
+                            <a  class="waves-effect waves-light btn right" href="{{ route('password.request') }}" style="color: white">忘记密码？</a>
                     </div>
 
                     <div class="col m4 push-m3 ">

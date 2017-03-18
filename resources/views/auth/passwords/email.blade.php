@@ -45,7 +45,7 @@
                             </div>
                         </div>
 
-                        <div class="">
+                        <div class="row">
                             <div class="col m4 push-m5">
                                 <button type="submit" class="btn btn-primary">
                                     输入邮箱获取重置密码链接

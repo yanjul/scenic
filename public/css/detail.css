@@ -115,6 +115,7 @@
     display: flex;
     line-height: 30px;
     padding: 0 5px;
+
 }
 .or_menpiao,.or_xianjia,.or_kuang,.or_yuanjia{
     text-overflow:ellipsis;
@@ -166,3 +167,6 @@
     border-color: #ccc;
 }
 /*# sourceMappingURL=detail.css.map */
+.orange{
+     background: black;
+}

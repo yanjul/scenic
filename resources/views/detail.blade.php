@@ -27,7 +27,7 @@
                         <input type="hidden" name="scenic_id" value="{{$scenic->id}}">
                         @foreach($scenic->ticket as $key=>$ticket)
                             <div id="sale_menu">
-                                <div class="or_menu">
+                                <div class="or_menu" id="or22">
                                     <div class="or_menpiao clearfix">
                                         门票：<span style="color:limegreen">{{$ticket->name}}</span>
                                     </div>
@@ -35,7 +35,7 @@
                                                 style="color: #2e6da4">{{$ticket->now_price}}</span></div>
                                     <div class="or_yuanjia">
                                         @if($ticket->price != $ticket->now_price)
-                                            原价：{{$ticket->price}}
+                                           <del> 原价：{{$ticket->price}}</del>
                                         @endif
                                     </div>
                                     <div class="or_kuang">
@@ -48,8 +48,10 @@
                                         </div>
                                         <input type="checkbox" name="ticket_id[]" value="{{$ticket->id}}"
                                                id="checkbox-1" class="checkbox ">
+
                                         @section('js')
                                             <script>
+
                                                 function minus(ind) {
                                                     var index = ind;
                                                     var id = 'num' + index;
@@ -116,4 +118,5 @@
     <div class="index_footer">
         &copy;2017&nbsp;FootPrint&nbsp;脚印
     </div>
+
 @endsection
