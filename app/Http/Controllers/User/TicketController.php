@@ -158,13 +158,21 @@ class TicketController extends Controller
         return redirect()->back();
     }
 
+    /**
+     * 上架下架
+     * @param Request $request
+     * @return \Illuminate\Http\RedirectResponse
+     */
     public function changeStatus(Request $request){
         $this->validate($request, [
             'id'=> 'required',
             'status'=> 'required'
         ]);
         $data = $request->input();
-        Ticket::where('id', $data['id'])->update(['status'=> $data['status']]);
+        $ticket = Ticket::find($data['id']);
+        if($ticket && $ticket->status != 2) {
+            Ticket::where('id', $data['id'])->update(['status'=> $data['status']]);
+        }
         return redirect()->back();
     }
 

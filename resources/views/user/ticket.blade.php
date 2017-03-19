@@ -54,8 +54,10 @@
                                             <a href="{{url('user/del-ticket/'.$ticket['id'])}}" class="btn btn-sm btn-danger">删除门票</a>
                                             @if($ticket['status'])
                                                 <a href="/user/ticket/status?id={{$ticket['id']}}&status=0" class="btn btn-danger">下架</a>
-                                            @else
+                                            @elseif($item['status'] == 0)
                                                 <a href="/user/ticket/status?id={{$ticket['id']}}&status=1" class="btn btn-success">上架</a>
+                                            @else
+                                                <a href="javascript:" title="已被强制下架" disabled class="btn btn-danger">上架</a>
                                             @endif
                                         </div>
                                     </div>

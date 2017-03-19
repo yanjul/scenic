@@ -8,6 +8,8 @@
     <!--商品详情内容-->
     <div class="detail_content">
         <form action="/order/pay/{{$order->sn}}" method="post" onsubmit="return queren()">
+            <input type="hidden" name="id" value="{{$order->id}}">
+            <input type="hidden" name="order_type" value="{{$order->order_type}}">
             <table class="table table1 table-condensed table-bordered">
                 <tr>
                     <td>订单号</td>
@@ -54,15 +56,17 @@
                     <td>价格</td>
                     <td>{{$order->pay_price}}</td>
                 </tr>
+                @if($order->order_type == 1)
                 <tr>
-                    <td><input type="hidden" name="id" value="{{$order->id}}"><label>入园时间</label></td>
+                    <td><label>入园时间</label></td>
                     <td>
-                        <input type="date" name="admission_time">
+                        <input type="date" name="admission_time" value="{{ old('admission_time') }}">
                         @if($errors->has('admission_time'))
                             <div style="color: brown">请您选择正确的入园时间</div>
                         @endif
                     </td>
                 </tr>
+                @endif
                 <tr>
                     <td>支付方式</td>
                     <td>
@@ -81,7 +85,7 @@
                 <tr>
                     <td>支付账号</td>
                     <td>
-                        <input type="tel" name="pay_account">
+                        <input type="tel" name="pay_account"  value="{{ old('pay_account') }}">
                         @if($errors->has('pay_account'))
                             <div style="color: brown">请您输入支付账号</div>
                         @endif
@@ -90,7 +94,7 @@
                 <tr>
                     <td>备注</td>
                     <td>
-                        <textarea name="remark"></textarea>
+                        <textarea name="remark">{{ old('remark') }}</textarea>
                     </td>
                 </tr>
                 <tr>

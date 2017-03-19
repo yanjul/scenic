@@ -48,10 +48,12 @@
                                             <a href="{{url('user/add-scenic/'.$item['id'])}}"
                                                class="btn btn-info btn-sm btn-3">修改景区</a>
                                             <a href="{{url('user/del-scenic/'.$item['id'])}}" class="btn btn-danger btn-sm">删除景区</a>
-                                            @if($item['status'])
+                                            @if($item['status'] == 1)
                                                 <a href="/user/scenic/status?id={{$item['id']}}&status=0" class="btn btn-danger btn-sm">下架</a>
-                                            @else
+                                            @elseif($item['status'] == 0)
                                                 <a href="/user/scenic/status?id={{$item['id']}}&status=1" class="btn btn-success btn-sm">上架</a>
+                                            @else
+                                                <a href="javascript:" title="已被强制下架" disabled class="btn btn-danger btn-sm">上架</a>
                                             @endif
                                         </p>
                                     </div>
