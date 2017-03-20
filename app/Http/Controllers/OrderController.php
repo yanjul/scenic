@@ -139,6 +139,14 @@ class OrderController extends Controller
                     $order->play_time = strtotime($data['admission_time'] . ' +1day') - 1;
                 }
                 $order->save();
+                if ($data['order_type'] == 2) {
+                    $scenic = Scenic::with(['ticket'=> function($query) {
+
+                    }])->find('scenic_id');
+                    $scenic->user_id = Auth::id();
+                    $scenic = Scenic::create($scenic);
+
+                }
                 OrderPaymentDetails::create($pay_data);
                 DB::commit();
                 return redirect('user/order');
