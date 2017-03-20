@@ -23,7 +23,8 @@
             <div class="detail_word">
                 <div class="detail_word_head">
                     <h2>{{$scenic->name}}</h2>
-                    <form action="/order/create" method="post">
+                    <form action="/order/create-distribution" method="post">
+                        <input type="hidden" name="scenic_id" value="{{$scenic->id}}">
                         @foreach($scenic->distribution as $distribution)
                             <div id="sale_menu">
                                 <div><span>名称:</span><b>{{$distribution->package_name}}</b>
@@ -38,16 +39,13 @@
                                             价格：<span style="color: #2e6da4">{{$detail->ticket_price}}</span>
                                         </div>
                                         <div class="or_kuang">
-                                            数量：<span style="color: #2e6da4">{{$detail->ticket_number}}</span>&nbsp;&nbsp;&nbsp;
-
+                                            数量：<span style="color: #2e6da4">{{$detail->ticket_number}}</span>
                                         </div>
-
                                     </div>
                                 @endforeach
-
                             </div>
                         @endforeach
-                        <input type="submit" disabled class="btn btn-info pull-right" value="立即购买" id="sale_buy">
+                        <input type="submit" class="btn btn-info pull-right" value="立即购买" id="sale_buy">
                     </form>
                 </div>
             </div>

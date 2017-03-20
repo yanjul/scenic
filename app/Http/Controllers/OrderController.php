@@ -2,6 +2,7 @@
 
 namespace App\Http\Controllers;
 
+use App\Models\Distribution;
 use App\Models\OrderInfo;
 use App\Models\OrderDetails;
 use App\Models\OrderPaymentDetails;
@@ -52,6 +53,46 @@ class OrderController extends Controller
     }
 
     /**
+     * 创建景区分销订单
+     * @param Request $request
+     * @return \Illuminate\Http\RedirectResponse|\Illuminate\Routing\Redirector
+     */
+    function createDistribution(Request $request){
+        $this->validate($request, [
+            'distribution_id'=> 'required',
+            'scenic_id'=> 'required'
+        ]);
+        $distribution = Distribution::with(['detail', 'scenic'])->where([
+            'scenic_id'=> $request->input('scenic_id')
+        ])->find($request->input('distribution_id'));
+        if($distribution) {
+            $data['scenic_id'] = $request->input('scenic_id');
+            foreach ($distribution->detail as $key=>$value) {
+                $data['ticket_id'][] = $value->ticket_id;
+                $data['ticket_number'][] = $value->ticket_number;
+            }
+            $orderService = new OrderService();
+            $order_data = $orderService->getInitOrderData($data);
+            if ($order_data) {
+                try {
+                    DB::beginTransaction();
+                    $order_data['info']['order_type'] = 2;
+                    $orderInfo = OrderInfo::create($order_data['info']);
+                    foreach ($order_data['detail'] as $value) {
+                        OrderDetails::create(array_merge($value, ['order_id' => $orderInfo->id]));
+                    }
+                    DB::commit();
+                    return redirect('order/pay/' . $orderInfo->sn);
+                } catch (\Exception $exception) {
+                    DB::rollBack();
+                    return redirect()->back();
+                }
+            }
+        }
+        return redirect()->back();
+    }
+
+    /**
      * 支付
      * @param $sn
      * @param Request $request
@@ -65,13 +106,14 @@ class OrderController extends Controller
         }
         $this->validate($request, [
             'id' => 'required',
-            'admission_time' => 'required|date|after:now',
+            'order_type' => 'required',
+            'admission_time' => 'required_unless:order_type,2|date|after:now',
             'pay_type' => 'required',
             'pay_mode' => 'required',
             'pay_account' => 'required',
         ]);
         $data = $request->input();
-        $time = time();
+        $time = time() + 8 + 3600;
         $order = OrderInfo::with('payment')->where(['sn' => $sn, 'id' => $data['id']])->first();
         if ($order && $order->order_status == 1 && $order->pay_status == 0 && !$order->payment) {
             $pay_data = [
@@ -93,7 +135,9 @@ class OrderController extends Controller
                 if ($request->has('remark')) {
                     $order->remark = $request->input('remark');
                 }
-                $order->play_time = strtotime($data['admission_time'] . ' +1day') - 1;
+                if(isset($data['admission_time'])) {
+                    $order->play_time = strtotime($data['admission_time'] . ' +1day') - 1;
+                }
                 $order->save();
                 OrderPaymentDetails::create($pay_data);
                 DB::commit();

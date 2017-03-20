@@ -136,6 +136,11 @@ class ScenicController extends Controller
         return redirect('user/scenic');
     }
 
+    /**
+     * 上架下架
+     * @param Request $request
+     * @return \Illuminate\Http\RedirectResponse
+     */
     public function changeStatus(Request $request)
     {
         $this->validate($request, [
@@ -143,10 +148,17 @@ class ScenicController extends Controller
             'status' => 'required'
         ]);
         $data = $request->input();
-        Scenic::where('id', $data['id'])->update(['status' => $data['status']]);
+        $scenic = Scenic::find($data['id']);
+        if($scenic && $scenic->status != 2) {
+            Scenic::where('id', $data['id'])->update(['status' => $data['status']]);
+        }
         return redirect()->back();
     }
 
+    /**
+     * 景区分销
+     * @return $this
+     */
     public function distribution()
     {
         $scenic = Scenic::with(['distribution' => function ($query) {
@@ -160,6 +172,11 @@ class ScenicController extends Controller
         return view('user.distribution')->with(['list' => $scenic, 'category' => $category]);
     }
 
+    /**
+     * 创建景区分销
+     * @param int $id
+     * @return $this
+     */
     public function distributionAdd($id = 0)
     {
         $list = Scenic::where('user_id', Auth::id())->get();
@@ -175,6 +192,11 @@ class ScenicController extends Controller
         return view('user.add-distribution')->with($data);
     }
 
+    /**
+     * 创建景区分销
+     * @param Request $request
+     * @return \Illuminate\Http\RedirectResponse|\Illuminate\Routing\Redirector
+     */
     public function createDistribution(Request $request)
     {
         $this->validate($request, [
@@ -223,6 +245,11 @@ class ScenicController extends Controller
         }
     }
 
+    /**
+     * 删除景区分销
+     * @param int $id
+     * @return \Illuminate\Http\RedirectResponse
+     */
     public function deleteDistribution($id = 0)
     {
         if (!$id) {
