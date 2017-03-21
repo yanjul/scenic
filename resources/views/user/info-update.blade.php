@@ -12,14 +12,8 @@
                 </div>
                 <div class="tab-myfoot">
                     <ul class="title">
-                        <li>
-                            <a href="" class="on">基本资料</a>
-                        </li>
-                        <li>
-                            <a href="">头像设置</a>
-                        </li>
-                        <li>
-                            <a href="">兴趣爱好</a>
+                        <li class="on">
+                           基本资料
                         </li>
                     </ul>
                     <div class="c-n box01">
