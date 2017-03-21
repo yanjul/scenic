@@ -6,6 +6,7 @@ use App\Models\Distribution;
 use App\Models\OrderInfo;
 use App\Models\OrderDetails;
 use App\Models\OrderPaymentDetails;
+use App\Models\Ticket;
 use Illuminate\Support\Facades\Auth;
 use App\Models\Scenic;
 use App\Services\OrderService;
@@ -69,6 +70,7 @@ class OrderController extends Controller
             $data['scenic_id'] = $request->input('scenic_id');
             foreach ($distribution->detail as $key=>$value) {
                 $data['ticket_id'][] = $value->ticket_id;
+                $data['ticket_name'][] = $value->ticket_name;
                 $data['ticket_number'][] = $value->ticket_number;
             }
             $orderService = new OrderService();
@@ -126,7 +128,6 @@ class OrderController extends Controller
                 'pay_at' => $time,
                 'debit_note' => $time . rand(1000, 9999)
             ];
-
             try {
                 DB::beginTransaction();
                 $order->paid_price = $order->pay_price;
@@ -140,12 +141,17 @@ class OrderController extends Controller
                 }
                 $order->save();
                 if ($data['order_type'] == 2) {
-                    $scenic = Scenic::with(['ticket'=> function($query) {
-
-                    }])->find('scenic_id');
+                    $scenic = Scenic::find($order->scenic_id);
                     $scenic->user_id = Auth::id();
-                    $scenic = Scenic::create($scenic);
-
+                    $scenic = Scenic::create($scenic->toArray());
+                    $orderDetail = OrderDetails::with('ticket')->where('order_id', $pay_data['order_id'])->get();
+                    foreach ($orderDetail as $value) {
+                        $value->ticket->scenic_id = $scenic->id;
+                        $value->ticket->ticket_name = $value->ticket_name;
+                        $value->ticket->ticket_price = $value->ticket_price;
+                        $value->ticket->ticket_number = $value->ticket_number;
+                        Ticket::create($value->ticket->toArray());
+                    }
                 }
                 OrderPaymentDetails::create($pay_data);
                 DB::commit();

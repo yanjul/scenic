@@ -12,6 +12,7 @@ class OrderDetails extends Model {
         'order_sn',
         'scenic_id',
         'scenic_name',
+        'ticket_id',
         'ticket_name',
         'ticket_price',
         'ticket_numbers',
@@ -23,5 +24,8 @@ class OrderDetails extends Model {
         'state',
     ];
 
+    public function ticket(){
+        return $this->belongsTo('App\Models\Ticket', 'ticket_id', 'id');
+    }
 
 }

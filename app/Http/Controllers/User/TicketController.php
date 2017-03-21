@@ -132,18 +132,23 @@ class TicketController extends Controller
             'last_time' => 'required|between:0,24'
         ]);
         $input = $request->input();
-        foreach ($input['custom_price'] as $key => $value) {
-            if ($value && ($input['start_time'][$key] || $input['end_time'][$key])) {
-                $data['custom_price'][] = [
-                    'start_time' => $input['start_time'][$key] ? strtotime($input['start_time'][$key]) : strtotime($input['end_time'][$key]),
-                    'end_time' => $input['end_time'][$key] ? strtotime($input['end_time'][$key] . '+1 day') : strtotime($input['start_time'][$key] . '+1 days'),
-                    'price' => $value
-                ];
+        $scenic = Scenic::find($input['scenic_id']);
+        if ($scenic) {
+            $input['scenic_name'] = $scenic->name;
+            foreach ($input['custom_price'] as $key => $value) {
+                if ($value && ($input['start_time'][$key] || $input['end_time'][$key])) {
+                    $data['custom_price'][] = [
+                        'start_time' => $input['start_time'][$key] ? strtotime($input['start_time'][$key]) : strtotime($input['end_time'][$key]),
+                        'end_time' => $input['end_time'][$key] ? strtotime($input['end_time'][$key] . '+1 day') : strtotime($input['start_time'][$key] . '+1 days'),
+                        'price' => $value
+                    ];
+                }
             }
+            $input['custom_price'] = isset($data) ? $data['custom_price'] : [];
+            Ticket::create($input);
+            return redirect('user/scenic');
         }
-        $input['custom_price'] = isset($data) ? $data['custom_price'] : [];
-        Ticket::create($input);
-        return redirect('user/scenic');
+        return redirect()->back();
     }
 
     /**删除门票

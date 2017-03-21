@@ -52,9 +52,9 @@
                                         <div class="edit-btns">
                                             <a href="{{url('user/scenic/ticket/'.$ticket['id'])}}" class="btn btn-sm btn-success">修改门票</a>
                                             <a href="{{url('user/del-ticket/'.$ticket['id'])}}" class="btn btn-sm btn-danger">删除门票</a>
-                                            @if($ticket['status'])
+                                            @if($ticket['status'] == 1)
                                                 <a href="/user/ticket/status?id={{$ticket['id']}}&status=0" class="btn btn-danger">下架</a>
-                                            @elseif($item['status'] == 0)
+                                            @elseif($ticket['status'] == 0)
                                                 <a href="/user/ticket/status?id={{$ticket['id']}}&status=1" class="btn btn-success">上架</a>
                                             @else
                                                 <a href="javascript:" title="已被强制下架" disabled class="btn btn-danger">上架</a>

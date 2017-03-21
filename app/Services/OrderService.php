@@ -54,15 +54,18 @@ class OrderService{
         $order_detail = [];
         foreach ($data['ticket_id'] as $key=>$value){
             $ticket = Ticket::find($value);
-            $order_detail[$key]['scenic_id'] = $scenic->id;
-            $order_detail[$key]['scenic_name'] = $scenic->name;
-            $order_detail[$key]['ticket_name'] = $ticket->name;
-            $order_detail[$key]['ticket_price'] = TicketService::getPrice($ticket);
-            $order_detail[$key]['ticket_numbers'] = $data['ticket_number'][$key];
-            $order_detail[$key]['ticket_amount'] = $order_detail[$key]['ticket_price'] * $order_detail[$key]['ticket_numbers'];
-            $order_detail[$key]['valid_time'] = $ticket->valid_time;
-            $order_detail[$key]['lead_time'] = $ticket->lead_time;
-            $order_detail[$key]['last_time'] = $ticket->last_time;
+            if($ticket) {
+                $order_detail[$key]['scenic_id'] = $scenic->id;
+                $order_detail[$key]['scenic_name'] = $scenic->name;
+                $order_detail[$key]['ticket_id'] = $ticket->id;
+                $order_detail[$key]['ticket_name'] = $ticket->name;
+                $order_detail[$key]['ticket_price'] = TicketService::getPrice($ticket);
+                $order_detail[$key]['ticket_numbers'] = $data['ticket_number'][$key];
+                $order_detail[$key]['ticket_amount'] = $order_detail[$key]['ticket_price'] * $order_detail[$key]['ticket_numbers'];
+                $order_detail[$key]['valid_time'] = $ticket->valid_time;
+                $order_detail[$key]['lead_time'] = $ticket->lead_time;
+                $order_detail[$key]['last_time'] = $ticket->last_time;
+            }
         }
         return $order_detail;
     }

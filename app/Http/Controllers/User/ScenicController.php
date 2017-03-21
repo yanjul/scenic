@@ -103,7 +103,7 @@ class ScenicController extends Controller
         return redirect('user/scenic');
     }
 
-    /**添加景区
+    /**修改景区
      * @param Request $request
      * @return \Illuminate\Http\RedirectResponse|\Illuminate\Routing\Redirector
      */
@@ -132,6 +132,9 @@ class ScenicController extends Controller
                 'season' => $data['category'][2]
             ];
             $scenic->save();
+            Ticket::where('scenic_id', $data['id'])->update([
+                'scenic_name'=> $data['name']
+            ]);
         }
         return redirect('user/scenic');
     }
