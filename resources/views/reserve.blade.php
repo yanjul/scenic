@@ -7,17 +7,13 @@
 @section('content')
     <!--商品详情内容-->
     <div class="detail_content">
-        <form action="/order/pay/{{$order->sn}}" method="post" onsubmit="return queren()">
-            <input type="hidden" name="id" value="{{$order->id}}">
-            <input type="hidden" name="order_type" value="{{$order->order_type}}">
+        <form action="/order/create-reserve" method="post">
             <table class="table table1 table-condensed table-bordered">
                 <tr>
-                    <td>订单号</td>
-                    <td>{{$order->sn}}</td>
-                </tr>
-                <tr>
                     <td>景区名字</td>
-                    <td>{{$order->scenic_name}}</td>
+                    <td>{{$data['info']['scenic_name']}}
+                        <input type="hidden" name="scenic_id" value="{{$data['info']['scenic_id']}}">
+                    </td>
                 </tr>
                 <tr>
                     <td>门票信息</td>
@@ -29,65 +25,39 @@
                                 <td style="color: darkcyan">门票数量</td>
                                 <td style="color: darkcyan">门票有效时间</td>
                             </tr>
-                            @foreach($order->detail as $detail)
+                            @foreach($data['detail'] as $detail)
                                 <tr>
-                                    <td style="color: orange;">{{$detail->ticket_name}}</td>
-                                    <td style="color: orange;">{{$detail->ticket_price}}</td>
-                                    <td style="color: orange;">{{$detail->ticket_numbers}}</td>
-                                    <td style="color: orange;">{{$detail->valid_time}}</td>
+                                    <td style="color: orange;">{{$detail['ticket_name']}}
+                                        <input type="hidden" name="ticket_id[]" value="{{$detail['ticket_id']}}">
+                                    </td>
+                                    <td style="color: orange;">{{$detail['ticket_price']}}元</td>
+                                    <td style="color: orange;">{{$detail['ticket_numbers']}}
+                                        <input type="hidden" name="ticket_number[]" value="{{$detail['ticket_numbers']}}">
+                                    </td>
+                                    <td style="color: orange;">{{$detail['valid_time']}}</td>
                                 </tr>
                             @endforeach
                         </table>
                     </td>
                 </tr>
-
-                <tr>
-
-                </tr>
                 <tr>
                     <td>游客姓名</td>
-                    <td>{{$order->tourist_name}}</td>
+                    <td>{{$data['info']['tourist_name']}}</td>
                 </tr>
                 <tr>
                     <td>手机号</td>
-                    <td>{{$order->mobile}}</td>
+                    <td>{{$data['info']['mobile']}}</td>
                 </tr>
                 <tr>
                     <td>价格</td>
-                    <td>{{$order->pay_price}}</td>
+                    <td>{{$data['info']['pay_price']}}</td>
                 </tr>
-                @if($order->order_type == 1)
                 <tr>
                     <td><label>入园时间</label></td>
                     <td>
                         <input type="date" name="admission_time" value="{{ old('admission_time') }}">
                         @if($errors->has('admission_time'))
                             <div style="color: brown">请您选择正确的入园时间</div>
-                        @endif
-                    </td>
-                </tr>
-                @endif
-                <tr>
-                    <td>支付方式</td>
-                    <td>
-                        <input type="radio" name="pay_type" value="1" checked>线上支付
-                        <input type="radio" name="pay_type" value="2">受信支付
-                    </td>
-                </tr>
-                <tr>
-                    <td>支付途径</td>
-                    <td>
-                        <input type="radio" name="pay_mode" value="1" checked>支付宝
-                        <input type="radio" name="pay_mode" value="2">微信
-                        <input type="radio" name="pay_mode" value="3">银联
-                    </td>
-                </tr>
-                <tr>
-                    <td>支付账号</td>
-                    <td>
-                        <input type="tel" name="pay_account"  value="{{ old('pay_account') }}">
-                        @if($errors->has('pay_account'))
-                            <div style="color: brown">请您输入支付账号</div>
                         @endif
                     </td>
                 </tr>
@@ -100,20 +70,15 @@
                 <tr>
                     <td colspan="2">
 
-                        <button type ='submit' class="btn btn-success pull-right" data-toggle="modal" id="zhifu" data-target="#myModal">支付</button>
+                        <button type='submit' class="btn btn-success pull-right" data-toggle="modal" id="zhifu"
+                                data-target="#myModal">预定
+                        </button>
 
                     </td>
                 </tr>
             </table>
         </form>
     </div>
-@section('js')
-    <script>
-            function queren() {
-                return confirm("确定支付吗？");
-            }
-    </script>
-@endsection
     <!--底部-->
     @include('user.footer')
 @endsection

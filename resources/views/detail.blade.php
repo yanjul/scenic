@@ -23,7 +23,7 @@
             <div class="detail_word">
                 <div class="detail_word_head">
                     <h2>{{$scenic->name}}</h2>
-                    <form action="/order/create" method="post">
+                    <form id="form" action="/order/create" method="post">
                         <input type="hidden" name="scenic_id" value="{{$scenic->id}}">
                         @foreach($scenic->ticket as $key=>$ticket)
                             <div id="sale_menu">
@@ -35,19 +35,18 @@
                                                 style="color: #2e6da4">{{$ticket->now_price}}</span></div>
                                     <div class="or_yuanjia">
                                         @if($ticket->price != $ticket->now_price)
-                                           <del> 原价：{{$ticket->price}}</del>
+                                            <del> 原价：{{$ticket->price}}</del>
                                         @endif
                                     </div>
                                     <div class="or_kuang">
                                         <div class="math">
                                             <span class="minus" onclick="minus( {{$key}} )">-</span>
-                                            <!-- <input type="number" class="num" name="ticket_number[]" min="1" value="1"  style="width: 50px;margin-left: 40px">-->
-                                            <span class="input_num"><input name="ticket_number[]" id="num{{$key}}"
-                                                                           type="text" value="1" readonly/></span>
+                                            <span class="input_num">
+                                                <input id="num{{$key}}" type="text" value="1" readonly/>
+                                            </span>
                                             <span class="add" onclick="add( {{$key}} )">+</span>
                                         </div>
-                                        <input type="checkbox" name="ticket_id[]" value="{{$ticket->id}}"
-                                               id="checkbox-1" class="checkbox ">
+                                        <input type="checkbox" onchange="check(this.parentNode)" name="ticket_id[]" value="{{$ticket->id}}" id="checkbox-1" class="checkbox ">
                                         @section('js')
                                             <script>
                                                 function minus(ind) {
@@ -62,6 +61,23 @@
                                                     var index = ind;
                                                     var id = 'num' + index;
                                                     document.getElementById(id).value++;
+                                                }
+                                                function check(el) {
+                                                   var input = $(el).find('input[type="text"]').eq(0);
+                                                   if(input.attr('name')) {
+                                                       input.attr('name', '')
+                                                   } else {
+                                                       input.attr('name', 'ticket_number[]')
+                                                   }
+                                                }
+                                                function _submit(_this) {
+                                                    var form = document.querySelector('#form');
+                                                    if (parseInt($(_this).attr('action'))) {
+                                                        form.setAttribute('action', '/order/create')
+                                                    } else {
+                                                        form.setAttribute('action', '/order/reserve')
+                                                    }
+                                                    form.submit();
                                                 }
                                             </script>
                                         @endsection
@@ -84,7 +100,10 @@
                             </div>
                             <br>
                         @endforeach
-                        <input type="submit" class="btn btn-info pull-right" value="立即购买" id="sale_buy">
+                        <button action="0" onclick="_submit(this)" type="button" class="btn btn-info pull-right">预定
+                        </button>
+                        <button action="1" onclick="_submit(this)" type="button" class="btn btn-info pull-right">立即购买
+                        </button>
                     </form>
                 </div>
             </div>

@@ -33,6 +33,11 @@
                 </a>
             </dd>
             <dd>
+                <a href="/user/reserve">
+                    <span>预定订单</span>
+                </a>
+            </dd>
+            <dd>
                 <a href="/user/payment">
                     <span>交易记录</span>
                 </a>

@@ -28,16 +28,13 @@
                                 <a href="/order/cancel?sn={{$order->sn}}" class="btn">取消退款</a>
                             @elseif($order->order_status == 2 && $order->pay_status == 3)
                                 <span class="highlight">退款完成</span>
-                                {{--<a href="#" class="btn">去支付</a>--}}
                             @elseif($order->order_status == 3 && $order->pay_status == 1 && !$order->admission_time)
                                 <span class="highlight">待入园</span>
                                 <a href="/order/refunds?sn={{$order->sn}}" class="btn">申请退款</a>
                             @elseif($order->order_status == 3 && $order->pay_status == 1 && $order->admission_time)
                                 <span class="highlight">已入园(订单完成)</span>
-                                {{--<a href="#" class="btn">去支付</a>--}}
                             @elseif($order->order_status == 4 && $order->pay_status == 0)
                                 <span class="highlight">交易取消</span>
-                                {{--<a href="#" class="btn">去支付</a>--}}
                             @else
                                 <span>***bug***{{$order->order_status}}***{{$order->pay_status}}***</span>
                             @endif
@@ -45,9 +42,15 @@
                     </dl>
                     <dl class="info">
                         <dt>订单信息</dt>
-                        <dd>
-                            <span>订单编号：{{$order->sn}}</span>
-                            <span>创建时间：{{$order->created_at}}</span>
+                        <dd class="row">
+                            <span class="col-md-4">订单编号：{{$order->sn}}</span>
+                            <span class="col-md-4">创建时间：{{date('Y-m-d H:i:s', strtotime($order->created_at.' +8hours'))}}</span>
+                            @if($order->admission_time)
+                                <span class="col-md-4">入园时间：{{date('Y-m-d', $order->admission_time)}}</span>
+                            @endif
+                        </dd>
+                        <dd class="title">
+                            <span>订单类型：{{$order->order_type == 2? '分销订单':($order->order_type == 3? '预定订单': '普通订单')}}</span>
                         </dd>
                         <dd class="title">
                             <a href="/scenic/{{$order->scenic_id}}">{{$order->scenic_name}}</a>
@@ -103,6 +106,12 @@
                         <dd>
                             <span class="s0">供应商：{{$supplier->user->name}}</span>
                             <span class="s0">联系电话：{{$supplier->user->telephone}}</span>
+                        </dd>
+                    </dl>
+                    <dl class="supplier">
+                        <dt>备注：</dt>
+                        <dd>
+                            <span>{{$order->remark}}</span>
                         </dd>
                     </dl>
                 </div>

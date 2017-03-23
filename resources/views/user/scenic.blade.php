@@ -12,7 +12,10 @@
                 </div>
                 @if(count($list))
                     @foreach($list as $item)
-                        <div class="scenic-list scenicShow">
+                        <div class="scenic-list scenicShow" style="position: relative">
+                            @if($item['status'] == 3)
+                                <div style="position: absolute; left: 0; right: 0; top: 0; bottom: 0; z-index: 10; background-color: rgba(220, 220, 220, .4)"></div>
+                            @endif
                             <div class="media">
                                 <div class="media-left">
                                     <a href="#" class="imgBox">
@@ -44,16 +47,22 @@
                                         <p class="edit-btn">
                                             <a href="{{url('user/scenic/'.$item['id'])}}"
                                                class="btn btn-primary btn-sm">查看门票</a>
-                                            <a href="{{url('user/add-ticket/'.$item['id'])}}" class="btn btn-success btn-sm">添加门票</a>
-                                            <a href="{{url('user/add-scenic/'.$item['id'])}}"
+                                            <a href="{{!$item['parent_id']? '/user/add-ticket/'.$item['id']: 'javascript:'}}"
+                                               {{!$item['parent_id']? '': 'disabled'}} class="btn btn-success btn-sm">添加门票</a>
+                                            <a href="{{!$item['parent_id']? '/user/add-scenic/'.$item['id']:'javascript:'}}"
+                                               {{!$item['parent_id']? '': 'disabled'}}
                                                class="btn btn-info btn-sm btn-3">修改景区</a>
-                                            <a href="{{url('user/del-scenic/'.$item['id'])}}" class="btn btn-danger btn-sm">删除景区</a>
+                                            <a href="{{!$item['parent_id']? '/user/del-scenic/'.$item['id']:'javascript:'}}"
+                                               {{!$item['parent_id']? '': 'disabled'}} class="btn btn-danger btn-sm">删除景区</a>
                                             @if($item['status'] == 1)
-                                                <a href="/user/scenic/status?id={{$item['id']}}&status=0" class="btn btn-danger btn-sm">下架</a>
+                                                <a href="/user/scenic/status?id={{$item['id']}}&status=0"
+                                                   class="btn btn-danger btn-sm">下架</a>
                                             @elseif($item['status'] == 0)
-                                                <a href="/user/scenic/status?id={{$item['id']}}&status=1" class="btn btn-success btn-sm">上架</a>
+                                                <a href="/user/scenic/status?id={{$item['id']}}&status=1"
+                                                   class="btn btn-success btn-sm">上架</a>
                                             @else
-                                                <a href="javascript:" title="已被强制下架" disabled class="btn btn-danger btn-sm">上架</a>
+                                                <a href="javascript:" title="已被强制下架" disabled
+                                                   class="btn btn-danger btn-sm">上架</a>
                                             @endif
                                         </p>
                                     </div>

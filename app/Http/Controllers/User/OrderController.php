@@ -28,4 +28,10 @@ class OrderController extends Controller
         return view('user.payment')->with('order', $order);
     }
 
+    public function getReserve(){
+        $user_id = Auth::id();
+        $order = OrderInfo::with(['detail'])->where(['user_id'=> $user_id,  'order_type'=> 3])->get();
+        return view('user.reserve')->with('order', $order);
+    }
+
 }

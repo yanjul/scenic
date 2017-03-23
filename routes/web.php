@@ -72,6 +72,7 @@ Route::group(['prefix' => 'user', 'middleware' => 'auth', 'namespace' => 'User']
 
     Route::get('/order', 'OrderController@getOrder');
     Route::get('/payment', 'OrderController@getPayment');
+    Route::get('/reserve', 'OrderController@getReserve');
 
 });
 
@@ -82,7 +83,8 @@ Route::group(['prefix' => 'order', 'middleware' => 'auth'], function () {
     Route::get('/detail/{sn}', 'OrderController@detail')->where('sn', '^[0-9]+$');;
     Route::get('/cancel', 'OrderController@cancel');
     Route::get('/refunds', 'OrderController@refunds');
-    Route::post('/reserve', 'OrderController@reserve');
+    Route::any('/reserve', 'OrderController@reserve');
+    Route::post('/create-reserve', 'OrderController@createReserve');
 });
 
 Route::get('/test', function (){

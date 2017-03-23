@@ -8,7 +8,7 @@ use App\Models\Ticket;
 use App\Models\OrderDetails;
 use Illuminate\Support\Facades\Auth;
 use Illuminate\Support\Facades\URL;
-use Log;
+
 class ScenicService
 {
 

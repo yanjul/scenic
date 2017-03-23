@@ -6,7 +6,6 @@ use App\Models\Distribution;
 use App\Models\OrderInfo;
 use App\Models\OrderDetails;
 use App\Models\OrderPaymentDetails;
-use App\Models\Ticket;
 use App\Models\UserInfo;
 use Illuminate\Support\Facades\Auth;
 use App\Models\Scenic;
@@ -15,6 +14,7 @@ use App\Services\ScenicService;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\DB;
 use Illuminate\Support\Facades\Session;
+
 
 class OrderController extends Controller
 {
@@ -141,7 +141,7 @@ class OrderController extends Controller
                     $order->remark = $request->input('remark');
                 }
                 if(isset($data['admission_time'])) {
-                    $order->play_time = strtotime($data['admission_time'] . ' +1day') - 1;
+                    $order->admission_time = strtotime($data['admission_time'] . ' +1day') - 1;
                 }
                 $order->save();
                 if ($data['order_type'] == 2) {
@@ -150,6 +150,9 @@ class OrderController extends Controller
                 }
                 OrderPaymentDetails::create($pay_data);
                 $user_info->money = $user_info->money - $order->pay_price;
+                $user_info->save();
+                $user_info = UserInfo::where('user_id', $order->distributor_id)->first();
+                $user_info->money = $user_info->money + $order->pay_price;
                 $user_info->save();
                 DB::commit();
                 return redirect('user/order');
@@ -162,15 +165,61 @@ class OrderController extends Controller
     }
 
     public function reserve(Request $request) {
+        if($request->isMethod('post')) {
+            $this->validate($request, [
+                'scenic_id' => 'required',
+                'ticket_id' => 'required|array',
+                'ticket_number' => 'required|array',
+            ]);
+            $data = $request->input();
+            $orderService = new OrderService();
+            $data = $orderService->getInitOrderData($data);
+            Session::put('reserve_data', $data);
+            return view('reserve')->with('data', $data);
+        } else {
+            if (Session::has('reserve_data')) {
+                return view('reserve')->with('data', Session::get('reserve_data'));
+            } else {
+                return redirect('/');
+            }
+        }
+
+    }
+
+    public function createReserve(Request $request) {
         $this->validate($request, [
             'scenic_id' => 'required',
             'ticket_id' => 'required|array',
             'ticket_number' => 'required|array',
+            'admission_time' => 'required|date|after:now',
         ]);
         $data = $request->input();
         $orderService = new OrderService();
         $order_data = $orderService->getInitOrderData($data);
-        return $order_data;
+        if ($order_data) {
+            try {
+                DB::beginTransaction();
+                Scenic::where('id', $data['scenic_id'])->update(['hot' => $order_data['scenic']['hot']]);
+                $order_data['info']['order_type'] = 3;
+                $order_data['info']['admission_time'] = strtotime($data['admission_time'] . ' +1day') - 1;
+                if(isset($data['remark'])) {
+                    $order_data['info']['remark'] = $data['remark'];
+                }
+
+                $orderInfo = OrderInfo::create($order_data['info']);
+                foreach ($order_data['detail'] as $value) {
+                    OrderDetails::create(array_merge($value, ['order_id' => $orderInfo->id]));
+                }
+                DB::commit();
+                Session::forget('reserve_data');
+                return redirect('order/detail/' . $orderInfo->sn);
+            } catch (\Exception $exception) {
+                DB::rollBack();
+                return redirect()->back();
+            }
+        } else {
+            return redirect()->back();
+        }
     }
 
     /**
