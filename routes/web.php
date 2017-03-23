@@ -82,6 +82,7 @@ Route::group(['prefix' => 'order', 'middleware' => 'auth'], function () {
     Route::get('/detail/{sn}', 'OrderController@detail')->where('sn', '^[0-9]+$');;
     Route::get('/cancel', 'OrderController@cancel');
     Route::get('/refunds', 'OrderController@refunds');
+    Route::post('/reserve', 'OrderController@reserve');
 });
 
 Route::get('/test', function (){

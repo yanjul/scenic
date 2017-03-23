@@ -116,7 +116,7 @@ class OrderController extends Controller
             'pay_account' => 'required',
         ]);
         $data = $request->input();
-        $time = time() + 8 + 3600;
+        $time = time() + 8 * 3600;
         $order = OrderInfo::with('payment')->where(['sn' => $sn, 'id' => $data['id']])->first();
         $user_info = UserInfo::where('user_id', Auth::id())->first();
         if ($order && $order->order_status == 1 && $order->pay_status == 0 && !$order->payment && ($user_info->money - $order->pay_price >= 0)) {
@@ -161,13 +161,23 @@ class OrderController extends Controller
                 DB::commit();
                 return redirect('user/order');
             } catch (\Exception $exception) {
-                print_r($exception);
                 DB::rollBack();
                 return redirect(Session::get('old_url', '/'));
             }
         }
         return redirect(Session::get('old_url', '/'));
+    }
 
+    public function reserve(Request $request) {
+        $this->validate($request, [
+            'scenic_id' => 'required',
+            'ticket_id' => 'required|array',
+            'ticket_number' => 'required|array',
+        ]);
+        $data = $request->input();
+        $orderService = new OrderService();
+        $order_data = $orderService->getInitOrderData($data);
+        return $order_data;
     }
 
     /**
