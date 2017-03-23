@@ -11,6 +11,7 @@ class Ticket extends Model
     protected $fillable = [
         'scenic_id',
         'scenic_name',
+        'parent_id',
         'name',
         'price',
         'custom_price',
@@ -30,4 +31,10 @@ class Ticket extends Model
     {
         return $this->belongsTo('App\Models\scenic', 'scenic_id', 'id');
     }
+
+    public function parent()
+    {
+        return $this->hasMany('App\Models\Ticket', 'parent_id', 'id');
+    }
+
 }

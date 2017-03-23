@@ -4,9 +4,11 @@ namespace App\Services;
 
 use App\Models\Scenic;
 use App\Models\Category;
+use App\Models\Ticket;
+use App\Models\OrderDetails;
 use Illuminate\Support\Facades\Auth;
 use Illuminate\Support\Facades\URL;
-
+use Log;
 class ScenicService
 {
 
@@ -81,6 +83,46 @@ class ScenicService
             ->offset(0)->limit($limit)
             ->where('scenic.status', 1)
             ->get();
+    }
+
+    public function createDistribution($order) {
+        $scenic = Scenic::where([
+            ['parent_id', '=', $order->scenic_id],
+            ['user_id', '=', $order->user_id],
+            ['status', '<', 3]])->first();
+        if ($scenic) {
+            $orderDetail = OrderDetails::with('ticket')->where('order_id', $order->id)->get();
+            foreach ($orderDetail as $value) {
+                $ticket = Ticket::where(['scenic_id'=> $scenic->id, 'parent_id'=> $value->ticket->id])->first();
+
+                if ($ticket) {
+                    $ticket->number += $value->ticket_numbers;
+                    $ticket->save();
+                } else {
+                    $value->ticket->scenic_id = $scenic->id;
+                    $value->ticket->parent_id = $value->ticket_id;
+                    $value->ticket->name = $value->ticket_name;
+                    $value->ticket->price = $value->ticket_price;
+                    $value->ticket->number = $value->ticket_numbers;
+                    Ticket::create($value->ticket->toArray());
+                }
+            }
+        } else {
+            $scenic = Scenic::find($order->scenic_id);
+            $scenic->user_id = $order->user_id;
+            $scenic->parent_id = $order->scenic_id;
+            $scenic->status = 3;
+            $scenic = Scenic::create($scenic->toArray());
+            $orderDetail = OrderDetails::with('ticket')->where('order_id', $order->id)->get();
+            foreach ($orderDetail as $value) {
+                $value->ticket->scenic_id = $scenic->id;
+                $value->ticket->parent_id = $value->ticket_id;
+                $value->ticket->name = $value->ticket_name;
+                $value->ticket->price = $value->ticket_price;
+                $value->ticket->number = $value->ticket_numbers;
+                Ticket::create($value->ticket->toArray());
+            }
+        }
     }
 
     public function getCategory($category)

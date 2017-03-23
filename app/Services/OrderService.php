@@ -29,7 +29,7 @@ class OrderService{
         if (!$scenic || ($scenic && ($scenic->user_id == Auth::id() || count($scenic->ticket) != count($data['ticket_id'])))){
             return false;
         }
-        $order['scenic']['hot'] = $scenic->hot ++;
+        $order['scenic']['hot'] = $scenic->hot + 1;
         $order['info']['sn'] = time().rand(1000, 9999);
         $order['info']['user_id'] = Auth::id();
         $order['info']['scenic_id'] = $scenic->id;

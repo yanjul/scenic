@@ -37,11 +37,13 @@
                     <span>交易记录</span>
                 </a>
             </dd>
-            {{--<dd>--}}
-                {{--<a href="">--}}
-                    {{--<span>数据分析</span>--}}
-                {{--</a>--}}
-            {{--</dd>--}}
+            @if(Auth::user()->role == 1)
+                <dd>
+                    <a href="">
+                        <span>数据分析</span>
+                    </a>
+                </dd>
+            @endif
         </dl>
         <dl>
             <dt>账户管理</dt>

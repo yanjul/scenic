@@ -28,7 +28,8 @@
                                     <div class="ri-infos">
                                         <p class="row">
                                             <span class="col-md-4">门票名称：{{$ticket['name']}}</span>
-                                            <span class="col-md-4">原价票价：{{$ticket['price']}}元</span>
+                                            <span class="col-md-4">门票价格：{{$ticket['price']}}元</span>
+                                            <span class="col-md-4">门票数量：{{$ticket['number'] < 0? '无限制': $ticket['number']}}张</span>
                                         </p>
                                         @foreach($ticket['custom_price'] as $item)
                                             <p class="row">
@@ -53,11 +54,11 @@
                                             <a href="{{url('user/scenic/ticket/'.$ticket['id'])}}" class="btn btn-sm btn-success">修改门票</a>
                                             <a href="{{url('user/del-ticket/'.$ticket['id'])}}" class="btn btn-sm btn-danger">删除门票</a>
                                             @if($ticket['status'] == 1)
-                                                <a href="/user/ticket/status?id={{$ticket['id']}}&status=0" class="btn btn-danger">下架</a>
+                                                <a href="/user/ticket/status?id={{$ticket['id']}}&status=0" class="btn btn-sm btn-danger">下架</a>
                                             @elseif($ticket['status'] == 0)
-                                                <a href="/user/ticket/status?id={{$ticket['id']}}&status=1" class="btn btn-success">上架</a>
+                                                <a href="/user/ticket/status?id={{$ticket['id']}}&status=1" class="btn btn-sm btn-success">上架</a>
                                             @else
-                                                <a href="javascript:" title="已被强制下架" disabled class="btn btn-danger">上架</a>
+                                                <a href="javascript:" title="已被强制下架" disabled class="btn btn-sm btn-danger">上架</a>
                                             @endif
                                         </div>
                                     </div>

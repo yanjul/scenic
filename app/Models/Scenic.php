@@ -10,6 +10,7 @@ class Scenic extends Model
 
     protected $fillable = [
         'user_id',
+        'parent_id',
         'name',
         'image',
         'info',
@@ -28,6 +29,11 @@ class Scenic extends Model
     public function ticket()
     {
         return $this->hasMany('App\Models\Ticket', 'scenic_id', 'id');
+    }
+
+    public function parent()
+    {
+        return $this->hasMany('App\Models\Scenic', 'parent_id', 'id');
     }
 
     public function user()

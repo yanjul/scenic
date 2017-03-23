@@ -48,10 +48,8 @@
                                         </div>
                                         <input type="checkbox" name="ticket_id[]" value="{{$ticket->id}}"
                                                id="checkbox-1" class="checkbox ">
-
                                         @section('js')
                                             <script>
-
                                                 function minus(ind) {
                                                     var index = ind;
                                                     var id = 'num' + index;
@@ -64,10 +62,6 @@
                                                     var index = ind;
                                                     var id = 'num' + index;
                                                     document.getElementById(id).value++;
-                                                    if (document.getElementById(id).value > 3) {
-                                                        document.getElementById(id).value = 3;
-                                                        alert("购买数量大于3");
-                                                    }
                                                 }
                                             </script>
                                         @endsection

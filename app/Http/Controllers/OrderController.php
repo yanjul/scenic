@@ -11,6 +11,7 @@ use App\Models\UserInfo;
 use Illuminate\Support\Facades\Auth;
 use App\Models\Scenic;
 use App\Services\OrderService;
+use App\Services\ScenicService;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\DB;
 use Illuminate\Support\Facades\Session;
@@ -80,6 +81,7 @@ class OrderController extends Controller
                 try {
                     DB::beginTransaction();
                     $order_data['info']['order_type'] = 2;
+                    Scenic::where('id', $data['scenic_id'])->update(['hot' => $order_data['scenic']['hot']]);
                     $orderInfo = OrderInfo::create($order_data['info']);
                     foreach ($order_data['detail'] as $value) {
                         OrderDetails::create(array_merge($value, ['order_id' => $orderInfo->id]));
@@ -117,9 +119,9 @@ class OrderController extends Controller
         ]);
         $data = $request->input();
         $time = time() + 8 * 3600;
-        $order = OrderInfo::with('payment')->where(['sn' => $sn, 'id' => $data['id']])->first();
+        $order = OrderInfo::where(['sn' => $sn, 'id' => $data['id']])->first();
         $user_info = UserInfo::where('user_id', Auth::id())->first();
-        if ($order && $order->order_status == 1 && $order->pay_status == 0 && !$order->payment && ($user_info->money - $order->pay_price >= 0)) {
+        if ($order && $order->order_status == 1 && $order->pay_status == 0 && ($user_info->money - $order->pay_price >= 0)) {
             $pay_data = [
                 'order_id' => $order->id,
                 'order_sn' => $order->sn,
@@ -143,17 +145,8 @@ class OrderController extends Controller
                 }
                 $order->save();
                 if ($data['order_type'] == 2) {
-                    $scenic = Scenic::find($order->scenic_id);
-                    $scenic->user_id = Auth::id();
-                    $scenic = Scenic::create($scenic->toArray());
-                    $orderDetail = OrderDetails::with('ticket')->where('order_id', $pay_data['order_id'])->get();
-                    foreach ($orderDetail as $value) {
-                        $value->ticket->scenic_id = $scenic->id;
-                        $value->ticket->ticket_name = $value->ticket_name;
-                        $value->ticket->ticket_price = $value->ticket_price;
-                        $value->ticket->ticket_number = $value->ticket_number;
-                        Ticket::create($value->ticket->toArray());
-                    }
+                    $scenic_service = new ScenicService();
+                    $scenic_service->createDistribution($order);
                 }
                 OrderPaymentDetails::create($pay_data);
                 $user_info->money = $user_info->money - $order->pay_price;
@@ -162,10 +155,10 @@ class OrderController extends Controller
                 return redirect('user/order');
             } catch (\Exception $exception) {
                 DB::rollBack();
-                return redirect(Session::get('old_url', '/'));
+                return redirect()->back();
             }
         }
-        return redirect(Session::get('old_url', '/'));
+        return redirect()->back();
     }
 
     public function reserve(Request $request) {
