@@ -17,7 +17,7 @@ class UserController extends Controller
     public function index()
     {
 
-        $user = Users::with('info')->find(Auth::id())->toArray();
+        $user = Users::with('info')->find(Auth::id());
 
         return view('user.main')->with('user', $user);
 

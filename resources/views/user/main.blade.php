@@ -10,29 +10,30 @@
                         <div class="infos">
                             <div class="infos-lf">
                                 <div class="img">
-                                    <img src="{{Auth::user()->info->photo ?: '/images/system/default-photo.jpg'}}" alt="" id="userPhoto">
+                                    <img src="{{$user->info->photo ?: '/images/system/default-photo.jpg'}}" alt="" id="userPhoto">
                                 </div>
                                 <a href="/user/info">编辑个人信息</a>
                             </div>
                             <div class="infos-ri">
                                 <p class="username">
-                                    <span>您好，</span><span class="c4" id="myindexnickname">{{$user['name']}}!</span>
+                                    <span>您好，</span><span class="c4" id="myindexnickname">{{$user->name}}!</span>
                                 </p>
-                                <p id="growInfo">
-                                    <label>成 长 值：0</label>
-                                </p>
+                                {{--<p id="growInfo">--}}
+                                    {{--<label>成 长 值：0</label>--}}
+                                {{--</p>--}}
                                 <p>
                                     <span class="mr10">
                                         <label>钱&nbsp;&nbsp;&nbsp;包：</label>
-                                        <a href="">现金&nbsp;&nbsp;0元</a>
+                                        <a href="">{{$user->info->money}}元</a>
+                                        <a href="">充值</a>
                                     </span>
                                 </p>
-                                <p>
-                                    <span class="mr10">
-                                        <label>积&nbsp;&nbsp;&nbsp;分：</label>
-                                        <a href="">0</a>
-                                    </span>
-                                </p>
+                                {{--<p>--}}
+                                    {{--<span class="mr10">--}}
+                                        {{--<label>积&nbsp;&nbsp;&nbsp;分：</label>--}}
+                                        {{--<a href="">0</a>--}}
+                                    {{--</span>--}}
+                                {{--</p>--}}
                             </div>
                         </div>
                         <div class="user-state">

@@ -7,6 +7,7 @@ use App\Models\OrderInfo;
 use App\Models\OrderDetails;
 use App\Models\OrderPaymentDetails;
 use App\Models\Ticket;
+use App\Models\UserInfo;
 use Illuminate\Support\Facades\Auth;
 use App\Models\Scenic;
 use App\Services\OrderService;
@@ -117,7 +118,8 @@ class OrderController extends Controller
         $data = $request->input();
         $time = time() + 8 + 3600;
         $order = OrderInfo::with('payment')->where(['sn' => $sn, 'id' => $data['id']])->first();
-        if ($order && $order->order_status == 1 && $order->pay_status == 0 && !$order->payment) {
+        $user_info = UserInfo::where('user_id', Auth::id())->first();
+        if ($order && $order->order_status == 1 && $order->pay_status == 0 && !$order->payment && ($user_info->money - $order->pay_price >= 0)) {
             $pay_data = [
                 'order_id' => $order->id,
                 'order_sn' => $order->sn,
@@ -154,6 +156,8 @@ class OrderController extends Controller
                     }
                 }
                 OrderPaymentDetails::create($pay_data);
+                $user_info->money = $user_info->money - $order->pay_price;
+                $user_info->save();
                 DB::commit();
                 return redirect('user/order');
             } catch (\Exception $exception) {

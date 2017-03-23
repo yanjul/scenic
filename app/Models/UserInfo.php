@@ -11,6 +11,7 @@ class UserInfo extends Model
 
     protected $fillable = [
         'user_id',
+        'money',
         'photo',
         'truename',
         'fax',
