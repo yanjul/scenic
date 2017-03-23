@@ -9,6 +9,7 @@ use App\Models\Scenic;
 use App\Models\Ticket;
 use App\Services\TicketService;
 use Illuminate\Support\Facades\Auth;
+use Illuminate\Support\Facades\DB;
 
 class OrderService{
 
@@ -68,6 +69,21 @@ class OrderService{
             }
         }
         return $order_detail;
+    }
+
+    public function count() {
+        $order = OrderInfo::where('user_id', Auth::id())->get();
+        $data = ['pay'=> 0, 'confirm'=> 0, 'play'=> 0];
+        foreach ($order as $item) {
+            if($item->order_status == 1 && $item->pay_status == 0) {
+                $data['pay'] += 1;
+            } elseif ($item->order_status == 2 && $item->pay_status == 1) {
+                $data['confirm'] += 1;
+            } elseif ($item->order_status == 3 && $item->pay_status == 1 && !$item->admission_time) {
+                $data['play'] += 1;
+            }
+        }
+        return $data;
     }
 
 }

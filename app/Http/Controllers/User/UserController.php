@@ -3,8 +3,10 @@
 namespace App\Http\Controllers\User;
 
 use App\Http\Controllers\Controller;
+use App\Models\OrderInfo;
 use App\Models\UserInfo;
 use App\Models\Users;
+use App\Services\OrderService;
 use Illuminate\Support\Facades\Auth;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Hash;
@@ -18,8 +20,9 @@ class UserController extends Controller
     {
 
         $user = Users::with('info')->find(Auth::id());
-
-        return view('user.main')->with('user', $user);
+        $count = (new OrderService())->count();
+        $order = OrderInfo::where('user_id', Auth::id())->orderBy('created_at', 'desc')->offset(0)->limit(10)->get();
+        return view('user.main')->with(['user'=> $user, 'count'=> $count, 'order'=> $order]);
 
     }
 
@@ -110,6 +113,11 @@ class UserController extends Controller
         return redirect('user/info');
     }
 
+    /**
+     * 修改头像
+     * @param Request $request
+     * @return \Illuminate\Http\RedirectResponse
+     */
     public function updatePhoto(Request $request)
     {
         if ($request->hasFile('image')) {
@@ -124,5 +132,17 @@ class UserController extends Controller
 
         }
         return redirect()->back();
+    }
+
+    public function recharge(Request $request) {
+        $this->validate($request, [
+            'value'=> 'required'
+        ]);
+        if ($request->isMethod('post')) {
+            $info = UserInfo::where('user_id', Auth::id())->first();
+            $info->money = $info->money + $request->input('value');
+            return $info->save()? 1: 0;
+        }
+        return 0;
     }
 }
