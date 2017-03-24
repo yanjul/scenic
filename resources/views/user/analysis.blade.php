@@ -11,8 +11,19 @@
                     <span>数据分析</span>
                 </div>
                 <div class="m-box m-orderList">
+
+                    <div class="tab-myfoot">
+                        <ul class="title" id="tabfirst">
+                            <li class="on">基本资料</li>
+                            <li>头像设置</li>
+                        </ul>
+                        <div class="c-n box01" id="divContentBox"></div>
+                        <div class="photoChange"></div>
+                    </div>
                     <div style="width: 100%; height:200px;"></div>
                     <div id="main" style="width: 100%; height:400px;"></div>
+
+
                 </div>
             </div>
         </div>
@@ -20,6 +31,23 @@
     @include('user.footer')
 @endsection
 @section('js')
+    <script>
+        var aLi = document.getElementById("tabfirst").children; //获取Tag下的li，即Tag标签
+        var content = document.getElementById("divContentBox").children; //获取Tag标签对应的内容
+        content[0].style.display = "block"; //默认显示第一个标签的内容
+        var len = aLi.length;
+        for (var i = 0; i < len; i++) {
+            aLi[i].index = i; //设置对象的INDEX属性，方便下面调用
+            aLi[i].onclick = function () {
+                for (var n = 0; n < len; n++) {
+                    aLi[n].className = "";
+                    content[n].style.display = "none";
+                }
+                aLi[this.index].className = "on";
+                content[this.index].style.display = "block";
+            }
+        }
+    </script>
     <script type="text/javascript" src="/js/echarts.min.js"></script>
     <script type="text/javascript">
         var myChart = echarts.init(document.getElementById('main'));
