@@ -36,7 +36,8 @@
                                 <label for="email">邮箱</label>
                                 @if ($errors->has('email'))
                                     <span class="help-block">
-                                        <strong>{{ $errors->first('email') }}</strong>
+                                        {{--<strong>{{ $errors->first('email') }}</strong>--}}
+                                        <strong>您输入的密码错误</strong>
                                     </span>
                                 @endif
                             </div>
@@ -59,16 +60,6 @@
                             </div>
                         </div>
                     </div>
-
-                    {{-- <div class="form-group">
-                         <div class="col-md-6 col-md-offset-4">
-                             <div class="checkbox">
-                                 <label>
-                                     <input type="checkbox" name="remember" {{ old('remember') ? 'checked' : '' }}> 记住密码
-                                 </label>
-                             </div>
-                         </div>
-                     </div>--}}
 
                     <div class="row">
                     </div>

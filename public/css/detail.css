@@ -89,7 +89,7 @@
 
     /*box-shadow: 0px 0px 4px #58B7FF;*/
     border: 1px solid #ccc;
-    width: 100%;
+    width: 120%;
     position: relative;
 }
 ._content{
@@ -123,17 +123,20 @@
     white-space:nowrap;
 }
 .or_menpiao{
-    flex: 1 1 30%;
+    flex: 1 1 26%;
 
 }
 .or_xianjia{
-    flex: 1 1 20%;
+    flex: 1 1 19%;
 }
 .or_yuanjia{
-    flex:1 1  20% ;
+    flex:1 1  15% ;
+}
+.or_yuliang{
+    flex: 1 1 25%;
 }
 .or_kuang{
-    /*flex: 1 1 30%;*/
+    flex: 1 1 25%;
 }
 .or_kuang .math{
     border: 1px solid #ccc;

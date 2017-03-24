@@ -99,14 +99,14 @@
                     @foreach($scenic['data'] as $item)
                         <div class="search_else">
                             <div class="search_else_word">
-                                <h2>{{$item['name']}}</h2>
+                                <h2><a href="/scenic/{{$item['id']}}" style="color: rgb(222,184,135)">{{$item['name']}}</a></h2>
                                 <p>{{$item['info']}}</p>
 
                                 <p>景区类型：{{ $cate[$item['category']['type']] }}</p>
                                 <p>最佳季节：{{ $cate[$item['category']['season']] }}</p>
                                 <p>建议游玩：{{ $cate[$item['category']['time']] }}</p>
                             </div>
-                            <img src="{{$item['image']}}">
+                           <a href="/scenic/{{$item['id']}}"> <img src="{{$item['image']}}"></a>
                         </div>
 
                     @endforeach

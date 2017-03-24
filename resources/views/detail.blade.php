@@ -38,6 +38,11 @@
                                             <del> 原价：{{$ticket->price}}</del>
                                         @endif
                                     </div>
+                                        @if($ticket->number>=0)
+                                    <div class="or_yuliang">
+                                        门票余量：<span>{{$ticket->number}}</span>
+                                    </div>
+                                        @endif
                                     <div class="or_kuang">
                                         <div class="math">
                                             <span class="minus" onclick="minus( {{$key}} )">-</span>
@@ -100,10 +105,13 @@
                             </div>
                             <br>
                         @endforeach
-                        <button action="0" onclick="_submit(this)" type="button" class="btn btn-info pull-right">预定
-                        </button>
-                        <button action="1" onclick="_submit(this)" type="button" class="btn btn-info pull-right">立即购买
-                        </button>
+                        <div class="row ">
+                            <button action="0" onclick="_submit(this)" type="button" class="btn btn-info " style="margin-left: 60%">预定
+                            </button>
+                            <button action="1" onclick="_submit(this)" type="button" class="btn btn-info pull-right">立即购买
+                            </button>
+                        </div>
+
                     </form>
                 </div>
             </div>
@@ -114,15 +122,19 @@
     <div class="detail_else">
 
         <!-- Nav tabs -->
-        <ul class="nav nav-tabs" role="tablist">
-            <li role="presentation" class="active"><a href="#home" aria-controls="home" role="tab" data-toggle="tab">景区信息</a>
+        {{--<ul class="nav nav-tabs" role="tablist">
+            <li  role="presentation" class="active"><a href="#home" aria-controls="home" role="tab" data-toggle="tab">景区信息</a>
             </li>
-        </ul>
-
+        </ul>--}}
+        <div class="progress">
+            <div class="progress-bar progress-bar-success" role="progressbar" aria-valuenow="60" aria-valuemin="0" aria-valuemax="100" style="width: 30%;font-size: 20px">
+                景区信息
+            </div>
+        </div>
         <!-- Tab panes -->
         <div class="tab-content">
 
-            <div>{{$scenic->info}}</div>
+            <div class="jumbotron" style="font-size: 17px;box-shadow: 0 0 10px gray;letter-spacing: 3px">{{$scenic->info}}</div>
 
         </div>
     </div>
