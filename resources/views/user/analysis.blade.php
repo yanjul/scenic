@@ -10,21 +10,26 @@
                     >
                     <span>数据分析</span>
                 </div>
-                <div class="m-box m-orderList">
+                {{--<div class="m-box m-orderList">--}}
 
                     <div class="tab-myfoot">
                         <ul class="title" id="tabfirst">
                             <li class="on">基本资料</li>
-                            <li>头像设置</li>
+                            <li>头像设置1</li>
+                            <li>头像设置2</li>
                         </ul>
-                        <div class="c-n box01" id="divContentBox"></div>
-                        <div class="photoChange"></div>
+                        <div class="c-n box01" id="divContentBox">
+                            <div class="photoChange">1111111111111111</div>
+                            <div class="photoChange">2222222222222222</div>
+                            <div class="photoChange">3333333333333333</div>
+                        </div>
+
                     </div>
                     <div style="width: 100%; height:200px;"></div>
                     <div id="main" style="width: 100%; height:400px;"></div>
 
 
-                </div>
+                {{--</div>--}}
             </div>
         </div>
     </div>
