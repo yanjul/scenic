@@ -1,4 +1,8 @@
+body{
+
+}
 .all {
+    min-height: 1000px;
     width: 90%;
     margin-left: 5%;
 }
