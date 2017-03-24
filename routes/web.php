@@ -73,7 +73,8 @@ Route::group(['prefix' => 'user', 'middleware' => 'auth', 'namespace' => 'User']
     Route::get('/order', 'OrderController@getOrder');
     Route::get('/payment', 'OrderController@getPayment');
     Route::get('/reserve', 'OrderController@getReserve');
-
+    Route::get('/analysis', 'OrderController@analysis');
+    Route::get('/get-analysis', 'OrderController@getAnalysis');
 });
 
 Route::group(['prefix' => 'order', 'middleware' => 'auth'], function () {

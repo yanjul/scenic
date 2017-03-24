@@ -67,17 +67,17 @@
                                 @endsection
                             </div>
                         </div>
-                        <div class="user-state">
-                            <p class="last-time">
-                                <span class="mr10">ID：0001</span>
-                                上次登陆时间：2017年02月14日 14:30:20
-                            </p>
-                            <div class="credit-card">
-                                <p>
-                                    <a href="#" class="coll">绑定中国脚印信用卡</a>
-                                </p>
-                            </div>
-                        </div>
+                        {{--<div class="user-state">--}}
+                            {{--<p class="last-time">--}}
+                                {{--<span class="mr10">ID：0001</span>--}}
+                                {{--上次登陆时间：2017年02月14日 14:30:20--}}
+                            {{--</p>--}}
+                            {{--<div class="credit-card">--}}
+                                {{--<p>--}}
+                                    {{--<a href="#" class="coll">绑定中国脚印信用卡</a>--}}
+                                {{--</p>--}}
+                            {{--</div>--}}
+                        {{--</div>--}}
                     </div>
                     <div class="user-msg">
                         <a href="" class="c2">
@@ -103,7 +103,7 @@
                     <div class="hd">
                         <h2>近期订单列表</h2>
                         <span class="subtit"></span>
-                        <a href="" class="fr c7">查看所有订单>></a>
+                        <a href="/user/order" class="fr c7">查看所有订单>></a>
                     </div>
                     <div class="c-n">
                         <table width="100%" border="0" class="table03">

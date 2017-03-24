@@ -60,9 +60,13 @@
                                                 <span>退款中</span>
                                             @elseif($item->order_status == 2 && $item->pay_status == 3)
                                                 <span>退款完成</span>
-                                            @elseif($item->order_status == 3 && $item->pay_status == 1 && !$item->admission_time)
+                                            @elseif($item->order_status == 3 && $item->pay_status == 1 && $item->order_type == 2)
+                                                <span>订单完成</span>
+                                            @elseif($item->order_status == 3 && $item->pay_status == 1 && $item->admission_time < time() && !$item->play_time)
                                                 <span>待入园</span>
-                                            @elseif($item->order_status == 3 && $item->pay_status == 1 && $item->admission_time)
+                                            @elseif($item->order_status == 3 && $item->pay_status == 1 && $item->admission_time >= time() && !$item->play_time)
+                                                <span>已过期(订单完成)</span>
+                                            @elseif($item->order_status == 3 && $item->pay_status == 1 && $item->play_time)
                                                 <span>已入园(订单完成)</span>
                                             @elseif($item->order_status == 4 && $item->pay_status == 0)
                                                 <span>交易取消</span>
@@ -87,7 +91,7 @@
                                                 </span>
                                             @elseif($item->order_status == 2 && $item->pay_status == 3)
 
-                                            @elseif($item->order_status == 3 && $item->pay_status == 1 && !$item->admission_time)
+                                            @elseif($item->order_status == 3 && $item->pay_status == 1 && $item->admission_time < time() && !$item->play_time)
                                                 <span>
                                                     <a href="/order/refunds?sn={{$item->sn}}">申请退款</a>
                                                 </span>

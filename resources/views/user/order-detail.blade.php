@@ -28,11 +28,15 @@
                                 <a href="/order/cancel?sn={{$order->sn}}" class="btn">取消退款</a>
                             @elseif($order->order_status == 2 && $order->pay_status == 3)
                                 <span class="highlight">退款完成</span>
-                            @elseif($order->order_status == 3 && $order->pay_status == 1 && !$order->admission_time)
-                                <span class="highlight">待入园</span>
+                            @elseif($order->order_status == 3 && $order->pay_status == 1 && $order->order_type == 2)
+                                <span>订单完成</span>
+                            @elseif($order->order_status == 3 && $order->pay_status == 1 && $order->admission_time < time() && !$order->play_time && $order->order_type != 2)
+                                <span>待入园</span>
                                 <a href="/order/refunds?sn={{$order->sn}}" class="btn">申请退款</a>
-                            @elseif($order->order_status == 3 && $order->pay_status == 1 && $order->admission_time)
-                                <span class="highlight">已入园(订单完成)</span>
+                            @elseif($order->order_status == 3 && $order->pay_status == 1 && $order->admission_time >= time() && !$order->play_time && $order->order_type != 2)
+                                <span>已过期(订单完成)</span>
+                            @elseif($order->order_status == 3 && $order->pay_status == 1 && $order->play_time && $order->order_type != 2)
+                                <span>已入园(订单完成)</span>
                             @elseif($order->order_status == 4 && $order->pay_status == 0)
                                 <span class="highlight">交易取消</span>
                             @else
