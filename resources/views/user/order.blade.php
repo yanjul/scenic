@@ -62,9 +62,9 @@
                                                 <span>退款完成</span>
                                             @elseif($item->order_status == 3 && $item->pay_status == 1 && $item->order_type == 2)
                                                 <span>订单完成</span>
-                                            @elseif($item->order_status == 3 && $item->pay_status == 1 && $item->admission_time < time() && !$item->play_time)
-                                                <span>待入园</span>
                                             @elseif($item->order_status == 3 && $item->pay_status == 1 && $item->admission_time >= time() && !$item->play_time)
+                                                <span>待入园</span>
+                                            @elseif($item->order_status == 3 && $item->pay_status == 1 && $item->admission_time < time() && !$item->play_time)
                                                 <span>已过期(订单完成)</span>
                                             @elseif($item->order_status == 3 && $item->pay_status == 1 && $item->play_time)
                                                 <span>已入园(订单完成)</span>
