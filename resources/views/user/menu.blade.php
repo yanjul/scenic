@@ -44,7 +44,7 @@
             </dd>
             @if(Auth::user()->role == 1)
                 <dd>
-                    <a href="">
+                    <a href="/user/analysis?action=sale&year=2017">
                         <span>数据分析</span>
                     </a>
                 </dd>

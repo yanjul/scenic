@@ -119,7 +119,9 @@ class OrderController extends Controller
         ]);
         $data = $request->input();
         $time = time() + 8 * 3600;
-        $order = OrderInfo::where(['sn' => $sn, 'id' => $data['id']])->first();
+        $order = OrderInfo::with(['detail'=> function($query) {
+            $query->with('ticket');
+        }])->where(['sn' => $sn, 'id' => $data['id']])->first();
         $user_info = UserInfo::where('user_id', Auth::id())->first();
         if ($order && $order->order_status == 1 && $order->pay_status == 0 && ($user_info->money - $order->pay_price >= 0)) {
             $pay_data = [
@@ -134,6 +136,17 @@ class OrderController extends Controller
             ];
             try {
                 DB::beginTransaction();
+                foreach ($order->detail as $detail) {
+                    if($detail->ticket->number == -1 || ($detail->ticket->number - $detail->ticket_numbers >= 0)){
+                        if ($detail->ticket->number != -1) {
+                            $detail->ticket->number -= $detail->ticket_numbers;
+                            $detail->ticket->save();
+                        }
+                    } else {
+                        DB::rollBack();
+                        return redirect()->back();
+                    }
+                }
                 $order->paid_price = $order->pay_price;
                 $order->pay_status = 1;
                 $order->order_status = 2;
