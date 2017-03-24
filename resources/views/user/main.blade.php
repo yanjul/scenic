@@ -106,40 +106,26 @@
                         <a href="" class="fr c7">查看所有订单>></a>
                     </div>
                     <div class="c-n">
-                        <table width="100%" border="0" class="table03">
+                        @if(count($order))
+                        <table width="100%" border="0" class="table03 table-striped" id="table-header">
                             <thead>
                                 <tr>
-                                    <th class="w6">景区名字</th>
-                                    <th class="w6">票价</th>
-                                    <th class="w13">数量</th>
-                                    <th class="w7">订单金额</th>
-                                    <th class="w4">交易状态</th>
+                                    <th class="w6">订单号</th>
+                                    <th class="w6">景区名</th>
+                                    <th class="w13">创建时间</th>
+                                    <th class="w7">应付金额</th>
+                                    <th class="w4">订单状态</th>
+                                    <th class="w4">操作</th>
                                 </tr>
                             </thead>
-                        </table>
-                    </div>
-                </div>
-                <div class="table-list01" id="list">
-                    @if(count($order))
-                        <table cellspacing="0" cellpadding="0" class="table-header" id="table-header">
-                            <thead>
-                            <tr>
-                                <th width="21%">订单号</th>
-                                <th width="9%">景区名</th>
-                                <th width="10%">创建时间</th>
-                                <th width="15%">应付金额</th>
-                                <th width="15%">订单状态</th>
-                                <th width="15%">操作</th>
-                            </tr>
-                            </thead>
-                            <tbody>
+                            <tbody class="">
                             @foreach($order as $item)
                                 <tr>
-                                    <td>{{$item->sn}}</td>
-                                    <td>{{$item->scenic_name}}</td>
-                                    <td>{{date('Y-m-d H:i:s', strtotime($item->created_at.' +8hours'))}}</td>
-                                    <td>{{$item->pay_price}}¥</td>
-                                    <td>
+                                    <td class="w6">{{$item->sn}}</td>
+                                    <td class="w6">{{$item->scenic_name}}</td>
+                                    <td class="w13">{{date('Y-m-d H:i:s', strtotime($item->created_at.' +8hours'))}}</td>
+                                    <td class="w7">{{$item->pay_price}}¥</td>
+                                    <td class="w4">
                                         @if($item->order_status == 1 && $item->pay_status == 0)
                                             <span>待付款</span>
                                         @elseif($item->order_status == 2 && $item->pay_status == 1)
@@ -158,11 +144,14 @@
                                             <span>***bug***{{$item->order_status}}***{{$item->pay_status}}
                                                 ***</span>
                                         @endif</td>
-                                    <td><a href="/order/detail/{{$item->sn}}" class="order-check col-md-offset-2 col-md-2">查看订单</a></td>
+                                    <td class="w4">
+                                        <a href="/order/detail/{{$item->sn}}" class="order-check">查看订单</a>
+                                    </td>
                                 </tr>
                             @endforeach
                             </tbody>
                         </table>
+                    </div>
                     @else
                         <div style="margin-top: 20px;font-size: 12px;">没有符合条件的订单，最近有不少很赞的景区，快去看看吧！</div>
                     @endif

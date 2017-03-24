@@ -8,7 +8,7 @@
                 <div class="breadcrumb">
                     <a href="/user">我的脚印</a>
                     >
-                    <span>订单</span>
+                    <span>交易记录</span>
                 </div>
                 <div class="m-box m-orderList">
                     <div class="bd">
