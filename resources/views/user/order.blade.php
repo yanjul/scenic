@@ -19,9 +19,15 @@
                                 <th width="9%">数量</th>
                                 <th width="10%">单价</th>
                                 <th width="15%">应付金额</th>
-                                <th width="12%">订单类型</th>
+                                <th width="12%">
+                                    <select name="" id="type" onchange="_change(this.value, 0)">
+                                        <option value="0">全部类型</option>
+                                        <option value="1">普通订单</option>
+                                        <option value="2">分销订单</option>
+                                        <option value="3">预定订单</option>
+                                    </select></th>
                                 <th width="15%">
-                                    <select name="" id="">
+                                    <select name="" id="status" onchange="_change(this.value, 1)">
                                         <option value="0">全部状态</option>
                                         <option value="1">待付款</option>
                                         <option value="2">待确认</option>
@@ -56,7 +62,6 @@
                                                 <span class="mingcheng">{{$ticket->ticket_name}}</span></td>
                                             <td width="9%" class="num">{{$ticket->ticket_numbers}}</td>
                                             <td width="10%" class="price">{{$ticket->ticket_price}}¥</td>
-
                                             <td width="15%" class="total">{{$ticket->ticket_amount}}¥</td>
                                             <td width="30%" colspan="3"></td>
                                         </tr>
@@ -65,7 +70,15 @@
                                         <td width="55%%" colspan="2"></td>
                                         <td width="9%"><span>总价</span></td>
                                         <td width="10%" class="total">{{$item->pay_price}}¥</td>
-                                        <td width="12%"></td>
+                                        <td width="12%">
+                                            @if($item->order_type = 1)
+                                                <span>普通订单</span>
+                                            @elseif($item->order_type = 2)
+                                                <span>分销订单</span>
+                                            @elseif($item->order_type = 3)
+                                                <span>预定订单</span>
+                                            @endif
+                                        </td>
                                         <td width="15%" class="statue">
                                             @if($item->order_status == 1 && $item->pay_status == 0)
                                                 <span>待付款</span>
@@ -123,4 +136,47 @@
         </div>
     </div>
     @include('user.footer')
+@endsection
+
+@section('js')
+    <script>
+        var _params = getParams(window.location.href);
+        $('#type').children().eq(_params.type || 0).attr('selected', true);
+        $('#status').children().eq(_params.status || 0).attr('selected', true);
+        function getUrl(baseUrl, obj) {
+            var url = baseUrl + '?';
+            for (var attr in obj) {
+                if (obj[attr] !== null) {
+                    url += attr + '=' + obj[attr].replace(/^(\s+)|(\s+)$/g, '') + '&';
+                }
+            }
+            return url.replace(/(\&)$/g, '');
+        }
+        function getParams(url) {
+            if (url.indexOf('?') < 0) {
+                return {};
+            }
+            var str = url.replace(/^(.+\?)/, '');
+            if (str) {
+                var arr = str.split('&');
+                var params = {};
+                for (var i = 0; i < arr.length; i++) {
+                    params[arr[i].split('=')[0]] = decodeURI(arr[i].split('=')[1] || '');
+                }
+                return params;
+            } else {
+                return {};
+            }
+        }
+        function _change(val, type) {
+            var url = '/user/order';
+            var params = getParams(window.location.href);
+            if(type) {
+                params['status'] = val;
+            } else {
+                params['type'] = val;
+            }
+            window.location.href = getUrl(url, params);
+        }
+    </script>
 @endsection

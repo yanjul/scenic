@@ -52,7 +52,7 @@
                     <td>价格</td>
                     <td>{{$order->pay_price}}</td>
                 </tr>
-                {{--@if($order->order_type == 1)--}}
+                @if($order->order_type != 2)
                 <tr>
                     <td><label>入园时间</label></td>
                     <td>
@@ -62,7 +62,7 @@
                         @endif
                     </td>
                 </tr>
-                {{--@endif--}}
+                @endif
                 <tr>
                     <td>支付方式</td>
                     <td>

@@ -7,15 +7,52 @@ use App\Models\OrderInfo;
 use App\Models\OrderPaymentDetails;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\DB;
-
 use Illuminate\Support\Facades\Auth;
 
 class OrderController extends Controller
 {
 
-    public function getOrder(){
+    public function getOrder(Request $request){
+        $data = $request->all();
         $user_id = Auth::id();
-        $order = OrderInfo::with(['detail', 'payment'])->where(['user_id'=> $user_id])->get();
+        $query = OrderInfo::query();
+        $query->with(['detail', 'payment'])->where(['user_id'=> $user_id]);
+        if(array_key_exists('type', $data) && $data['type']) {
+            $query->where('order_type', $data['type']);
+        }
+        if(array_key_exists('status', $data) && $data['status'] == 1) {
+            $query->where(['order_status'=> 1, 'pay_status'=> 0]);
+        }
+        if(array_key_exists('status', $data) && $data['status'] == 2) {
+            $query->where(['order_status'=> 2, 'pay_status'=> 1]);
+        }
+        if(array_key_exists('status', $data) && $data['status'] == 3) {
+            $query->where(['pay_status'=> 2]);
+        }
+        if(array_key_exists('status', $data) && $data['status'] == 4) {
+            $query->where(['order_status'=> 4, 'pay_status'=> 3]);
+        }
+        if(array_key_exists('status', $data) && $data['status'] == 5) {
+            $query->where(['order_status'=> 3, 'pay_status'=> 1]);
+        }
+        if(array_key_exists('status', $data) && $data['status'] == 6) {
+            $query->where(['order_status'=> 3, 'pay_status'=> 1]);
+            $query->where('created_at', '>=', date('Y-m-d H:i:s', time()));
+            $query->where('play_time', '=', 0);
+        }
+        if(array_key_exists('status', $data) && $data['status'] == 7) {
+            $query->where(['order_status'=> 3, 'pay_status'=> 1]);
+            $query->where('created_at', '<', date('Y-m-d H:i:s', time()));
+            $query->where('play_time', '=', 0);
+        }
+        if(array_key_exists('status', $data) && $data['status'] == 8) {
+            $query->where(['order_status'=> 3, 'pay_status'=> 1]);
+            $query->where('play_time', '!=', 0);
+        }
+        if(array_key_exists('status', $data) && $data['status'] == 9) {
+            $query->where(['order_status'=> 4, 'pay_status'=> 0]);
+        }
+        $order = $query->get();
         return view('user.order')->with('order', $order);
     }
 
