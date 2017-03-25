@@ -1,7 +1,7 @@
 @extends('layouts.app')
 
 @section('content')
-    <div class="container main" style="min-height: 830px;">
+    <div class="container" style="min-height: 830px;">
         <div class="row">
             @include('user.menu')
             <div class="col-md-9">
@@ -18,9 +18,6 @@
                                 <p class="username">
                                     <span>您好，</span><span class="c4" id="myindexnickname">{{$user->name}}!</span>
                                 </p>
-                                {{--<p id="growInfo">--}}
-                                    {{--<label>成 长 值：0</label>--}}
-                                {{--</p>--}}
                                 <p>
                                     <span class="mr10">
                                         <label>钱&nbsp;&nbsp;&nbsp;包：</label>
@@ -28,56 +25,8 @@
                                         <a href="javascript:" onclick="recharge()">充值</a>
                                     </span>
                                 </p>
-                                {{--<p>--}}
-                                    {{--<span class="mr10">--}}
-                                        {{--<label>积&nbsp;&nbsp;&nbsp;分：</label>--}}
-                                        {{--<a href="">0</a>--}}
-                                    {{--</span>--}}
-                                {{--</p>--}}
-                                @section('js')
-                                <script>
-                                    function recharge() {
-                                        var num = prompt('输入充值金额');
-                                        num = num.toString().trim();
-                                        if (num !== null) {
-                                            if((/^([1-9]\d{0,9}|0)([.]?|(\.\d{1,2})?)$/).test(num)) {
-                                                $.ajax({
-                                                    url: '/user/recharge',
-                                                    type: 'POST',
-                                                    data: {value: num},
-                                                    dataType: 'JSON',
-                                                    success: function (data) {
-                                                        if (data) {
-                                                            alert('充值成功');
-                                                            window.location.reload();
-                                                        } else {
-                                                            alert('充值失败');
-                                                        }
-                                                    },
-                                                    error: function () {
-                                                        alert('充值失败');
-                                                    }
-                                                });
-                                            } else {
-                                                alert('格式错误')
-                                            }
-                                        }
-                                    }
-                                </script>
-                                @endsection
                             </div>
                         </div>
-                        {{--<div class="user-state">--}}
-                            {{--<p class="last-time">--}}
-                                {{--<span class="mr10">ID：0001</span>--}}
-                                {{--上次登陆时间：2017年02月14日 14:30:20--}}
-                            {{--</p>--}}
-                            {{--<div class="credit-card">--}}
-                                {{--<p>--}}
-                                    {{--<a href="#" class="coll">绑定中国脚印信用卡</a>--}}
-                                {{--</p>--}}
-                            {{--</div>--}}
-                        {{--</div>--}}
                     </div>
                     <div class="user-msg">
                         <a href="" class="c2">
@@ -156,13 +105,44 @@
                             @endforeach
                             </tbody>
                         </table>
+                        @else
+                            <div style="margin-top: 20px;font-size: 12px;">没有符合条件的订单，最近有不少很赞的景区，快去看看吧！</div>
+                        @endif
                     </div>
-                    @else
-                        <div style="margin-top: 20px;font-size: 12px;">没有符合条件的订单，最近有不少很赞的景区，快去看看吧！</div>
-                    @endif
                 </div>
             </div>
         </div>
     </div>
     @include('user.footer')
+@endsection
+@section('js')
+    <script>
+        function recharge() {
+            var num = prompt('输入充值金额');
+            num = num.toString().trim();
+            if (num !== null) {
+                if((/^([1-9]\d{0,9}|0)([.]?|(\.\d{1,2})?)$/).test(num)) {
+                    $.ajax({
+                        url: '/user/recharge',
+                        type: 'POST',
+                        data: {value: num},
+                        dataType: 'JSON',
+                        success: function (data) {
+                            if (data) {
+                                alert('充值成功');
+                                window.location.reload();
+                            } else {
+                                alert('充值失败');
+                            }
+                        },
+                        error: function () {
+                            alert('充值失败');
+                        }
+                    });
+                } else {
+                    alert('格式错误')
+                }
+            }
+        }
+    </script>
 @endsection
