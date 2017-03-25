@@ -26,7 +26,7 @@
                             @elseif(($order->order_status == 2 || $order->order_status == 3) && $order->pay_status == 2)
                                 <span class="highlight">退款中</span>
                                 <a href="/order/cancel?sn={{$order->sn}}" class="btn">取消退款</a>
-                            @elseif($order->order_status == 2 && $order->pay_status == 3)
+                            @elseif($order->order_status == 4 && $order->pay_status == 3)
                                 <span class="highlight">退款完成</span>
                             @elseif($order->order_status == 3 && $order->pay_status == 1 && $order->order_type == 2)
                                 <span>订单完成</span>

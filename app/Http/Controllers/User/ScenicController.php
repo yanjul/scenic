@@ -41,7 +41,7 @@ class ScenicController extends Controller
         if (array_key_exists('user_id', $data) && $data['user_id']) {
             return $query->where('user_id', $data['user_id'])->get();
         }
-        return null;
+        return $query->where('user_id', Auth::id())->get();
     }
 
     /**景区添加

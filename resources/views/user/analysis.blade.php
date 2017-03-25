@@ -10,26 +10,23 @@
                     >
                     <span>数据分析</span>
                 </div>
-                {{--<div class="m-box m-orderList">--}}
-
-                    <div class="tab-myfoot">
-                        <ul class="title" id="tabfirst">
-                            <li class="on">基本资料</li>
-                            <li>头像设置1</li>
-                            <li>头像设置2</li>
-                        </ul>
-                        <div class="c-n box01" id="divContentBox">
-                            <div class="photoChange">1111111111111111</div>
-                            <div class="photoChange">2222222222222222</div>
-                            <div class="photoChange">3333333333333333</div>
+                <div class="tab-myfoot">
+                    <ul class="title" id="tabfirst">
+                        <li class="on">景区年销量</li>
+                        {{--<li>头像设置1</li>--}}
+                        {{--<li>头像设置2</li>--}}
+                    </ul>
+                    <div class="c-n box01" id="divContentBox">
+                        <div class="photoChange">
+                            <div id="main" style="width: 100%; height:400px;"></div>
                         </div>
-
+                        <div class="photoChange">
+                            <span>选择景区</span>
+                            <select id="scenic-name"></select>
+                        </div>
+                        <div class="photoChange">3333333333333333</div>
                     </div>
-                    <div style="width: 100%; height:200px;"></div>
-                    <div id="main" style="width: 100%; height:400px;"></div>
-
-
-                {{--</div>--}}
+                </div>
             </div>
         </div>
     </div>
@@ -59,7 +56,7 @@
         // 指定图表的配置项和数据
         var option = {
             title: {
-                text: '景区销量'
+                text: '景区年销量' + (new Date()).getFullYear()
             },
             tooltip: {
                 trigger: 'axis'
@@ -98,18 +95,23 @@
                 }
             }
         };
-        $.get('/user/get-analysis', {action: 'sale', year: 2017}, function (data) {
+        $.get('/user/get-analysis', {action: 'sale', year: (new Date()).getFullYear()}, function (data) {
             option.xAxis.data.forEach(function (item, index) {
                 data.forEach(function (v) {
-                    if(parseInt(item) === parseInt(v.month.substr(-2, v.month.length))) {
+                    if (parseInt(item) === parseInt(v.month.substr(-2, v.month.length))) {
                         option.series.data[index] = v.number;
                     }
                 });
                 myChart.setOption(option);
             });
-
         });
-//        myChart.setOption(option);
+
+        $.get('/get-scenic', {}, function (data) {
+            data.forEach(function (item) {
+                $('#scenic-name').append($('<option value="' + item.id + '">' + item.name + '</option>'))
+            });
+
+        })
 
     </script>
 @endsection
