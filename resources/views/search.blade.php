@@ -75,7 +75,7 @@
                         var arr = str.split('&');
                         var params = {};
                         for (var i = 0; i < arr.length; i++) {
-                            params[arr[i].split('=')[0]] = arr[i].split('=')[1] || '';
+                            params[arr[i].split('=')[0]] = decodeURI(arr[i].split('=')[1] || '');
                         }
                         return params;
                     } else {
