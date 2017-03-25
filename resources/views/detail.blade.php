@@ -105,7 +105,7 @@
                             </div>
                             <br>
                         @endforeach
-                        <div class="row ">
+                        <div class="row " style="margin-top: 100px;">
                             <button action="0" onclick="_submit(this)" type="button" class="btn btn-info " style="margin-left: 60%">预定
                             </button>
                             <button action="1" onclick="_submit(this)" type="button" class="btn btn-info pull-right">立即购买

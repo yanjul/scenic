@@ -10,7 +10,7 @@
 @endsection
 
 @section('js')
-    <script src="/js/materialize.js"></script>
+    <script src="//cdn.bootcss.com/materialize/0.98.1/js/materialize.js"></script>
 @endsection
 
 @section('content')
