@@ -13,16 +13,17 @@
                 <div class="tab-myfoot">
                     <ul class="title" id="tabfirst">
                         <li class="on">景区年销量</li>
-                        {{--<li>头像设置1</li>--}}
+                        <li>利润分析</li>
                         {{--<li>头像设置2</li>--}}
                     </ul>
                     <div class="c-n box01" id="divContentBox">
                         <div class="photoChange">
-                            <div id="main" style="width: 100%; height:400px;"></div>
+                            <div id="sale_volume" style="width: 100%; height:400px;"></div>
                         </div>
                         <div class="photoChange">
                             <span>选择景区</span>
                             <select id="scenic-name"></select>
+                            <div id="profit_analysis" style="width: 600px; height:400px;"></div>
                         </div>
                         <div class="photoChange">3333333333333333</div>
                     </div>
@@ -52,9 +53,11 @@
     </script>
     <script type="text/javascript" src="/js/echarts.min.js"></script>
     <script type="text/javascript">
-        var myChart = echarts.init(document.getElementById('main'));
+
+        //景区年销量分析统计
+        var sale_volume_div = echarts.init(document.getElementById('sale_volume'));
         // 指定图表的配置项和数据
-        var option = {
+        var sale_volume_option = {
             title: {
                 text: '景区年销量' + (new Date()).getFullYear()
             },
@@ -63,12 +66,6 @@
             },
             legend: {
                 data: ['销量']
-            },
-            toolbox: {
-                show: true,
-                feature: {
-                    magicType: {show: true, type: ['line', 'bar']}
-                }
             },
             calculable: true,
             xAxis: {
@@ -96,13 +93,13 @@
             }
         };
         $.get('/user/get-analysis', {action: 'sale', year: (new Date()).getFullYear()}, function (data) {
-            option.xAxis.data.forEach(function (item, index) {
+            sale_volume_option.xAxis.data.forEach(function (item, index) {
                 data.forEach(function (v) {
                     if (parseInt(item) === parseInt(v.month.substr(-2, v.month.length))) {
-                        option.series.data[index] = v.number;
+                        sale_volume_option.series.data[index] = v.number;
                     }
                 });
-                myChart.setOption(option);
+                sale_volume_div.setOption(sale_volume_option);
             });
         });
 
@@ -113,5 +110,58 @@
 
         })
 
+        //景区利润分析统计
+        var profit_analysis_div = echarts.init(document.getElementById('profit_analysis'));
+        profit_analysis_option = {
+            title: {
+                text: '景区利润',
+                x:'center'
+            },
+            tooltip: {
+                trigger: 'axis',
+                axisPointer: { // 坐标轴指示器，坐标轴触发有效
+                    type: 'shadow' // 默认为直线，可选为：'line' | 'shadow'
+                }
+            },
+            legend: {
+                data: ['销售总额', '利润', '成本'],
+                align: 'right',
+                right: 10
+            },
+            grid: {
+                left: '3%',
+                right: '4%',
+                bottom: '3%',
+                containLabel: true
+            },
+            xAxis: [{
+                type: 'category',
+                data: ['景区1', '景区2', '景区3', '景区4', '景区5']
+            }],
+            yAxis: [{
+                type: 'value',
+                name: '金额（元）',
+                axisLabel: {
+                    formatter: '{value}'
+                }
+            }],
+            series: [
+                {
+                    name: '销售总额',
+                    type: 'bar',
+                    data: [20, 12, 31, 34,20]
+                },
+                {
+                    name: '利润',
+                    type: 'bar',
+                    data: [10, 20, 5, 9,12]
+                }, {
+                    name: '成本',
+                    type: 'bar',
+                    data: [13, 11, 23, 33,15]
+                }
+            ]
+        };
+        profit_analysis_div.setOption(profit_analysis_option);
     </script>
 @endsection
