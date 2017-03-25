@@ -21,11 +21,9 @@
                             <div id="sale_volume" style="width: 100%; height:400px;"></div>
                         </div>
                         <div class="photoChange">
-                            <span>选择景区</span>
-                            <select id="scenic-name"></select>
-                            <div id="profit_analysis" style="width: 600px; height:400px;margin: 10px auto 0"></div>
+                            <div id="profit_analysis" style="width: 760px; height:400px;"></div>
                         </div>
-                        <div class="photoChange">3333333333333333</div>
+                        <div class="photoChange"></div>
                     </div>
                 </div>
             </div>
@@ -53,7 +51,6 @@
     </script>
     <script type="text/javascript" src="/js/echarts.min.js"></script>
     <script type="text/javascript">
-
         //景区年销量分析统计
         var sale_volume_div = echarts.init(document.getElementById('sale_volume'));
         // 指定图表的配置项和数据
@@ -103,16 +100,9 @@
             });
         });
 
-        $.get('/get-scenic', {}, function (data) {
-            data.forEach(function (item) {
-                $('#scenic-name').append($('<option value="' + item.id + '">' + item.name + '</option>'))
-            });
-
-        })
-
         //景区利润分析统计
         var profit_analysis_div = echarts.init(document.getElementById('profit_analysis'));
-        profit_analysis_option = {
+        var profit_analysis_option = {
             title: {
                 text: '景区利润',
                 x:'center'
@@ -123,45 +113,27 @@
                     type: 'shadow' // 默认为直线，可选为：'line' | 'shadow'
                 }
             },
-            legend: {
-                data: ['销售总额', '利润', '成本'],
-                align: 'right',
-                right: 10
-            },
-            grid: {
-                left: '3%',
-                right: '4%',
-                bottom: '3%',
-                containLabel: true
-            },
-            xAxis: [{
-                type: 'category',
-                data: ['景区1', '景区2', '景区3', '景区4', '景区5']
-            }],
-            yAxis: [{
-                type: 'value',
-                name: '金额（元）',
-                axisLabel: {
-                    formatter: '{value}'
-                }
-            }],
+            legend: {data: ['销售总额', '利润', '成本', '销量'], align: 'right', right: 10},
+            grid: {left: '3%', right: '4%', bottom: '3%', containLabel: true},
+            xAxis: {type: 'category', data: []},
+            yAxis: [{type: 'value', name: '金额（元）', axisLabel: {formatter: '{value}'}}],
             series: [
-                {
-                    name: '销售总额',
-                    type: 'bar',
-                    data: [20, 12, 31, 34,20]
-                },
-                {
-                    name: '利润',
-                    type: 'bar',
-                    data: [10, 20, 5, 9,12]
-                }, {
-                    name: '成本',
-                    type: 'bar',
-                    data: [13, 11, 23, 33,15]
-                }
+                {name: '销售总额', type: 'bar', data: []},
+                {name: '利润', type: 'bar', data: []},
+                {name: '成本', type: 'bar', data: []},
+                {name: '销量', type: 'bar', data: []}
             ]
         };
-        profit_analysis_div.setOption(profit_analysis_option);
+        $.get('/user/get-analysis', {action: 'profit', year: (new Date()).getFullYear()}, function (data) {
+            data.forEach(function (item, index) {
+                profit_analysis_option.xAxis.data.push(item.scenic_name);
+                profit_analysis_option.series[0].data.push(item.sum_price);
+                profit_analysis_option.series[1].data.push(item.profit);
+                profit_analysis_option.series[2].data.push(item.floor_price);
+                profit_analysis_option.series[3].data.push(item.number);
+            });
+            profit_analysis_div.setOption(profit_analysis_option);
+        });
+
     </script>
 @endsection

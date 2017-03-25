@@ -53,7 +53,16 @@ class OrderController extends Controller
             $query->orderBy('month');
         }
         elseif ($data['action'] == 'profit') {
-            $query->leftJoin('order_detail as d', 'order_info.id', 'd.order_id');
+            $query->select(
+                'order_info.scenic_name',
+                DB::raw('count(order_info.id) as number'),
+                DB::raw('sum(d.ticket_price) as sum_price'),
+                DB::raw('sum(d.ticket_floor_price) as floor_price'),
+                DB::raw('(sum(d.ticket_price) - sum(d.ticket_floor_price)) as profit'));
+            $query->leftJoin('order_details as d', 'order_info.id', 'd.order_id');
+            $query->whereYear('order_info.created_at', $data['year']);
+            $query->groupBy('order_info.scenic_id');
+//            $query->where(['order_status'=> 3, 'pay_status'=> 1]);
         }
         $data = $query->get();
         return $data;
