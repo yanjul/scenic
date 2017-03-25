@@ -5,6 +5,7 @@
 <div class="col-md-3 sidenav">
     <div class="sidenav_content" id="myfoot">
         <h3><a href="/user">我的脚印</a></h3>
+        @if(Auth::user()->role == 1)
         <dl>
             <dt>景区管理</dt>
             <dd>
@@ -17,14 +18,13 @@
                     <span>景区添加</span>
                 </a>
             </dd>
-            @if(Auth::user()->role == 1)
-                <dd>
-                    <a href="/user/scenic/distribution">
-                        <span>景区分销</span>
-                    </a>
-                </dd>
-            @endif
+            <dd>
+                <a href="/user/scenic/distribution">
+                    <span>景区分销</span>
+                </a>
+            </dd>
         </dl>
+        @endif
         <dl>
             <dt>订单管理</dt>
             <dd>

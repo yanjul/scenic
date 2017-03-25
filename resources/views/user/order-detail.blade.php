@@ -18,6 +18,7 @@
                             当前订单状态：
                             @if($order->order_status == 1 && $order->pay_status == 0)
                                 <span class="highlight">未支付</span>
+                                <span>支付倒计时：</span>
                                 <a href="/order/pay/{{$order->sn}}" class="btn">去支付</a>
                                 <a href="/order/cancel?sn={{$order->sn}}" class="btn">取消</a>
                             @elseif($order->order_status == 2 && $order->pay_status == 1)
