@@ -19,6 +19,7 @@
                                 <th width="9%">数量</th>
                                 <th width="10%">单价</th>
                                 <th width="15%">应付金额</th>
+                                <th width="12%">订单类型</th>
                                 <th width="15%">
                                     <select name="" id="">
                                         <option value="0">全部状态</option>
@@ -42,7 +43,7 @@
                                 <table>
                                     <tbody>
                                     <tr>
-                                        <td colspan="6" class="o_info row">
+                                        <td colspan="7" class="o_info row">
                                             <span class="col-md-4">订单编号：{{$item->sn}}</span>
                                             <span class="col-md-4">创建时间：{{date('Y-m-d H:i:s', strtotime($item->created_at.' +8hours'))}}</span>
                                             <a href="/order/detail/{{$item->sn}}" class="order-check col-md-offset-2 col-md-2">查看订单</a>
@@ -57,13 +58,14 @@
                                             <td width="10%" class="price">{{$ticket->ticket_price}}¥</td>
 
                                             <td width="15%" class="total">{{$ticket->ticket_amount}}¥</td>
-                                            <td width="30%" colspan="2"></td>
+                                            <td width="30%" colspan="3"></td>
                                         </tr>
                                     @endforeach
                                     <tr>
                                         <td width="55%%" colspan="2"></td>
                                         <td width="9%"><span>总价</span></td>
                                         <td width="10%" class="total">{{$item->pay_price}}¥</td>
+                                        <td width="12%"></td>
                                         <td width="15%" class="statue">
                                             @if($item->order_status == 1 && $item->pay_status == 0)
                                                 <span>待付款</span>
