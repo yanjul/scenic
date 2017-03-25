@@ -15,6 +15,7 @@ class OrderDetails extends Model {
         'ticket_id',
         'ticket_name',
         'ticket_price',
+        'ticket_floor_price',
         'ticket_numbers',
         'ticket_amount',
         'valid_time',

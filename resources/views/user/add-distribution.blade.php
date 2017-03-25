@@ -44,7 +44,7 @@
                                             <tr data-id="{{$ticket->id}}">
                                                 <td>{{$ticket->name}}</td>
                                                 <td>{{$ticket->price}}</td>
-                                                <td>{{$ticket->number}}</td>
+                                                <td>{{$ticket->number == -1?'无限制': $ticket->number}}</td>
                                                 <td>
                                                     <button class="btn btn-success btn-sm"
                                                             onclick="add(this.parentNode.parentNode)">添加
@@ -126,7 +126,7 @@
                                             t.append(' <table cellspacing="0" cellpadding="0"> <thead> <tr> <th>门票名称</th> <th>票价</th> <th>数量</th> <th>操作</th> </tr> </thead><tbody></tbody></table>');
                                             var t_b = t.find('tbody');
                                             for (var i = 0; i < data.ticket.length; i++) {
-                                                t_b.append('<tr data-id="' + data.ticket[i].id + '"><td>' + data.ticket[i].name + '</td><td>' + data.ticket[i].price + '</td><td>' + data.ticket[i].number + '</td><td><button class="btn btn-success btn-sm" onclick="add(this.parentNode.parentNode)">添加</button></td></tr>');
+                                                t_b.append('<tr data-id="' + data.ticket[i].id + '"><td>' + data.ticket[i].name + '</td><td>' + data.ticket[i].price + '</td><td>' + (data.ticket[i].number === -1?'无限制':data.ticket[i].number) + '</td><td><button class="btn btn-success btn-sm" onclick="add(this.parentNode.parentNode)">添加</button></td></tr>');
                                             }
                                             container.append(m_l, m_b, t);
                                         },

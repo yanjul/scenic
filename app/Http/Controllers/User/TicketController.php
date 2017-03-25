@@ -124,6 +124,7 @@ class TicketController extends Controller
             'scenic_id' => 'required',
             'name' => 'required|max:18',
             'price' => 'required|between:0,999999999',
+            'floor_price' => 'required|between:0,999999999',
             'start_time' => 'array',
             'end_time' => 'array',
             'custom_price' => 'array',

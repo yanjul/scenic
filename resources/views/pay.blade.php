@@ -40,10 +40,6 @@
                         </table>
                     </td>
                 </tr>
-
-                <tr>
-
-                </tr>
                 <tr>
                     <td>游客姓名</td>
                     <td>{{$order->tourist_name}}</td>
@@ -56,17 +52,17 @@
                     <td>价格</td>
                     <td>{{$order->pay_price}}</td>
                 </tr>
-                @if($order->order_type == 1)
+                {{--@if($order->order_type == 1)--}}
                 <tr>
                     <td><label>入园时间</label></td>
                     <td>
-                        <input type="date" name="admission_time" value="{{ old('admission_time') }}">
+                        <input type="date" name="admission_time" {{$order->order_type == 3? 'readOnly': ''}} value="{{ old('admission_time') ?: ($order->order_type == 3?date('Y-m-d', $order->admission_time):'') }}">
                         @if($errors->has('admission_time'))
                             <div style="color: brown">请您选择正确的入园时间</div>
                         @endif
                     </td>
                 </tr>
-                @endif
+                {{--@endif--}}
                 <tr>
                     <td>支付方式</td>
                     <td>
@@ -107,13 +103,16 @@
             </table>
         </form>
     </div>
-@section('js')
-    <script>
-            function queren() {
-                return confirm("确定支付吗？");
-            }
-    </script>
-@endsection
     <!--底部-->
     @include('user.footer')
+    @if(old('e'))
+        <script>alert('账户余额不足。。。')</script>
+    @endif
+@endsection
+@section('js')
+    <script>
+        function queren() {
+            return confirm("确定支付吗？");
+        }
+    </script>
 @endsection

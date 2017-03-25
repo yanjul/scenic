@@ -103,6 +103,7 @@ class ScenicService
                     $value->ticket->parent_id = $value->ticket_id;
                     $value->ticket->name = $value->ticket_name;
                     $value->ticket->price = $value->ticket_price;
+                    $value->ticket->floor_price = $value->ticket_price;
                     $value->ticket->number = $value->ticket_numbers;
                     Ticket::create($value->ticket->toArray());
                 }
@@ -119,6 +120,7 @@ class ScenicService
                 $value->ticket->parent_id = $value->ticket_id;
                 $value->ticket->name = $value->ticket_name;
                 $value->ticket->price = $value->ticket_price;
+                $value->ticket->floor_price = $value->ticket_price;
                 $value->ticket->number = $value->ticket_numbers;
                 Ticket::create($value->ticket->toArray());
             }

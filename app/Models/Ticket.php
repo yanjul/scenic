@@ -14,6 +14,7 @@ class Ticket extends Model
         'parent_id',
         'name',
         'price',
+        'floor_price',
         'custom_price',
         'number',
         'valid_time',
