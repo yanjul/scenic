@@ -23,7 +23,7 @@
                         <div class="photoChange">
                             <span>选择景区</span>
                             <select id="scenic-name"></select>
-                            <div id="profit_analysis" style="width: 600px; height:400px;"></div>
+                            <div id="profit_analysis" style="width: 600px; height:400px;margin: 10px auto 0"></div>
                         </div>
                         <div class="photoChange">3333333333333333</div>
                     </div>
