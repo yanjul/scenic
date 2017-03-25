@@ -52,6 +52,9 @@ class OrderController extends Controller
             $query->groupBy('month');
             $query->orderBy('month');
         }
+        elseif ($data['action'] == 'profit') {
+            $query->leftJoin('order_detail as d', 'order_info.id', 'd.order_id');
+        }
         $data = $query->get();
         return $data;
     }

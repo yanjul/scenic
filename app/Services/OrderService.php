@@ -61,6 +61,7 @@ class OrderService{
                 $order_detail[$key]['ticket_id'] = $ticket->id;
                 $order_detail[$key]['ticket_name'] = $ticket->name;
                 $order_detail[$key]['ticket_price'] = TicketService::getPrice($ticket);
+                $order_detail[$key]['ticket_floor_price'] = $ticket->floor_price;
                 $order_detail[$key]['ticket_numbers'] = $data['ticket_number'][$key];
                 $order_detail[$key]['ticket_amount'] = $order_detail[$key]['ticket_price'] * $order_detail[$key]['ticket_numbers'];
                 $order_detail[$key]['valid_time'] = $ticket->valid_time;

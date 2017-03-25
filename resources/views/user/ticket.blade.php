@@ -27,27 +27,28 @@
                                 <li>
                                     <div class="ri-infos">
                                         <p class="row">
-                                            <span class="col-md-4">门票名称：{{$ticket['name']}}</span>
-                                            <span class="col-md-4">门票价格：{{$ticket['price']}}元</span>
-                                            <span class="col-md-4">门票数量：{{$ticket['number'] < 0? '无限制': $ticket['number']}}张</span>
+                                            <span class="col-md-3">门票名称：{{$ticket['name']}}</span>
+                                            <span class="col-md-3">门票底价：{{$ticket['floor_price']}}元</span>
+                                            <span class="col-md-3">门票价格：{{$ticket['price']}}元</span>
+                                            <span class="col-md-3">门票数量：{{$ticket['number'] < 0? '无限制': $ticket['number']}}</span>
                                         </p>
                                         @foreach($ticket['custom_price'] as $item)
                                             <p class="row">
-                                                <span class="col-md-4">
+                                                <span class="col-md-3">
                                                     开始时间：<strong>{{date('Y-m-d', $item['start_time'])}}</strong>
                                                 </span>
-                                                <span class="col-md-4">
+                                                <span class="col-md-3">
                                                     结束时间：<strong>{{date('Y-m-d', $item['end_time']-1)}}</strong>
                                                 </span>
-                                                 <span class="col-md-4">
+                                                 <span class="col-md-3">
                                                     限时价格：<strong>{{ $item['price']}}</strong>
                                                 </span>
                                             </p>
                                         @endforeach
                                         <p class="row">
-                                            <span class="col-md-4">有效时间：{{$ticket['valid_time']}}天</span>
-                                            <span class="col-md-4">提前时间：{{$ticket['lead_time']}}天</span>
-                                            <span class="col-md-4">最迟入园时间：{{$ticket['last_time']}} 点</span>
+                                            <span class="col-md-3">有效时间：{{$ticket['valid_time']}}天</span>
+                                            <span class="col-md-3">提前时间：{{$ticket['lead_time']}}天</span>
+                                            <span class="col-md-3">最迟入园时间：{{$ticket['last_time']}} 点</span>
                                         </p>
                                         <p class="remark">备注：<span class="remark-box">{{$ticket['remark']}}</span></p>
                                         <div class="edit-btns">

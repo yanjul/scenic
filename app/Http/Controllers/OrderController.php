@@ -112,7 +112,7 @@ class OrderController extends Controller
         $this->validate($request, [
             'id' => 'required',
             'order_type' => 'required',
-            'admission_time' => 'required_unless:order_type,2|date|after:now',
+            'admission_time' => 'required_if:order_type,1|date|after:now',
             'pay_type' => 'required',
             'pay_mode' => 'required',
             'pay_account' => 'required',
@@ -123,7 +123,10 @@ class OrderController extends Controller
             $query->with('ticket');
         }])->where(['sn' => $sn, 'id' => $data['id']])->first();
         $user_info = UserInfo::where('user_id', Auth::id())->first();
-        if ($order && $order->order_status == 1 && $order->pay_status == 0 && ($user_info->money - $order->pay_price >= 0)) {
+        if($user_info->money < $order->pay_price) {
+            return redirect()->back()->withInput(['e'=> 1]);
+        }
+        if ($order && $order->order_status == 1 && $order->pay_status == 0) {
             $pay_data = [
                 'order_id' => $order->id,
                 'order_sn' => $order->sn,

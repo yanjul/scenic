@@ -40,6 +40,17 @@
                                 </div>
                             </li>
                             <li>
+                                <p class="caption01">门票底价：</p>
+                                <div>
+                                    <input class="t" type="number" id="ticket-price" name="floor_price" {{isset($scenic['ticket'])? 'readOnly': ''}}
+                                           value="{{isset($scenic['ticket'])? $scenic['ticket']['floor_price']: ''}}">
+                                    <span class="warningTips">*门票底格创建后不能修改</span>
+                                    @if ($errors->has('price'))
+                                        <span class="warningTips">门票底格不能为空!</span>
+                                    @endif
+                                </div>
+                            </li>
+                            <li>
                                 <p class="caption01">门票价格：</p>
                                 <div>
                                     <input class="t" type="number" id="ticket-price" name="price"
