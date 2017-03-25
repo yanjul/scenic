@@ -19,7 +19,20 @@
                                 <th width="9%">数量</th>
                                 <th width="10%">单价</th>
                                 <th width="15%">应付金额</th>
-                                <th width="15%">订单状态</th>
+                                <th width="15%">
+                                    <select name="" id="">
+                                        <option value="0">全部状态</option>
+                                        <option value="1">待付款</option>
+                                        <option value="2">待确认</option>
+                                        <option value="3">退款中</option>
+                                        <option value="4">退款完成</option>
+                                        <option value="5">订单完成</option>
+                                        <option value="6">待入园</option>
+                                        <option value="7">已过期</option>
+                                        <option value="8">已入园</option>
+                                        <option value="9">交易取消</option>
+                                    </select>
+                                </th>
                                 <th width="15%">操作</th>
                             </tr>
                             </thead>

@@ -13,7 +13,7 @@
     <div class="all">
         <div class="index_search clearfix">
             <div class="logo">
-                <p style="font-size: 60px"><a href="/">👣</a></p>
+                <p style="font-size: 60px"><a href="/" style="text-decoration: none;">👣</a></p>
                 <p><a href="/" style="color:burlywood">FootPrint脚印</a></p>
             </div>
             <div class="search_box">
