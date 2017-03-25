@@ -5,7 +5,7 @@
     <link href="/css/index.css" rel="stylesheet">
 @endsection
 @section('js')
-    <script src="/js/materialize.js"></script>
+    <script src="//cdn.bootcss.com/materialize/0.98.1/js/materialize.js"></script>
 @endsection
 
 @section('content')
@@ -13,8 +13,8 @@
     <div class="all">
         <div class="index_search clearfix">
             <div class="logo">
-                <p style="font-size: 60px">👣</p>
-                <p>FootPrint脚印</p>
+                <p style="font-size: 60px"><a href="/">👣</a></p>
+                <p><a href="/" style="color:burlywood">FootPrint脚印</a></p>
             </div>
             <div class="search_box">
                 <form action="">
@@ -127,8 +127,8 @@
                             success: function (data) {
                                 var container = $('#hot');
                                 for (var i = 0; i < data.length; i++) {
-                                    var content = $('<div class="hot_box"></div>');
-                                    content.append('<img class="materialboxed" src="' + data[i].image + '">');
+                                    var content = $('<div class="hot_box "></div>');
+                                    content.append('<img   src="' + data[i].image + '">');
                                     content.append('<a class="black" href="/scenic/' + data[i].id + '"><div class="hot_box_introduce"><p>' + data[i].name + '</p> <p>' + data[i].info + '</p> </div></a>');
                                     container.append(content);
                                 }
@@ -188,7 +188,7 @@
                                 container.empty();
                                 for (var i = 0; i < data.length; i++) {
                                     var content = $('<div class="hot_box"></div>');
-                                    content.append('<img class="materialboxed" src="' + data[i].image + '">');
+                                    content.append('<img  src="' + data[i].image + '">');
                                     content.append('<a class="black" href="/distribution/' + data[i].id + '"><div class="hot_box_introduce"><p>' + data[i].name + '</p> <p>' + data[i].info + '</p> </div></a>');
                                     container.append(content);
                                 }

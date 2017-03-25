@@ -8,8 +8,8 @@
 @section('content')
     <div class="index_search clearfix">
         <div class="logo">
-            <p style="font-size: 60px">👣</p>
-            <p>FootPrint脚印</p>
+            <p style="font-size: 60px"><a href="/">👣</a></p>
+            <p><a href="/" style="color: burlywood">FootPrint脚印</a></p>
         </div>
         <div class="search_box">
             <form action="">
@@ -106,7 +106,7 @@
                                 <p>最佳季节：{{ $cate[$item['category']['season']] }}</p>
                                 <p>建议游玩：{{ $cate[$item['category']['time']] }}</p>
                             </div>
-                           <a href="/scenic/{{$item['id']}}"> <img src="{{$item['image']}}"></a>
+                           <a href="/scenic/{{$item['id']}}"> <img  style="margin-left: 150px" src="{{$item['image']}}"></a>
                         </div>
 
                     @endforeach
