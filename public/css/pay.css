@@ -13,5 +13,7 @@
 .table tr td {
     height: 50px;
     vertical-align: middle !important; }
-
+.detail_content{
+    min-height: 910px;
+}
 /*# sourceMappingURL=payment.css.map */
