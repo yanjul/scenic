@@ -3,6 +3,7 @@
 @section('css')
     <link href="/css/bootstrap.css" rel="stylesheet">
     <link href="/css/pay.css" rel="stylesheet">
+    <link href="/css/flatpickr.min.css" rel="stylesheet">
 @endsection
 @section('content')
     <!--商品详情内容-->
@@ -55,7 +56,7 @@
                 <tr>
                     <td><label>入园时间</label></td>
                     <td>
-                        <input type="date" name="admission_time" value="{{ old('admission_time') }}">
+                        <input id="flatpickr-tryme" placeholder="请选择日期" name="admission_time" value="{{ old('admission_time') }}">
                         @if($errors->has('admission_time'))
                             <div style="color: brown">请您选择正确的入园时间</div>
                         @endif
@@ -81,4 +82,11 @@
     </div>
     <!--底部-->
     @include('user.footer')
+@endsection
+
+@section('js')
+    <script src="/js/flatpickr.min.js"></script>
+    <script>
+        document.getElementById("flatpickr-tryme").flatpickr();
+    </script>
 @endsection
